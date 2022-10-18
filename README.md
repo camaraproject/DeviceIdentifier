@@ -1,5 +1,5 @@
 <a href="https://github.com/camaraproject/DeviceIdentifier/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/camaraproject/DeviceIdentifier?style=plastic"></a>
-<a href="https://github.com/camaraproject/DeviceIdentifier/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/camaraproject/v?style=plastic"></a>
+<a href="https://github.com/camaraproject/DeviceIdentifier/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/camaraproject/DeviceIdentifier?style=plastic"></a>
 <a href="https://github.com/camaraproject/DeviceIdentifier/pulls" title="Open Pull Requests"><img src="https://img.shields.io/github/issues-pr/camaraproject/DeviceIdentifier?style=plastic"></a>
 <a href="https://github.com/camaraproject/DeviceIdentifier/graphs/contributors" title="Contributors"><img src="https://img.shields.io/github/contributors/camaraproject/DeviceIdentifier?style=plastic"></a>
 <a href="https://github.com/camaraproject/DeviceIdentifier" title="Repo Size"><img src="https://img.shields.io/github/repo-size/camaraproject/DeviceIdentifier?style=plastic"></a>
