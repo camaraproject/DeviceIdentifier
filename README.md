@@ -19,7 +19,7 @@ Repository to describe, develop, document and test the DeviceIdentifier API fami
 
 ## Meetings
 * Meetings are held virtually
-* Schedule: Friday 15:00 - 16:00 GMT, from Friday 5th December 2022
+* Schedule: Friday 15:00 - 16:00 GMT, from Friday 9th December 2022
 * [Calendar File](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Anonymised%20Subscriber%20Identity%20and%20Device%20Identifier%20WG%20Bi-Weekly%20Meeting.ics)
 
 ## Contributorship and mailing list
