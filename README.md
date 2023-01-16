@@ -22,6 +22,9 @@ Repository to describe, develop, document and test the DeviceIdentifier API fami
 * Schedule: Friday 15:00 - 16:00 GMT, from Friday 9th December 2022
 * [Calendar File](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Anonymised%20Subscriber%20Identity%20and%20Device%20Identifier%20WG%20Bi-Weekly%20Meeting.ics)
 
+## Results
+* Sub Project is in progress
+
 ## Contributorship and mailing list
 * To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-dvi>.
 * A message to all Contributors of this Sub Project can be sent using <sp-dvi@lists.camaraproject.org>.
