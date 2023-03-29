@@ -9,7 +9,7 @@
 Repository to describe, develop, document and test the DeviceIdentifier API family
 
 ## Scope
-* Service APIs for “DeviceIdentifier” (see APIBacklog.md)  
+* Service APIs for “DeviceIdentifier” (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md) in Backlog WG)  
 * It provides the customer with the ability to:  
   * get the identity of the device being used by the subscriber.
   * NOTE: The scope of this API family should be limited (at least at a first stage) to 4G and 5G.  
@@ -19,7 +19,7 @@ Repository to describe, develop, document and test the DeviceIdentifier API fami
 
 ## Meetings
 * Meetings are held virtually
-* Schedule: Friday 15:00 - 16:00 GMT, from Friday 9th December 2022
+* Schedule: Friday 15:00 - 16:00 BST, from Friday 28th March 2023
 * [Calendar File](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Anonymised%20Subscriber%20Identity%20and%20Device%20Identifier%20WG%20Bi-Weekly%20Meeting.ics)
 
 ## Results
