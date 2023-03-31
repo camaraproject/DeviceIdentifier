@@ -39,7 +39,7 @@ paths:
       description: Get details about the device being used by a specified mobile subscriber
       operationId: getDeviceIdentifier
       parameters:
-        - name: Network-Access-Indentifier
+        - name: Network-Access-Identifier
           in: header
           description: 3GPP network access identifier for the subscription being used by the device
           example: "123456789@domain.com"
