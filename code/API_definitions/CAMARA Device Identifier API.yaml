@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Device Identifier API
-  version: 0.0.1
+  version: 0.0.2
   description: |
      The Device Identifier API return details about the device (i.e. UE) currently being used by a specified mobile subscriber. The following information can be returned:
      - A unique network identifier for the specific device itself (IMEI SV and IMEI)
@@ -37,11 +37,11 @@ paths:
         - Get device identifiers
       summary: Get details about the device being used by a specified mobile subscriber
       description: Get details about the device being used by a specified mobile subscriber
-      operationId: get_device_identifier
+      operationId: getDeviceIdentifier
       parameters:
-        - name: ExternalId
+        - name: Network-Access-Identifier
           in: header
-          description: 3GPP external identifier of the subscription being used by the device
+          description: 3GPP network access identifier for the subscription being used by the device
           example: "123456789@domain.com"
           required: false
           schema:
@@ -55,10 +55,10 @@ paths:
           schema:
             type: string
             pattern: '^\+?[0-9]{5,15}$'
-        - name: IP
+        - name: IP-Address
           in: header
           required: false
-          description: The public IP used by the device. If an IPv4 address is specified, the public port must also be specified in the "Port" header
+          description: The public IP allocated to the device. If an IPv4 address is specified, the public port must also be specified in the "Port" header
           examples:
             ipv4:
               value: "84.125.93.10"
@@ -73,7 +73,7 @@ paths:
         - name: Port
           in: header
           required: false
-          description: The public port used by the device. This is only required if an IPv4 public IP is also specified.
+          description: The public port alloacted to the device. This is only required if an IPv4 public IP is also specified.
           example: 20000
           schema:
             type: integer
