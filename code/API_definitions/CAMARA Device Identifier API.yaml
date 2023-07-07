@@ -1,15 +1,86 @@
 openapi: 3.0.3
 info:
   title: CAMARA Device Identifier API
-  version: 0.0.2
+  version: 0.0.3
   description: |
-     The Device Identifier API return details about the device (i.e. UE) currently being used by a specified mobile subscriber. The following information can be returned:
+    # Summary
+    
+    The Device Identifier API returns details of the mobile device (also know as the UE, or User Equipment) currently being used by a specified mobile subscriber. The following information can be returned:
      - A unique network identifier for the specific device itself (IMEI SV and IMEI)
      - A network identifier for the device make and model (IMEI Type Allocation Code)
      - Device manufacturer name
      - Device manufacturer model
      
-     Information for the manufacturer name and model will, where provided, be taken from the [GSMA IMEI database](https://www.gsma.com/aboutus/workinggroups/terminal-steering-group/imei-database)
+     This information can be useful in a number of scenarios, such as the following:
+     - For insurance purposes, to automatically identify a device that a customer wishes to insure
+     - For security / fraud reasons, to establish that a customer is not using a device they claim to have broken or lost
+     - For service delivery reasons, to optimise content for a particular device or OS type
+
+    # Introduction
+
+    Mobile devices are alloacted a unique identity by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identity is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
+    
+    The IMEI is a 15 digit integer, and the IMEI SV is a 16 digit integer:
+    - The first 8 digits are known as the Type Allocation Code (TAC), and identify the manufacturer and model of the device
+    - The following 6 digits are the serial number of the device for that TAC
+    - For IMEI, the remaining digit is a check digit
+    - For IMEI SV, the remaining two digits are the software version
+    
+    TACs are issued and managed by the GSMA, and can be queried using the [GSMA IMEI database](https://www.gsma.com/aboutus/workinggroups/terminal-steering-group/imei-database).
+    
+    The mobile network associates this device identifier with the mobile subscription currently using the device. The mobile subscription is defined by the Subscriber Identity Module (SIM) currently active in the mobile device. This may be a removable SIM or an eSIM. In either case, it is possible for the association between the device identifier and subscription to change - for example, when a physical SIM is transferred to another mobile device.
+    
+    ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/documentation/API_documentation/resources/Device_Identifier_Overview.png)
+    
+    The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one of the following subscription identifiers:
+    - the subscription phone number (also known as MSISDN)
+    - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
+    - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
+    
+    The API can be called by an application server or other 3rd party server to establish the identity of the device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in reponse to their request. Otherwise, the information that the end user has consented to being given will be returned. 
+    
+    # Relevant terms and definitions
+
+    * **Device Identifier API service endpoint**:
+    The URL pointing to the RESTful resource of the Device Identifier API.
+
+    * **Authentication**:
+    Security access keys such as OAuth 2.0 client credentials used by client applications to invoke the Device Identifier API.
+
+    * **Identifier for the mobile subscription**:
+    At least one identifier for the mobile subscription:
+        - `IP-Address` + `Port`, where `Port` only needs to be specified if `IP-Address` is an IPv4 address
+        - `Phone-Number`
+        - `Network-Access-Identifier`
+    
+      These parameters must be passed as headers for data security and privacy reasons. An example of a valid header would be `"Network-Access-Identifier: 4d596ac1-7822-4927-a3c5-d72e1f922c94@domain.com"`.
+
+    # API functionality
+
+    The API defines a single service endpoint /device-identifier. To call this endpoint, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers as a header (`Network-Access-Identifier`, `Phone-Number` and/or `IP-Address` + `Port`).
+    
+    If the authentication token is not valid, a `401 UNAUTHENTICATED` error is returned
+    
+    If the mobile subscription parameters contain a formatting error, a `400 INVALID_ARGUMENT` error is returned.
+    
+    If the mobile subscription cannot be identified from the provided parameters, a `404 NOT_FOUND` error is returned.
+    
+    If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
+    
+    Otherwise, a JSON object is returned containing the data the the end user has consented to sharing with the API consumer. An example of this JSON object is as follows:
+    ```
+    {
+       "imeisv": "49015420323751800",
+       "imei": "4901542032375181",
+       "tac": "49015420",
+       "model": "3110",
+       "manufacturer": "Nokia"
+    }
+    ```
+    
+    # Further info and support
+
+    (FAQs will be added in a later version of the documentation)
   contact:
     email: sp-dvi@lists.camaraproject.org
   license:
@@ -42,12 +113,12 @@ paths:
         - name: Network-Access-Identifier
           in: header
           description: 3GPP network access identifier for the subscription being used by the device
-          example: "123456789@domain.com"
+          example: "4d596ac1-7822-4927-a3c5-d72e1f922c94@domain.com"
           required: false
           schema:
             type: string
             format: email
-        - name: MSISDN
+        - name: Phone-Number
           in: header
           example: "441234567890"
           required: false
@@ -135,7 +206,7 @@ components:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Insufficient Headers: At least one of ExternalId, MSISDN or IP must be specified"
+                  "message": "Insufficient Headers: At least one of Network-Access-Identifier, Phone-Number or IP-Address must be specified"
                 }
             MissingPortHeader:
               description: If IP header specified is an IPv4 address, the Port header must also be specified
@@ -143,28 +214,29 @@ components:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Insufficient Headers: Port header must be specified if IP is an IPv4 address"
+                  "message": "Insufficient Headers: Port header must be specified if IP-Address is a public IPv4 address"
                 }
             InvalidExternalId:
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Invalid Header Format: ExternalId"
+                  "message": "Invalid Header Format: Network-Access-Identifier"
                 }
             InvalidMSISDN:
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Invalid Header Format: MSISDN"
+                  "message": "Invalid Header Format: Phone-Number"
                 }
             InvalidIP:
+              description: This error will be returned if the IP address does not have a valid format, or if the IP address is a private IPv4 address
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Invalid Header Format: IP"
+                  "message": "Invalid Header Format: IP-Address"
                 }
             InvalidPort:
               value:
