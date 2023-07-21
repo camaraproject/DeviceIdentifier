@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Device Identifier API
-  version: 0.0.3
+  version: 0.1.0
   description: |
     # Summary
     
@@ -48,16 +48,17 @@ info:
     Security access keys such as OAuth 2.0 client credentials used by client applications to invoke the Device Identifier API.
 
     * **Identifier for the mobile subscription**:
-    At least one identifier for the mobile subscription:
-        - `IP-Address` + `Port`, where `Port` only needs to be specified if `IP-Address` is an IPv4 address
-        - `Phone-Number`
-        - `Network-Access-Identifier`
-    
-      These parameters must be passed as headers for data security and privacy reasons. An example of a valid header would be `"Network-Access-Identifier: 4d596ac1-7822-4927-a3c5-d72e1f922c94@domain.com"`.
+    At least one identifier for the mobile subscription from the following four options:
+      - Phone number (MSISDN)
+      - Network Access Identifier assigned by the mobile network operator for the device
+      - IPv6 address
+      - IPv4 address
 
     # API functionality
 
-    The API defines a single service endpoint /device-identifier. To call this endpoint, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers as a header (`Network-Access-Identifier`, `Phone-Number` and/or `IP-Address` + `Port`).
+    The API defines a single service endpoint `POST /get-device-identifier`. To call this endpoint, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
+    
+    Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
     
     If the authentication token is not valid, a `401 UNAUTHENTICATED` error is returned
     
@@ -100,8 +101,8 @@ servers:
         default: dvi/v0
         description: Base path for the Device Identifier API
 paths:
-  "/device-identifier":
-    get:
+  "/get-device-identifier":
+    post:
       security:
         - oAuth2ClientCredentials: []
       tags:
@@ -109,56 +110,16 @@ paths:
       summary: Get details about the device being used by a specified mobile subscriber
       description: Get details about the device being used by a specified mobile subscriber
       operationId: getDeviceIdentifier
-      parameters:
-        - name: Network-Access-Identifier
-          in: header
-          description: 3GPP network access identifier for the subscription being used by the device
-          example: "4d596ac1-7822-4927-a3c5-d72e1f922c94@domain.com"
-          required: false
-          schema:
-            type: string
-            format: email
-        - name: Phone-Number
-          in: header
-          example: "441234567890"
-          required: false
-          description: MSISDN in E.164 format (starting with country code) of the mobile subscription being used by the device. Optionally prefixed with '+'.
-          schema:
-            type: string
-            pattern: '^\+?[0-9]{5,15}$'
-        - name: IP-Address
-          in: header
-          required: false
-          description: The public IP allocated to the device. If an IPv4 address is specified, the public port must also be specified in the "Port" header
-          examples:
-            ipv4:
-              value: "84.125.93.10"
-            ipv6:
-              value: "2001:db8:85a3:8d3:1319:8a2e:370:7344"
-          schema:
-            type: string
-            format: ipv4/ipv6
-            oneOf:
-              - pattern: '^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$'
-              - pattern: '^((:|(0?|([1-9a-f][0-9a-f]{0,3}))):)((0?|([1-9a-f][0-9a-f]{0,3})):){0,6}(:|(0?|([1-9a-f][0-9a-f]{0,3})))$'
-        - name: Port
-          in: header
-          required: false
-          description: The public port alloacted to the device. This is only required if an IPv4 public IP is also specified.
-          example: 20000
-          schema:
-            type: integer
-            minimum: 1024
-            maximum: 65535
+      requestBody:
+        description: Parameters to create a new session
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Device"
 
       responses:
         "200":
-          description: An device identifier has been found for the specified subscriber
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/200Response'
-
+          $ref: '#/components/responses/200Response'
         "400":
           $ref: '#/components/responses/400BadRequest'
         "401":
@@ -193,12 +154,40 @@ components:
           scopes: {}
   
   responses:
+    200Response:
+      description: An device identifier has been found for the specified subscriber
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              imeisv:
+                type: string
+                description: IMEISV of the device
+                example: "49015420323751800"
+              imei:
+                type: string
+                description: IMEI of the device
+                example: "4901542032375181"
+              tac:
+                type: string
+                description: IMEI TAC of the device
+                example: "49015420"
+              model:
+                type: string
+                description: Model of the device
+                example: "3110"
+              manufacturer:
+                type: string
+                description: Manufacturer of the device
+                example: "Nokia"
+
     400BadRequest: 
       description: Bad Request
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             InsufficientHeaders:
               description: Sufficient headers must be specified to allow the target UE to be identified
@@ -250,7 +239,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             InvalidCredentials:
               value:
@@ -265,7 +254,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             InsufficientPermissions:
               value:
@@ -280,7 +269,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             SubscriberNotFound:
               description: The specified parameters are either inconsistent (if multiple parameters are specified) or not currently associated with any customers of this service
@@ -296,7 +285,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             MethodNotAllowed:
               description: An HTTP verb other than GET has been used to try and access the resource
@@ -312,7 +301,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             NotAcceptable:
               description: A response format other than JSON has been requested
@@ -328,7 +317,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             TooManyRequests:
               description: Access to the API has been temporarily blocked due to quota or spike arrest limits being reached
@@ -344,7 +333,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           example:
             { 
               "code": "INTERNAL",
@@ -357,7 +346,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           example:
             { 
               "code": "BAD_GATEWAY",
@@ -370,7 +359,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           example:
             { 
               "code": "UNAVAILABLE",
@@ -383,7 +372,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/errorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           example:
             { 
               "code": "TIMEOUT",
@@ -392,31 +381,57 @@ components:
             }
 
   schemas:
-    200Response:
+    Device:
+      description: |
+        End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators. 
+
+        The developer can choose to provide the below specified device identifiers:
+
+        * `phoneNumber`
+        * `networkAccessIdentifier`  
+        * `ipv6Address`
+        * `ipv4Address`
+
+        NOTE: The API implementation might support only a subset of these options. The API consumer can provide multiple identifiers to be compatible across different implementations. In this case the identifiers MUST belong to the same device. In the event that the identifiers belong to different devices, an error may be returned, or the API implementation may take the identifiers specified in the order defined above until it finds a valid identifier.
       type: object
       properties:
-        imeisv:
-          type: string
-          description: IMEISV of the device
-          example: "49015420323751800"
-        imei:
-          type: string
-          description: IMEI of the device
-          example: "4901542032375181"
-        tac:
-          type: string
-          description: IMEI TAC of the device
-          example: "49015420"
-        model:
-          type: string
-          description: Model of the device
-          example: "3110"
-        manufacturer:
-          type: string
-          description: Manufacturer of the device
-          example: "Nokia"
+        phoneNumber:
+          $ref: "#/components/schemas/PhoneNumber"
+        networkAccessIdentifier:
+          $ref: "#/components/schemas/NetworkAccessIdentifier"
+        ipv6Address:
+          $ref: "#/components/schemas/Ipv6Address"
+        ipv4Address:
+          $ref: "#/components/schemas/DeviceIpv4Addr"
+      minProperties: 1
 
-    errorResponse:
+    DeviceIpv4Addr:
+      type: object
+      description: |
+        The device should be identified by either the public (observed) IP address and port as seen by the application server, or the private (local) and any public (observed) IP addresses in use by the device (this information can be obtained by various means, for example from some DNS servers).
+        
+        If the allocated and observed IP addresses are the same (i.e. NAT is not in use) then  the same address should be specified for both publicAddress and privateAddress.
+        
+        If NAT64 is in use, the device should be identified by its publicAddress and publicPort, or separately by its allocated IPv6 address (field ipv6Address of the Device object)
+      
+        In all cases, publicAddress must be specified, along with at least one of either privateAddress or publicPort, dependent upon which is known. In general, mobile devices cannot be identified by their public IPv4 address alone.
+      properties:
+        publicAddress:
+          $ref: "#/components/schemas/SingleIpv4Addr"
+        privateAddress:
+          $ref: "#/components/schemas/SingleIpv4Addr"
+        publicPort:
+          $ref: "#/components/schemas/Port"
+      anyOf:
+        - required: [publicAddress, privateAddress]
+        - required: [publicAddress, publicPort]
+      example:
+            {
+              "publicAddress": "84.125.93.10",
+              "publicPort": 59765
+            }
+
+    ErrorResponse:
       type: object
       properties:
         code:
@@ -428,3 +443,41 @@ components:
         message: 
           type: string
           description: This parameter appears when there was an error. Human readable explanation specific to this occurrence of the problem
+
+    Ipv6Address:
+      type: string
+      allOf:
+        - pattern: '^((:|(0?|([1-9a-f][0-9a-f]{0,3}))):)((0?|([1-9a-f][0-9a-f]{0,3})):){0,6}(:|(0?|([1-9a-f][0-9a-f]{0,3})))(\/(([0-9])|([0-9]{2})|(1[0-1][0-9])|(12[0-8])))?$'
+        - pattern: '^((([^:]+:){7}([^:]+))|((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?))(\/.+)?$'
+      example: "2001:db8:85a3:8d3:1319:8a2e:370:7344"
+      description: |
+        IPv6 address, following IETF 5952 format, may be specified in form <address/mask> as:
+          - address - The /128 subnet is optional for single addresses:
+            - 2001:db8:85a3:8d3:1319:8a2e:370:7344
+            - 2001:db8:85a3:8d3:1319:8a2e:370:7344/128
+          - address/mask - an IP v6 number with a mask:
+            - 2001:db8:85a3:8d3::0/64
+            - 2001:db8:85a3:8d3::/64
+
+    NetworkAccessIdentifier:
+      description: A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.
+      type: string
+      example: "123456789@domain.com"
+          
+    PhoneNumber:
+      description: A public identifier addressing a telephone subscription. In mobile networks it corresponds to the MSISDN (Mobile Station International Subscriber Directory Number). In order to be globally unique it has to be formatted in international format, according to E.164 standard, optionally prefixed with '+'.
+      type: string
+      pattern: '^\+?[0-9]{5,15}$'
+      example: "123456789"
+
+    Port:
+      description:  TCP or UDP port number
+      type: integer
+      minimum: 1024
+      maximum: 65535
+
+    SingleIpv4Addr:
+      description: A single IPv4 address with no subnet mask
+      type: string
+      pattern: '^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$'
+      example: "84.125.93.10"
