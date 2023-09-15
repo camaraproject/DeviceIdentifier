@@ -201,9 +201,9 @@ components:
               summary: Device parameters provided identify different devices
               value:
                 {
-                  status: 400
-                  code: INVALID_ARGUMENT
-                  message: "Multiple inconsistent device parameters specified"
+                  "status": 400,
+                  "code": "INVALID_ARGUMENT",
+                  "message": "Multiple inconsistent device parameters specified"
                 }
             InvalidExternalId:
               value:
