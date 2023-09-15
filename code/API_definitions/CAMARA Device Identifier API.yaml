@@ -189,50 +189,56 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
-            InsufficientHeaders:
-              description: Sufficient headers must be specified to allow the target UE to be identified
+            InsufficientParameters:
+              description: Sufficient parameters must be provided to allow the target UE to be identified
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Insufficient Headers: At least one of Network-Access-Identifier, Phone-Number or IP-Address must be specified"
+                  "message": "At least one of phoneNumber, networkAccessIdentifier, ipv4Address and ipv6Address msut be specified"
                 }
-            MissingPortHeader:
-              description: If IP header specified is an IPv4 address, the Port header must also be specified
+            InconsistentDeviceProperties:
+              summary: Device parameters provided identify different devices
               value:
-                { 
-                  "code": "INVALID_ARGUMENT",
-                  "status": 400,
-                  "message": "Insufficient Headers: Port header must be specified if IP-Address is a public IPv4 address"
+                {
+                  status: 400
+                  code: INVALID_ARGUMENT
+                  message: "Multiple inconsistent device parameters specified"
                 }
             InvalidExternalId:
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Invalid Header Format: Network-Access-Identifier"
+                  "message": "Invalid format: networkAccessIdentifier"
                 }
             InvalidMSISDN:
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Invalid Header Format: Phone-Number"
+                  "message": "Invalid format: phoneNumber"
                 }
-            InvalidIP:
-              description: This error will be returned if the IP address does not have a valid format, or if the IP address is a private IPv4 address
+            InvalidIPv4:
               value:
                 { 
                   "code": "INVALID_ARGUMENT",
                   "status": 400,
-                  "message": "Invalid Header Format: IP-Address"
+                  "message": "Invalid format: ipv4Address"
+                }
+            InvalidIPv6:
+              value:
+                { 
+                  "code": "INVALID_ARGUMENT",
+                  "status": 400,
+                  "message": "Invalid format: ipv6Address"
                 }
             InvalidPort:
               value:
                 { 
                   "code": "OUT_OF_RANGE",
                   "status": 400,
-                  "message": "Invalid Header Value: Port"
+                  "message": "Invalid value: ipv4Address.publicPort"
                 }
     401Unauthorized:
       description: Unauthorized 
