@@ -192,54 +192,40 @@ components:
             InsufficientParameters:
               description: Sufficient parameters must be provided to allow the target UE to be identified
               value:
-                { 
-                  "code": "INVALID_ARGUMENT",
-                  "status": 400,
-                  "message": "At least one of phoneNumber, networkAccessIdentifier, ipv4Address and ipv6Address msut be specified"
-                }
+                status: 400
+                code: INVALID_ARGUMENT
+                message: "At least one of phoneNumber, networkAccessIdentifier, ipv4Address and ipv6Address msut be specified"
             InconsistentDeviceProperties:
-              summary: Device parameters provided identify different devices
+              description: Device parameters provided identify different devices
               value:
-                {
-                  "status": 400,
-                  "code": "INVALID_ARGUMENT",
-                  "message": "Multiple inconsistent device parameters specified"
-                }
+                status: 400
+                code: INVALID_ARGUMENT
+                message: "Multiple inconsistent device parameters specified"
             InvalidExternalId:
               value:
-                { 
-                  "code": "INVALID_ARGUMENT",
-                  "status": 400,
-                  "message": "Invalid format: networkAccessIdentifier"
-                }
+                status: 400
+                code: INVALID_ARGUMENT
+                message: "Invalid format: networkAccessIdentifier"
             InvalidMSISDN:
               value:
-                { 
-                  "code": "INVALID_ARGUMENT",
-                  "status": 400,
-                  "message": "Invalid format: phoneNumber"
-                }
+                status: 400
+                code: INVALID_ARGUMENT
+                message: "Invalid format: phoneNumber"
             InvalidIPv4:
               value:
-                { 
-                  "code": "INVALID_ARGUMENT",
-                  "status": 400,
-                  "message": "Invalid format: ipv4Address"
-                }
+                status: 400
+                code: INVALID_ARGUMENT
+                message: "Invalid format: ipv4Address"
             InvalidIPv6:
               value:
-                { 
-                  "code": "INVALID_ARGUMENT",
-                  "status": 400,
-                  "message": "Invalid format: ipv6Address"
-                }
+                status: 400
+                code: INVALID_ARGUMENT
+                message: "Invalid format: ipv6Address"
             InvalidPort:
               value:
-                { 
-                  "code": "OUT_OF_RANGE",
-                  "status": 400,
-                  "message": "Invalid value: ipv4Address.publicPort"
-                }
+                status: 400
+                code: OUT_OF_RANGE
+                message: "Invalid value: ipv4Address.publicPort"
     401Unauthorized:
       description: Unauthorized 
       content:
@@ -249,11 +235,9 @@ components:
           examples:
             InvalidCredentials:
               value:
-                { 
-                  "code": "UNAUTHENTICATED",
-                  "status": 401, 
-                  "message": "Request not authenticated due to missing, invalid, or expired credentials"
-                }
+                status: 400
+                code: UNAUTHENTICATED
+                message: "Request not authenticated due to missing, invalid, or expired credentials"
 
     403Forbidden:
       description: Forbidden
@@ -264,12 +248,10 @@ components:
           examples:
             InsufficientPermissions:
               value:
-                { 
-                  "code": "PERMISSION_DENIED",
-                  "status": 403,
-                  "message": "Client does not have sufficient permissions to perform this action"
-                }
-    
+                status: 403
+                code: PERMISSION_DENIED
+                message: "API consumer does not have sufficient permissions to perform this action"
+
     404NotFound:
       description: Subscriber Not Found
       content:
@@ -280,11 +262,9 @@ components:
             SubscriberNotFound:
               description: The specified parameters are either inconsistent (if multiple parameters are specified) or not currently associated with any customers of this service
               value:
-                { 
-                  "code": "NOT_FOUND",
-                  "status": 404,
-                  "message": "No device found for the specified parameters"
-                }
+                status: 404
+                code: NOT_FOUND
+                message: "No device found for the specified parameters"
     
     405MethodNotAllowed:
       description: Method Not Allowed
@@ -296,12 +276,10 @@ components:
             MethodNotAllowed:
               description: An HTTP verb other than GET has been used to try and access the resource
               value:
-                { 
-                  "code": "METHOD_NOT_ALLOWED",
-                  "status": 405,
-                  "message": "The request method is not supported by this resource"
-                }
-    
+                status: 404
+                code: METHOD_NOT_ALLOWED
+                message: "The request method is not supported by this resource"
+
     406Unacceptable:
       description: Not Acceptable
       content:
@@ -312,12 +290,10 @@ components:
             NotAcceptable:
               description: A response format other than JSON has been requested
               value:
-                { 
-                  "code": "NOT_ACCEPTABLE",
-                  "status": 406,
-                  "message": "The server cannot produce a response matching the content requested by the client through Accept-* headers"
-                }
-    
+                status: 406
+                code: NOT_ACCEPTABLE
+                message: "The server cannot produce a response matching the content requested by the client through Accept-* headers"
+
     429TooManyRequests:
       description: Too Many Requests
       content:
@@ -328,12 +304,10 @@ components:
             TooManyRequests:
               description: Access to the API has been temporarily blocked due to quota or spike arrest limits being reached
               value:
-                { 
-                  "code": "TOO_MANY_REQUESTS",
-                  "status": 429,
-                  "message": "Either out of resource quota or reaching rate limiting"
-                }
-    
+                status: 429
+                code: TOO_MANY_REQUESTS
+                message: "Either out of resource quota or reaching rate limiting"
+
     500InternalServerError:
       description: Internal Server Error
       content:
@@ -341,11 +315,9 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
-            { 
-              "code": "INTERNAL",
-              "status": 500,
-              "message": "The service is currently not available"
-            }
+            status: 500
+            code: INTERNAL
+            message: "The service is currently not available"
 
     502BadGateway:
       description: Bad Gateway
@@ -354,11 +326,9 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
-            { 
-              "code": "BAD_GATEWAY",
-              "status": 502,
-              "message": "The service is currently not available"
-            }
+            status: 502
+            code: BAD_GATEWAY
+            message: "The service is currently not available"
 
     503ServiceUnavailable:
       description: Service Unavailable
@@ -367,12 +337,10 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
-            { 
-              "code": "UNAVAILABLE",
-              "status": 503,
-              "message": "The service is currently not available"
-            }
-        
+            status: 503
+            code: UNAVAILABLE
+            message: "The service is currently not available"
+
     504GatewayTimeout:
       description: Gateway Time-Out
       content:
@@ -380,11 +348,9 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
-            { 
-              "code": "TIMEOUT",
-              "status": 504,
-              "message": "The service is currently not available"
-            }
+            status: 504
+            code: TIMEOUT
+            message: "The service is currently not available"
 
   schemas:
     Device:
