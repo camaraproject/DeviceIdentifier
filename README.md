@@ -24,7 +24,7 @@ Repository to describe, develop, document and test the DeviceIdentifier API fami
 
 ## Results
 * Sub Project is in progress
-* Draft 0.0.3 of the API is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier):
+* Draft 0.1.0 of the API is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier):
   - API definition **with inline documentation**:
     - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/main/code/API_definitions/CAMARA%20Device%20Identifier%20API.yaml)
     - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/code/API_definitions/CAMARA%20Device%20Identifier%20API.yaml&nocors)
