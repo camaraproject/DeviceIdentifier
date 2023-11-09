@@ -1,0 +1,216 @@
+BEGIN:VCALENDAR
+PRODID:-//Microsoft Corporation//Outlook 16.0 MIMEDIR//EN
+VERSION:2.0
+METHOD:REQUEST
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:GMT Standard Time
+BEGIN:STANDARD
+DTSTART:16011028T020000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+TZOFFSETFROM:+0100
+TZOFFSETTO:-0000
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010325T010000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3
+TZOFFSETFROM:-0000
+TZOFFSETTO:+0100
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ATTENDEE;CN=sp-dvi@lists.camaraproject.org;RSVP=TRUE:mailto:sp-dvi@lists.ca
+	maraproject.org
+ATTENDEE;CN="Alex Ferreira";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:Alex.Ferr
+	eira@phronesis.net
+ATTENDEE;CN="Matthew Hornsey";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:matt@ph
+	ronesis.net
+ATTENDEE;CN="Surajj Jaggernath, Vodacom";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mai
+	lto:surajj.jaggernath@vodacom.co.za
+ATTENDEE;CN="Vilim Duganić";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:Vilim.Du
+	ganic@infobip.com
+ATTENDEE;CN="Nitin Sood";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:nitin@shabod
+	i.com
+ATTENDEE;CN="Kevin Howe-Patterson";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:ke
+	vinhp@shabodi.com
+ATTENDEE;CN="Artych Rafał";ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:Rafal.Art
+	ych@t-mobile.pl
+CLASS:PUBLIC
+CREATED:20231108T152447Z
+DESCRIPTION:Morning meetings to discuss Device Identifier and IMEI Fraud AP
+	Is\n\n____________________________________________________________________
+	____________ \n\nMicrosoft Teams meeting \n\nJoin on your computer\, mobil
+	e app or room device \n\nClick here to join the meeting <https://teams.mic
+	rosoft.com/l/meetup-join/19%3ameeting_Y2U4MmNlNDUtMzhhNC00Y2Y4LWExYzAtOTEz
+	ZjMzZDEzOTY3%40thread.v2/0?context=%7b%22Tid%22%3a%2268283f3b-8487-4c86-ad
+	b3-a5228f18b893%22%2c%22Oid%22%3a%22d88e05b9-3def-46f4-992b-c1d9031b7272%2
+	2%7d>  \n\nMeeting ID: 343 405 927 736 \nPasscode: asxkRu \n\nDownload Tea
+	ms <https://www.microsoft.com/en-us/microsoft-teams/download-app>  | Join 
+	on the web <https://www.microsoft.com/microsoft-teams/join-a-meeting> \n\n
+	Join with a video conferencing device \n\nteams@vroom.vodafone.com \n\nVid
+	eo Conference ID: 128 513 160 8 \n\nAlternate VTC instructions <https://jo
+	in.vroom.vodafone.com/teams/?conf=1285131608&ivr=teams&d=vroom.vodafone.co
+	m&test=test_call&w>  \n\nOr call in (audio only) \n\n+44 20 3443 8791\,\,5
+	28853228# <tel:+442034438791\,\,528853228#>    United Kingdom\, London \n\
+	nPhone Conference ID: 528 853 228# \n\nFind a local number <https://dialin
+	.teams.microsoft.com/d8d060bc-1c7d-4360-befb-562456209125?id=528853228>  |
+	 Reset PIN <https://dialin.teams.microsoft.com/usp/pstnconferencing>  \n\n
+	Disclaimer: This online meeting may be recorded and / or transcribed by on
+	e or more of the attendees and the meeting content\, including the voice a
+	nd / or the image of the meeting participants\, will be captured in any re
+	cordings or transcriptions. \n\nLearn More <https://aka.ms/JoinTeamsMeetin
+	g>  | Meeting options <https://teams.microsoft.com/meetingOptions/?organiz
+	erId=d88e05b9-3def-46f4-992b-c1d9031b7272&tenantId=68283f3b-8487-4c86-adb3
+	-a5228f18b893&threadId=19_meeting_Y2U4MmNlNDUtMzhhNC00Y2Y4LWExYzAtOTEzZjMz
+	ZDEzOTY3@thread.v2&messageId=0&language=en-US>  \n\n______________________
+	__________________________________________________________ \n\n \n\n
+DTEND;TZID="GMT Standard Time":20231117T100000
+DTSTAMP:20231108T145248Z
+DTSTART;TZID="GMT Standard Time":20231117T090000
+LAST-MODIFIED:20231108T152447Z
+LOCATION:Microsoft Teams Meeting
+ORGANIZER;CN="Eric Murray, Vodafone":mailto:eric.murray@vodafone.com
+PRIORITY:5
+RRULE:FREQ=WEEKLY;INTERVAL=4;BYDAY=FR;WKST=MO
+SEQUENCE:0
+SUMMARY;LANGUAGE=en-gb:CAMARA Device Identifier Sub-Project Meetings Friday
+	 Morning
+TRANSP:OPAQUE
+UID:040000008200E00074C5B7101A82E0080000000040AEB6D85212DA01000000000000000
+	01000000026E1DFE3595AA94A8888C7E141DACC40
+X-ALT-DESC;FMTTYPE=text/html:<html xmlns:v="urn:schemas-microsoft-com:vml" 
+	xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-mic
+	rosoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/
+	12/omml" xmlns="http://www.w3.org/TR/REC-html40"><head>\n<meta name="Gener
+	ator" content="Microsoft Word 15 (filtered medium)"><style><!--\n/* Font D
+	efinitions */\n@font-face\n	{font-family:"Cambria Math"\;\n	panose-1:2 4 5
+	 3 5 4 6 3 2 4\;}\n@font-face\n	{font-family:Calibri\;\n	panose-1:2 15 5 2
+	 2 2 4 3 2 4\;}\n@font-face\n	{font-family:"Segoe UI"\;\n	panose-1:2 11 5 
+	2 4 2 4 2 2 3\;}\n@font-face\n	{font-family:"Segoe UI Semibold"\;\n	panose
+	-1:2 11 7 2 4 2 4 2 2 3\;}\n/* Style Definitions */\np.MsoNormal\, li.MsoN
+	ormal\, div.MsoNormal\n	{margin:0cm\;\n	font-size:11.0pt\;\n	font-family:"
+	Calibri"\,sans-serif\;\n	mso-fareast-language:EN-US\;}\na:link\, span.MsoH
+	yperlink\n	{mso-style-priority:99\;\n	color:#0563C1\;\n	text-decoration:un
+	derline\;}\nspan.EmailStyle17\n	{mso-style-type:personal-compose\;\n	font-
+	family:"Calibri"\,sans-serif\;\n	color:windowtext\;}\n.MsoChpDefault\n	{ms
+	o-style-type:export-only\;\n	font-family:"Calibri"\,sans-serif\;\n	mso-far
+	east-language:EN-US\;}\n@page WordSection1\n	{size:612.0pt 792.0pt\;\n	mar
+	gin:72.0pt 72.0pt 72.0pt 72.0pt\;}\ndiv.WordSection1\n	{page:WordSection1\
+	;}\n--></style><!--[if gte mso 9]><xml>\n<o:shapedefaults v:ext="edit" spi
+	dmax="1026" />\n</xml><![endif]--><!--[if gte mso 9]><xml>\n<o:shapelayout
+	 v:ext="edit">\n<o:idmap v:ext="edit" data="1" />\n</o:shapelayout></xml><
+	![endif]--></head><body lang="EN-GB" link="#0563C1" vlink="#954F72" style=
+	"word-wrap:break-word"><div class="WordSection1"><p class="MsoNormal">Morn
+	ing meetings to discuss Device Identifier and IMEI Fraud APIs<o:p></o:p></
+	p><div><p class="MsoNormal"><span style="color:#5F5F5F">__________________
+	______________________________________________________________</span> <o:p
+	></o:p></p></div><div><div style="margin-top:18.0pt\;margin-bottom:15.0pt"
+	><p class="MsoNormal"><span lang="EN-US" style="font-size:18.0pt\;font-fam
+	ily:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424">Microsoft Teams mee
+	ting</span><span lang="EN-US" style="font-family:&quot\;Segoe UI&quot\;\,s
+	ans-serif\;color:#252424"> <o:p></o:p></span></p></div><div style="margin-
+	bottom:15.0pt"><div><p class="MsoNormal"><b><span lang="EN-US" style="font
+	-size:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#25242
+	4">Join on your computer\, mobile app or room device</span></b><b><span la
+	ng="EN-US" style="font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#2
+	52424"> <o:p></o:p></span></b></p></div><p class="MsoNormal"><span lang="E
+	N-US" style="font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424
+	"><a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Y2U4MmNl
+	NDUtMzhhNC00Y2Y4LWExYzAtOTEzZjMzZDEzOTY3%40thread.v2/0?context=%7b%22Tid%2
+	2%3a%2268283f3b-8487-4c86-adb3-a5228f18b893%22%2c%22Oid%22%3a%22d88e05b9-3
+	def-46f4-992b-c1d9031b7272%22%7d" target="_blank"><span style="font-size:1
+	0.5pt\;font-family:&quot\;Segoe UI Semibold&quot\;\,sans-serif\;color:#626
+	4A7">Click here to join the meeting</span></a> <o:p></o:p></span></p></div
+	><div style="margin-top:15.0pt\;margin-bottom:15.0pt"><div style="margin-b
+	ottom:3.0pt"><p class="MsoNormal"><span lang="EN-US" style="font-size:10.5
+	pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424">Meeting
+	 ID: </span><span lang="EN-US" style="font-size:12.0pt\;font-family:&quot\
+	;Segoe UI&quot\;\,sans-serif\;color:#252424">343 405 927 736</span><span l
+	ang="EN-US" style="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,s
+	ans-serif\;color:#252424"> </span><span lang="EN-US" style="font-family:&q
+	uot\;Segoe UI&quot\;\,sans-serif\;color:#252424"><br></span><span lang="EN
+	-US" style="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sans-ser
+	if\;color:#252424">Passcode: </span><span lang="EN-US" style="font-size:12
+	.0pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424">asxkR
+	u </span><span lang="EN-US" style="font-family:&quot\;Segoe UI&quot\;\,san
+	s-serif\;color:#252424"><o:p></o:p></span></p><div><p class="MsoNormal"><s
+	pan lang="EN-US" style="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot
+	\;\,sans-serif\;color:#252424"><a href="https://www.microsoft.com/en-us/mi
+	crosoft-teams/download-app" target="_blank"><span style="color:#6264A7">Do
+	wnload Teams</span></a> | <a href="https://www.microsoft.com/microsoft-tea
+	ms/join-a-meeting" target="_blank"><span style="color:#6264A7">Join on the
+	 web</span></a><o:p></o:p></span></p></div></div></div><div style="margin-
+	bottom:3.0pt"><p class="MsoNormal"><b><span lang="EN-US" style="font-size:
+	10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424">Joi
+	n with a video conferencing device</span></b><span lang="EN-US" style="fon
+	t-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424"> <o:p></o:p></
+	span></p></div><div><p class="MsoNormal"><span lang="EN-US" style="font-si
+	ze:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424">
+	teams@vroom.vodafone.com <o:p></o:p></span></p></div><div><p class="MsoNor
+	mal"><span lang="EN-US" style="font-size:10.5pt\;font-family:&quot\;Segoe 
+	UI&quot\;\,sans-serif\;color:#252424">Video Conference ID: </span><span la
+	ng="EN-US" style="font-size:12.0pt\;font-family:&quot\;Segoe UI&quot\;\,sa
+	ns-serif\;color:#252424">128 513 160 8 </span><span lang="EN-US" style="fo
+	nt-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424"><o:p></o:p></
+	span></p></div><div style="margin-bottom:15.0pt"><p class="MsoNormal"><spa
+	n lang="EN-US" style="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot\;
+	\,sans-serif\;color:#252424"><a href="https://join.vroom.vodafone.com/team
+	s/?conf=1285131608&amp\;ivr=teams&amp\;d=vroom.vodafone.com&amp\;test=test
+	_call&amp\;w"><span style="color:#6264A7">Alternate VTC instructions</span
+	></a> <o:p></o:p></span></p></div><div style="margin-bottom:3.0pt"><div st
+	yle="margin-bottom:3.0pt"><p class="MsoNormal"><b><span lang="EN-US" style
+	="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:
+	#252424">Or call in (audio only)</span></b><span lang="EN-US" style="font-
+	family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424"> <o:p></o:p></sp
+	an></p></div><div style="margin-bottom:3.0pt"><p class="MsoNormal"><span l
+	ang="EN-US" style="font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#
+	252424"><a href="tel:+442034438791\,\,528853228# "><span style="font-size:
+	10.5pt\;color:#6264A7">+44 20 3443 8791\,\,528853228#</span></a> </span><s
+	pan lang="EN-US" style="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot
+	\;\,sans-serif\;color:#252424">&nbsp\; United Kingdom\, London </span><spa
+	n lang="EN-US" style="font-family:&quot\;Segoe UI&quot\;\,sans-serif\;colo
+	r:#252424"><o:p></o:p></span></p></div></div><p class="MsoNormal"><span la
+	ng="EN-US" style="font-size:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sa
+	ns-serif\;color:#252424">Phone Conference ID: </span><span lang="EN-US" st
+	yle="font-size:12.0pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;col
+	or:#252424">528 853 228# </span><span lang="EN-US" style="font-family:&quo
+	t\;Segoe UI&quot\;\,sans-serif\;color:#252424"><o:p></o:p></span></p><div 
+	style="margin-bottom:15.0pt"><p class="MsoNormal"><span lang="EN-US" style
+	="font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424"><a href="
+	https://dialin.teams.microsoft.com/d8d060bc-1c7d-4360-befb-562456209125?id
+	=528853228" target="_blank"><span style="font-size:10.5pt\;color:#6264A7">
+	Find a local number</span></a> | <a href="https://dialin.teams.microsoft.c
+	om/usp/pstnconferencing" target="_blank"><span style="font-size:10.5pt\;co
+	lor:#6264A7">Reset PIN</span></a> <o:p></o:p></span></p></div><div style="
+	margin-bottom:3.0pt"><p class="MsoNormal"><span lang="EN-US" style="font-s
+	ize:10.5pt\;font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424"
+	>Disclaimer: This online meeting may be recorded and / or transcribed by o
+	ne or more of the attendees and the meeting content\, including the voice 
+	and / or the image of the meeting participants\, will be captured in any r
+	ecordings or transcriptions. <o:p></o:p></span></p></div><div style="margi
+	n-top:15.0pt\;margin-bottom:18.0pt"><p class="MsoNormal"><span lang="EN-US
+	" style="font-family:&quot\;Segoe UI&quot\;\,sans-serif\;color:#252424"><a
+	 href="https://aka.ms/JoinTeamsMeeting" target="_blank"><span style="font-
+	size:10.5pt\;color:#6264A7">Learn More</span></a> | <a href="https://teams
+	.microsoft.com/meetingOptions/?organizerId=d88e05b9-3def-46f4-992b-c1d9031
+	b7272&amp\;tenantId=68283f3b-8487-4c86-adb3-a5228f18b893&amp\;threadId=19_
+	meeting_Y2U4MmNlNDUtMzhhNC00Y2Y4LWExYzAtOTEzZjMzZDEzOTY3@thread.v2&amp\;me
+	ssageId=0&amp\;language=en-US" target="_blank"><span style="font-size:10.5
+	pt\;color:#6264A7">Meeting options</span></a> <o:p></o:p></span></p></div>
+	</div><div><p class="MsoNormal"><span style="color:#5F5F5F">______________
+	__________________________________________________________________</span> 
+	<o:p></o:p></p></div><p class="MsoNormal"><o:p>&nbsp\;</o:p></p></div></bo
+	dy></html>
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MS-OLK-APPTSEQTIME:20231108T145248Z
+X-MS-OLK-AUTOFILLLOCATION:FALSE
+X-MS-OLK-CONFTYPE:0
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
