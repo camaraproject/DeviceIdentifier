@@ -6,13 +6,12 @@
 <a href="https://github.com/camaraproject/DeviceIdentifier/blob/main/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=plastic"></a>
 
 # DeviceIdentifier
-Repository to describe, develop, document and test the DeviceIdentifier API family
+Repository to describe, develop, document and test the Device Identifier API family
 
 ## Scope
-* Service APIs for “DeviceIdentifier” (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md) in Backlog WG)  
-* It provides the customer with the ability to:  
-  * get the identity of the device being used by the subscriber.
-  * NOTE: The scope of this API family should be limited (at least at a first stage) to 4G and 5G.  
+* Service APIs for:
+  * “Device Identifier” (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
+  * "IMEI Fraud" (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/IMEI%20Fraud.md))  
 * Describe, develop, document and test the APIs (with 1-2 Telcos)  
 * Started: October 2022
 * Location: virtually  
@@ -21,6 +20,7 @@ Repository to describe, develop, document and test the DeviceIdentifier API fami
 * Meetings are held virtually
 * Schedule: Every second Friday, alternating between [09:00 - 10:00 GMT](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Device%20Identifier%20Sub-Project%20Meetings%20Friday%20Morning.ics) and [16:00 - 17:00 GMT](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Device%20Identifier%20Sub-Project%20Meeting%20Friday%20Afternoon.ics)
   * Starting from Friday 17th November 2023 @ 09:00 GMT
+ * Meeting minutes can be found [here](https://wiki.camaraproject.org/display/CAM/Device+Identifier+Meeting+Minutes)
 
 ## Results
 * Sub Project is in progress
