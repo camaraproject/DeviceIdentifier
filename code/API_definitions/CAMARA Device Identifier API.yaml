@@ -103,7 +103,7 @@ paths:
   "/get-device-identifier":
     post:
       security:
-        - oAuth2ClientCredentials: []
+        - openId: []
       tags:
         - Get device identifiers
       summary: Get details about the device being used by a specified mobile subscriber
@@ -144,13 +144,9 @@ paths:
 
 components:
   securitySchemes:
-    oAuth2ClientCredentials:
-      type: oauth2
-      description: This API uses OAuth 2 with the client credentials grant flow.
-      flows:
-        clientCredentials:
-          tokenUrl: "{tokenUrl}"
-          scopes: {}
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: .well-known/openid-configuration
 
   responses:
     200Response:
