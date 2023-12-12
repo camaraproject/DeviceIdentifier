@@ -1,15 +1,15 @@
-openapi: 3.0.3
+openapi: "3.0.3"
 info:
   title: CAMARA Device Identifier API
-  version: 0.1.0
+  version: 0.2.0
   description: |
     # Summary
-    
+
     The Device Identifier API returns details of the mobile device (also know as the UE, or User Equipment) currently being used by a specified mobile subscriber. The following information can be returned:
      - A unique network identifier for the specific device itself (IMEI SV and IMEI)
      - A network identifier for the device make and model (IMEI Type Allocation Code)
      - Device manufacturer name and model
-     
+
      This information can be useful in a number of scenarios, such as the following:
      - For insurance purposes, to automatically identify a device that a customer wishes to insure
      - For security / fraud reasons, to establish that a customer is not using a device they claim to have broken or lost
@@ -17,27 +17,27 @@ info:
 
     # Introduction
 
-    Mobile devices are alloacted a unique identity by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identity is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
-    
+    Mobile devices are allocated a unique identity by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identity is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
+
     The IMEI is a 15 digit integer, and the IMEI SV is a 16 digit integer:
     - The first 8 digits are known as the Type Allocation Code (TAC), and identify the manufacturer and model of the device
     - The following 6 digits are the serial number of the device for that TAC
     - For IMEI, the remaining digit is a check digit
     - For IMEI SV, the remaining two digits are the software version
-    
+
     TACs are issued and managed by the GSMA, and can be queried using the [GSMA IMEI database](https://www.gsma.com/aboutus/workinggroups/terminal-steering-group/imei-database).
-    
+
     The mobile network associates this device identifier with the mobile subscription currently using the device. The mobile subscription is defined by the Subscriber Identity Module (SIM) currently active in the mobile device. This may be a removable SIM or an eSIM. In either case, it is possible for the association between the device identifier and subscription to change - for example, when a physical SIM is transferred to another mobile device.
-    
+
     ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/documentation/API_documentation/resources/Device_Identifier_Overview.png)
-    
+
     The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one of the following subscription identifiers:
     - the subscription phone number (also known as MSISDN)
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
-    
-    The API can be called by an application server or other 3rd party server to establish the identity of the device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in reponse to their request. Otherwise, the information that the end user has consented to being given will be returned. 
-    
+
+    The API can be called by an application server or other 3rd party server to establish the identity of the device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in reponse to their request. Otherwise, the information that the end user has consented to being given will be returned.
+
     # Relevant terms and definitions
 
     * **Device Identifier API service endpoint**:
@@ -56,17 +56,17 @@ info:
     # API functionality
 
     The API defines a single service endpoint `POST /get-device-identifier`. To call this endpoint, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
-    
+
     Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
-    
+
     If the authentication token is not valid, a `401 UNAUTHENTICATED` error is returned
-    
+
     If the mobile subscription parameters contain a formatting error, a `400 INVALID_ARGUMENT` error is returned.
-    
+
     If the mobile subscription cannot be identified from the provided parameters, a `404 NOT_FOUND` error is returned.
-    
+
     If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
-    
+
     Otherwise, a JSON object is returned containing the data the the end user has consented to sharing with the API consumer. An example of this JSON object is as follows:
     ```
     {
@@ -77,7 +77,7 @@ info:
        "manufacturer": "Nokia"
     }
     ```
-    
+
     # Further info and support
 
     (FAQs will be added in a later version of the documentation)
@@ -103,7 +103,7 @@ paths:
   "/get-device-identifier":
     post:
       security:
-        - oAuth2ClientCredentials: []
+        - openId: []
       tags:
         - Get device identifiers
       summary: Get details about the device being used by a specified mobile subscriber
@@ -141,17 +141,13 @@ paths:
           $ref: '#/components/responses/503ServiceUnavailable'
         "504":
           $ref: '#/components/responses/504GatewayTimeout'
-          
+
 components:
   securitySchemes:
-    oAuth2ClientCredentials:
-      type: oauth2
-      description: This API uses OAuth 2 with the client credentials grant flow.
-      flows:
-        clientCredentials:
-          tokenUrl: "{tokenUrl}"
-          scopes: {}
-  
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: .well-known/openid-configuration
+
   responses:
     200Response:
       description: An device identifier has been found for the specified subscriber
@@ -181,7 +177,7 @@ components:
                 description: Manufacturer of the device
                 example: "Nokia"
 
-    400BadRequest: 
+    400BadRequest:
       description: Bad Request
       content:
         application/json:
@@ -226,7 +222,7 @@ components:
                 code: OUT_OF_RANGE
                 message: "Invalid value: ipv4Address.publicPort"
     401Unauthorized:
-      description: Unauthorized 
+      description: Unauthorized
       content:
         application/json:
           schema:
@@ -264,7 +260,7 @@ components:
                 status: 404
                 code: NOT_FOUND
                 message: "No device found for the specified parameters"
-    
+
     405MethodNotAllowed:
       description: Method Not Allowed
       content:
@@ -354,12 +350,12 @@ components:
   schemas:
     Device:
       description: |
-        End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators. 
+        End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators.
 
         The developer can choose to provide the below specified device identifiers:
 
         * `phoneNumber`
-        * `networkAccessIdentifier`  
+        * `networkAccessIdentifier`
         * `ipv6Address`
         * `ipv4Address`
 
@@ -380,11 +376,11 @@ components:
       type: object
       description: |
         The device should be identified by either the public (observed) IP address and port as seen by the application server, or the private (local) and any public (observed) IP addresses in use by the device (this information can be obtained by various means, for example from some DNS servers).
-        
+
         If the allocated and observed IP addresses are the same (i.e. NAT is not in use) then  the same address should be specified for both publicAddress and privateAddress.
-        
+
         If NAT64 is in use, the device should be identified by its publicAddress and publicPort, or separately by its allocated IPv6 address (field ipv6Address of the Device object)
-      
+
         In all cases, publicAddress must be specified, along with at least one of either privateAddress or publicPort, dependent upon which is known. In general, mobile devices cannot be identified by their public IPv4 address alone.
       properties:
         publicAddress:
@@ -397,10 +393,10 @@ components:
         - required: [publicAddress, privateAddress]
         - required: [publicAddress, publicPort]
       example:
-            {
-              "publicAddress": "84.125.93.10",
-              "publicPort": 59765
-            }
+        {
+          "publicAddress": "84.125.93.10",
+          "publicPort": 59765
+        }
 
     ErrorResponse:
       type: object
@@ -411,7 +407,7 @@ components:
         status:
           type: integer
           description: The HTTP status code
-        message: 
+        message:
           type: string
           description: This parameter appears when there was an error. Human readable explanation specific to this occurrence of the problem
 
@@ -434,7 +430,7 @@ components:
       description: A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.
       type: string
       example: "123456789@domain.com"
-          
+
     PhoneNumber:
       description: A public identifier addressing a telephone subscription. In mobile networks it corresponds to the MSISDN (Mobile Station International Subscriber Directory Number). In order to be globally unique it has to be formatted in international format, according to E.164 standard, optionally prefixed with '+'.
       type: string
@@ -442,7 +438,7 @@ components:
       example: "123456789"
 
     Port:
-      description:  TCP or UDP port number
+      description: TCP or UDP port number
       type: integer
       minimum: 1024
       maximum: 65535
