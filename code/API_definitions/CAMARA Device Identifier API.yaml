@@ -1,7 +1,7 @@
-openapi: "3.0.3"
+openapi: 3.0.3
 info:
   title: CAMARA Device Identifier API
-  version: 0.2.0
+  version: 0.2.1
   description: |
     # Summary
 
@@ -86,6 +86,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+
 externalDocs:
   description: Product documentation at CAMARA
   url: https://github.com/camaraproject/DeviceIdentifier
@@ -99,6 +100,7 @@ servers:
       basePath:
         default: dvi/v0
         description: Base path for the Device Identifier API
+
 paths:
   "/get-device-identifier":
     post:
@@ -146,7 +148,7 @@ components:
   securitySchemes:
     openId:
       type: openIdConnect
-      openIdConnectUrl: .well-known/openid-configuration
+      openIdConnectUrl: https://localhost/.well-known/openid-configuration
 
   responses:
     200Response:
