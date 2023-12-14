@@ -148,7 +148,7 @@ components:
   securitySchemes:
     openId:
       type: openIdConnect
-      openIdConnectUrl: https://localhost/.well-known/openid-configuration
+      openIdConnectUrl: .well-known/openid-configuration
 
   responses:
     200Response:
