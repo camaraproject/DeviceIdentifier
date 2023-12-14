@@ -106,6 +106,8 @@ paths:
     post:
       security:
         - openId: []
+      tags:
+        - Get Device Identifiers
       summary: Get details about the device being used by a specified mobile subscriber
       description: Get details about the device being used by a specified mobile subscriber
       operationId: getDeviceIdentifier
