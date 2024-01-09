@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Device Identifier API
-  version: 0.2.1
+  version: 0.3.0
   description: |
     # Summary
 
@@ -98,7 +98,7 @@ servers:
         default: https://localhost:443
         description: API root
       basePath:
-        default: dvi/v0
+        default: device-identifier/v0
         description: Base path for the Device Identifier API
 
 paths:
