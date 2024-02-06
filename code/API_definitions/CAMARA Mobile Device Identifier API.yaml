@@ -119,6 +119,7 @@ paths:
       parameters:
         - in: header
           name: X-Correlator
+          required: false
           schema:
             type: string
             format: uuid
