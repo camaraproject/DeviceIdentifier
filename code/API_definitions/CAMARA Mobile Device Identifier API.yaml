@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Mobile Device Identifier API
-  version: 0.3.3
+  version: 0.4.0
   description: |
     # Summary
 
@@ -115,6 +115,15 @@ paths:
       summary: Get details about the device being used by a specified mobile subscriber
       description: Get details about the device being used by a specified mobile subscriber
       operationId: getDeviceIdentifier
+
+      parameters:
+        - in: header
+          name: X-Correlator
+          required: false
+          schema:
+            type: string
+            format: uuid
+
       requestBody:
         description: Parameters to create a new session
         content:
@@ -154,9 +163,20 @@ components:
       type: openIdConnect
       openIdConnectUrl: .well-known/openid-configuration
 
+  headers:
+    X-Correlator:
+      description: Correlation id for the different services
+      required: false
+      schema:
+        type: string
+        format: uuid
+
   responses:
     200Response:
       description: An device identifier has been found for the specified subscriber
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -185,6 +205,9 @@ components:
 
     400BadRequest:
       description: Bad Request
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -229,6 +252,9 @@ components:
                 message: "Invalid value: ipv4Address.publicPort"
     401Unauthorized:
       description: Unauthorized
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -242,6 +268,9 @@ components:
 
     403Forbidden:
       description: Forbidden
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -255,6 +284,9 @@ components:
 
     404NotFound:
       description: Subscriber Not Found
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -269,6 +301,9 @@ components:
 
     405MethodNotAllowed:
       description: Method Not Allowed
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -283,6 +318,9 @@ components:
 
     406Unacceptable:
       description: Not Acceptable
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -297,6 +335,9 @@ components:
 
     429TooManyRequests:
       description: Too Many Requests
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -311,6 +352,9 @@ components:
 
     500InternalServerError:
       description: Internal Server Error
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -322,6 +366,9 @@ components:
 
     502BadGateway:
       description: Bad Gateway
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -333,6 +380,9 @@ components:
 
     503ServiceUnavailable:
       description: Service Unavailable
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
@@ -344,6 +394,9 @@ components:
 
     504GatewayTimeout:
       description: Gateway Time-Out
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
