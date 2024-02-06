@@ -115,9 +115,14 @@ paths:
       summary: Get details about the device being used by a specified mobile subscriber
       description: Get details about the device being used by a specified mobile subscriber
       operationId: getDeviceIdentifier
-      headers:
-        X-Correlator:
-          $ref: "#/components/headers/X-Correlator"
+
+      parameters:
+        - in: header
+          name: X-Correlator
+          schema:
+            type: string
+            format: uuid
+
       requestBody:
         description: Parameters to create a new session
         content:
@@ -201,7 +206,7 @@ components:
       description: Bad Request
       headers:
         X-Correlator:
-        $ref: "#/components/headers/X-Correlator"
+          $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
           schema:
