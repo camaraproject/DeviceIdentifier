@@ -1,4 +1,6 @@
 ---
+# CAMARA Project - YAML linting configuration for yamllint https://yamllint.readthedocs.io/en/latest/rules.html
+# 31.01.2024 - initial version
 
 yaml-files:
   - '*.yaml'
