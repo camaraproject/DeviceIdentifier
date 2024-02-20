@@ -59,10 +59,10 @@ info:
     # API functionality
 
     The API defines two service endpoints:
-    
+
     - `POST /get-identifier` to get details about the specific device being used by a given mobile subscriber, including IMEI / IMEISV and the type of device
     - `POST /get-type` to get details only about the type of device being used by a given mobile subscriber
-    
+
     To call either of these endpoints, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
     Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
@@ -80,7 +80,7 @@ info:
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
     - Other response parameters are implementation dependent
-    
+
     An example of a JSON response object is as follows:
     ```
     {
@@ -124,7 +124,7 @@ paths:
         - Get Device Identifiers
       security:
         - openId:
-          - device-identifier:retrieve-identifier
+            - device-identifier:retrieve-identifier
 
       parameters:
         - in: header
@@ -176,7 +176,7 @@ paths:
         - Get Device Identifiers
       security:
         - openId:
-          - device-identifier:retrieve-type
+            - device-identifier:retrieve-type
 
       parameters:
         - in: header
@@ -243,12 +243,12 @@ components:
         application/json:
           schema:
             required:
-            - lastChecked
-            - imei
+              - lastChecked
+              - imei
             allOf:
-            - $ref: "#/components/schemas/LastChecked"
-            - $ref: "#/components/schemas/DeviceIdentifier"
-            - $ref: "#/components/schemas/DeviceType"
+              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/DeviceIdentifier"
+              - $ref: "#/components/schemas/DeviceType"
 
     200RetrieveType:
       description: An device identifier has been found for the specified subscriber
@@ -259,12 +259,12 @@ components:
         application/json:
           schema:
             required:
-            - lastChecked
-            - tac
+              - lastChecked
+              - tac
             allOf:
-            - $ref: "#/components/schemas/LastChecked"
-            - $ref: "#/components/schemas/DeviceType"
-  
+              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/DeviceType"
+
     400BadRequest:
       description: Bad Request
       headers:
@@ -478,7 +478,7 @@ components:
           type: string
           format: date-time
           example: "2024-02-20T10:41:38.657Z"
-         
+
     DeviceIdentifier:
       description: |
         The individual physical mobile device identifier, as expressed by the IMEI and IMEISV
@@ -492,7 +492,7 @@ components:
           type: string
           description: IMEI of the device
           example: "4901542032375181"
-          
+
     DeviceType:
       description: |
         The physical device type, as expressed by Type Approval Code, manufacturer name and model name
@@ -510,7 +510,7 @@ components:
           type: string
           description: Manufacturer of the device
           example: "Nokia"
-  
+
     Device:
       description: |
         End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators.
