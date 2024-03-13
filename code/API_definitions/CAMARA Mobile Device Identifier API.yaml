@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Mobile Device Identifier API
-  version: 0.5.0
+  version: 0.6.0
   description: |
     # Summary
 
@@ -45,10 +45,12 @@ info:
 
     ### Identifier for the mobile subscription
     At least one identifier for the mobile subscription from the following four options:
-      - Phone number (MSISDN)
+      - Phone number (i.e. MSISDN)
       - Network Access Identifier assigned by the mobile network operator for the device
       - IPv6 address
       - IPv4 address
+
+    In scenarios where a primary MSISDN is shared between multiple devices, each of which has its own "secondary" MSISDN (e.g. OneNumber), the MSISDN passed by the API consumer will be treated as the secondary MSISDN, and hence the identifier returned will be that of the relevant associated device (such as a smartwatch). In such scenarios, the "primary" device (e.g. smartphone) is usually allocated the same primary and secondary MSISDN, and hence providing the primary MSISDN will always return the identity of the primary device and not any associated devices.
 
     ### Authorization and authentication
 
@@ -58,7 +60,12 @@ info:
 
     # API functionality
 
-    The API defines a single service endpoint `POST /get-device-identifier`. To call this endpoint, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
+    The API defines two service endpoints:
+
+    - `POST /retrieve-identifier` to get details about the specific device being used by a given mobile subscriber, including IMEI / IMEISV and the type of device
+    - `POST /retrieve-type` to get details only about the type (i.e. manufacturer and model) of device being used by a given mobile subscriber
+
+    To call either of these endpoints, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
     Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
 
@@ -70,9 +77,16 @@ info:
 
     If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
 
-    Otherwise, a JSON object is returned containing the data the the end user has consented to sharing with the API consumer. An example of this JSON object is as follows:
+    Otherwise, a JSON object is returned containing the data the the end user has consented to sharing with the API consumer.
+    - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
+    - When calling endpoint `retrieve-type`, the response will always contain `tac`
+    - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
+    - Other response parameters are implementation dependent
+
+    An example of a JSON response object is as follows:
     ```
     {
+       "lastChecked": "2024-02-20T10:41:38.657Z",
        "imeisv": "49015420323751800",
        "imei": "4901542032375181",
        "tac": "49015420",
@@ -103,15 +117,16 @@ servers:
         description: API root
 
 paths:
-  "/get-device-identifier":
+  "/retrieve-identifier":
     post:
-      security:
-        - openId: []
+      summary: Get details about the specific device being used by a given mobile subscriber
+      description: Get details about the specific device being used by a given mobile subscriber
+      operationId: retrieveIdentifier
       tags:
         - Get Device Identifiers
-      summary: Get details about the device being used by a specified mobile subscriber
-      description: Get details about the device being used by a specified mobile subscriber
-      operationId: getDeviceIdentifier
+      security:
+        - openId:
+            - device-identifier:retrieve-identifier
 
       parameters:
         - in: header
@@ -130,7 +145,59 @@ paths:
 
       responses:
         "200":
-          $ref: '#/components/responses/200Response'
+          $ref: '#/components/responses/200RetrieveIdentifier'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+        "403":
+          $ref: '#/components/responses/403Forbidden'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+        "405":
+          $ref: '#/components/responses/405MethodNotAllowed'
+        "406":
+          $ref: '#/components/responses/406Unacceptable'
+        "429":
+          $ref: '#/components/responses/429TooManyRequests'
+        "500":
+          $ref: '#/components/responses/500InternalServerError'
+        "502":
+          $ref: '#/components/responses/502BadGateway'
+        "503":
+          $ref: '#/components/responses/503ServiceUnavailable'
+        "504":
+          $ref: '#/components/responses/504GatewayTimeout'
+
+  "/retrieve-type":
+    post:
+      summary: Get details about the type of device being used by a given mobile subscriber
+      description: Get details about the type of device being used by a given mobile subscriber
+      operationId: retrieveType
+      tags:
+        - Get Device Identifiers
+      security:
+        - openId:
+            - device-identifier:retrieve-type
+
+      parameters:
+        - in: header
+          name: X-Correlator
+          required: false
+          schema:
+            type: string
+            format: uuid
+
+      requestBody:
+        description: Parameters to create a new session
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Device"
+
+      responses:
+        "200":
+          $ref: '#/components/responses/200RetrieveType'
         "400":
           $ref: '#/components/responses/400BadRequest'
         "401":
@@ -169,7 +236,7 @@ components:
         format: uuid
 
   responses:
-    200Response:
+    200RetrieveIdentifier:
       description: An device identifier has been found for the specified subscriber
       headers:
         X-Correlator:
@@ -177,28 +244,28 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              imeisv:
-                type: string
-                description: IMEISV of the device
-                example: "49015420323751800"
-              imei:
-                type: string
-                description: IMEI of the device
-                example: "4901542032375181"
-              tac:
-                type: string
-                description: IMEI TAC of the device
-                example: "49015420"
-              model:
-                type: string
-                description: Model of the device
-                example: "3110"
-              manufacturer:
-                type: string
-                description: Manufacturer of the device
-                example: "Nokia"
+            required:
+              - lastChecked
+              - imei
+            allOf:
+              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/DeviceIdentifier"
+              - $ref: "#/components/schemas/DeviceType"
+
+    200RetrieveType:
+      description: An device identifier has been found for the specified subscriber
+      headers:
+        X-Correlator:
+          $ref: "#/components/headers/X-Correlator"
+      content:
+        application/json:
+          schema:
+            required:
+              - lastChecked
+              - tac
+            allOf:
+              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/DeviceType"
 
     400BadRequest:
       description: Bad Request
@@ -404,6 +471,48 @@ components:
             message: "The service is currently not available"
 
   schemas:
+    LastChecked:
+      description: |
+        Last time that the associated device identity was checked and, if necessary, updated
+      properties:
+        lastChecked:
+          description: Date and time information was last checked
+          type: string
+          format: date-time
+          example: "2024-02-20T10:41:38.657Z"
+
+    DeviceIdentifier:
+      description: |
+        The individual physical mobile device identifier, as expressed by the IMEI and IMEISV
+      type: object
+      properties:
+        imeisv:
+          type: string
+          description: IMEISV of the device
+          example: "49015420323751800"
+        imei:
+          type: string
+          description: IMEI of the device
+          example: "4901542032375181"
+
+    DeviceType:
+      description: |
+        The physical device type, as expressed by Type Approval Code, manufacturer name and model name
+      type: object
+      properties:
+        tac:
+          type: string
+          description: IMEI TAC of the device
+          example: "49015420"
+        model:
+          type: string
+          description: Model of the device
+          example: "3110"
+        manufacturer:
+          type: string
+          description: Manufacturer of the device
+          example: "Nokia"
+
     Device:
       description: |
         End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators.
