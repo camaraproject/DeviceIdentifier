@@ -1,0 +1,140 @@
+BEGIN:VCALENDAR
+PRODID:-//Microsoft Corporation//Outlook 16.0 MIMEDIR//EN
+VERSION:2.0
+METHOD:REQUEST
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:Europe/London
+BEGIN:STANDARD
+DTSTART:16011028T020000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+TZOFFSETFROM:+0100
+TZOFFSETTO:-0000
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010325T010000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3
+TZOFFSETFROM:-0000
+TZOFFSETTO:+0100
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ATTENDEE;CN="Eric Murray, Vodafone";RSVP=TRUE:mailto:eric.murray@vodafone.c
+	om
+CLASS:PUBLIC
+CREATED:20240410T081325Z
+DESCRIPTION:	External Email: Be cautious about the sender email address\, a
+	ttachments and links. If uncertain use Report Message button. 	\n\nHello E
+	ric Murray\,\n\nYou have been invited to a recurring meeting for Camara Pr
+	oject\n\n\nCAMARA Device Identifier Monthly Meeting\n\n\nNext Meeting: Fri
+	day\, May 3rd\, 9:00 Europe/London\n\nRepeats: Monthly on the first Friday
+	 of the month at 9:00 Europe/London\n\n\nMeeting Description:\n\n\nDevice 
+	Identifier monthly meeting\n\n\nWays to join meeting:\n\n\n1. Join from PC
+	\, Mac\, iPad\, or Android\n\nJoin Meeting \n\nIf the button above does no
+	t work\, paste this into your browser: https://zoom-lfx.platform.linuxfoun
+	dation.org/meeting/96981252767?password=fc957607-cc06-450f-b80a-229bb6a88c
+	39 <https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fzoom
+	-lfx.platform.linuxfoundation.org%2Fmeeting%2F96981252767%3Fpassword%3Dfc9
+	57607-cc06-450f-b80a-229bb6a88c39&data=05%7C02%7Ceric.murray%40vodafone.co
+	m%7Cecebcf0aaf844dbaaf5608dc58cfeaec%7C68283f3b84874c86adb3a5228f18b893%7C
+	0%7C0%7C638482897253889159%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJ
+	QIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&sdata=l0siLgpA4al
+	ZHcUyW%2BPzCpEcFTaDPLB%2BSHndx0y8ohQ%3D&reserved=0> \n\n\n2. Join via audi
+	o\n\n\nOne tap mobile:\n\nUS: +12532158782\,\,96981252767#\,\,\,\,*766762#
+	 <tel:+12532158782\,\,96981252767%23\,\,\,\,*766762%23>  or +13462487799\,
+	\,96981252767#\,\,\,\,*766762# <tel:+13462487799\,\,96981252767%23\,\,\,\,
+	*766762%23> \n\nOr dial: \n\nUS: +1 253 215 8782 or +1 346 248 7799 or +1 
+	669 900 6833 or +1 301 715 8592 or +1 312 626 6799 or +1 646 374 8656 or 8
+	77 369 0926 (Toll Free) or 855 880 1246 (Toll Free)\n\nCanada: +1 647 374 
+	4685 or +1 647 558 0588 or +1 778 907 2071 or +1 204 272 7920 or +1 438 80
+	9 7799 or +1 587 328 1099 or 855 703 8985 (Toll Free)\n\nMeeting ID: 96981
+	252767\n\nMeeting Passcode: 766762\n\nInternational numbers <https://eur03
+	.safelinks.protection.outlook.com/?url=https%3A%2F%2Fzoom.us%2Fu%2FalwnPIa
+	VT&data=05%7C02%7Ceric.murray%40vodafone.com%7Cecebcf0aaf844dbaaf5608dc58c
+	feaec%7C68283f3b84874c86adb3a5228f18b893%7C0%7C0%7C638482897253901694%7CUn
+	known%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLC
+	JXVCI6Mn0%3D%7C0%7C%7C%7C&sdata=NAsUP%2F3hAtElAUoCVvnTSsXRgFWAqXIIa%2Bs9ma
+	nd1q4%3D&reserved=0>  \n
+DTEND;TZID=Europe/London:20240503T100000
+DTSTAMP:20240409T200158Z
+DTSTART;TZID=Europe/London:20240503T090000
+LAST-MODIFIED:20240410T081325Z
+LOCATION:https://zoom-lfx.platform.linuxfoundation.org/meeting/96981252767?
+	password=fc957607-cc06-450f-b80a-229bb6a88c39
+ORGANIZER;CN="Camara Project":mailto:meetings@lfx.dev
+PRIORITY:5
+RRULE:FREQ=MONTHLY;COUNT=999;BYDAY=FR;BYSETPOS=1
+SEQUENCE:0
+SUMMARY:CAMARA Device Identifier Monthly Meeting
+TRANSP:OPAQUE
+UID:96981252767
+X-ALT-DESC;FMTTYPE=text/html:<html><head>\n<style>\n        .join-meeting-b
+	tn {\n            background: #0099CC 0% 0% no-repeat padding-box\;\n     
+	       border: 1px solid #0099CC\;\n            border-radius: 30px\;\n   
+	         opacity: 1\;\n        }\n        .join-meeting-text {\n          
+	  text-align: left\;\n            font: normal normal 600 14px/19px Open S
+	ans\;\n            letter-spacing: 0px\;\n            color: white\;\n    
+	        text-decoration: none\;\n            text-transform: capitalize\;\
+	n            opacity: 1\;\n        }\n        .tight-spacing {\n          
+	  letter-spacing: 0px\;\n            line-height: 10px\;\n            padd
+	ing-bottom: 3px\;\n        }\n        </style>\n</head>\n<body>\n<p><style
+	>\n            table {}\n            td.column1 {\n                width: 
+	2%\;\n                background-color: #EB970C\;\n            }\n\n      
+	      td.column2 {\n                width: 98%\;\n                backgrou
+	nd-color: #5D284F\;\n                text-align: left\;\n                v
+	ertical-align: middle\;\n                color: white\;\n                m
+	argin-left: 1%\;\n                margin-right: 1%\;\n                font
+	-family: 'Calibri'\;\n            }\n\n            .report-text {\n       
+	         color: #EB970C\;\n            }\n        </style>\n<table>\n<tbod
+	y>\n<tr>\n<td class="column1"></td>\n<td class="column2"><b>External Email
+	:</b> Be cautious about the sender email address\, attachments and links. 
+	If uncertain use\n<span class="report-text">Report Message</span> button. 
+	</td>\n</tr>\n</tbody>\n</table>\n</p>\n<div>\n<div>\n<p>Hello Eric Murray
+	\,</p>\n<p>You have been invited to a recurring meeting for Camara Project
+	</p>\n<h2>CAMARA Device Identifier Monthly Meeting</h2>\n<div>\n<div class
+	="tight-spacing">\n<p>Next Meeting: Friday\, May 3rd\, 9:00 Europe/London<
+	/p>\n<p>Repeats: Monthly on the first Friday of the month at 9:00 Europe/L
+	ondon</p>\n</div>\n<div>\n<h3>Meeting Description:</h3>\n<p>Device Identif
+	ier monthly meeting</p>\n</div>\n</div>\n<div>\n<h3>Ways to join meeting:<
+	/h3>\n<div>\n<div>\n<h2>1. Join from PC\, Mac\, iPad\, or Android</h2>\n<b
+	utton class="join-meeting-btn">Join Meeting</button>\n<p>If the button abo
+	ve does not work\, paste this into your browser: <a href="https://eur03.sa
+	felinks.protection.outlook.com/?url=https%3A%2F%2Fzoom-lfx.platform.linuxf
+	oundation.org%2Fmeeting%2F96981252767%3Fpassword%3Dfc957607-cc06-450f-b80a
+	-229bb6a88c39&amp\;data=05%7C02%7Ceric.murray%40vodafone.com%7Cecebcf0aaf8
+	44dbaaf5608dc58cfeaec%7C68283f3b84874c86adb3a5228f18b893%7C0%7C0%7C6384828
+	97253889159%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLC
+	JBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp\;sdata=l0siLgpA4alZHcUyW%2BP
+	zCpEcFTaDPLB%2BSHndx0y8ohQ%3D&amp\;reserved=0" originalsrc="https://zoom-l
+	fx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06
+	-450f-b80a-229bb6a88c39" shash="mZ8W1zunMgYOmkE/at4mi3tjtzNyHdZMlu45H6SwaB
+	DnL3I4BhBhuRb1w48UeYovLKFIwFiSQzmjKs3IaqZJJ+1rAEbUBiKMw613eOsCb0DYq/uhsbs7
+	vmRU85rOeeVxV8cStBXYNPQ1BBuinmUPptWQg2ttpPDxvLibTrSQ1Wo=">\nhttps://zoom-l
+	fx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06
+	-450f-b80a-229bb6a88c39</a></p>\n</div>\n<div>\n<h2>2. Join via audio</h2>
+	\n<div class="tight-spacing">\n<p><b>One tap mobile:</b></p>\n<p><b>US:</b
+	> <a href="tel:+12532158782\,\,96981252767%23\,\,\,\,*766762%23">+12532158
+	782\,\,96981252767#\,\,\,\,*766762#</a> or\n<a href="tel:+13462487799\,\,9
+	6981252767%23\,\,\,\,*766762%23">+13462487799\,\,96981252767#\,\,\,\,*7667
+	62#</a></p>\n</div>\n<div class="tight-spacing">\n<p><b>Or dial: </b></p>\
+	n<p><b>US:</b> +1 253 215 8782 or +1 346 248 7799 or +1 669 900 6833 or +1
+	 301 715 8592 or +1 312 626 6799 or +1 646 374 8656 or 877 369 0926 (Toll 
+	Free) or 855 880 1246 (Toll Free)</p>\n<p><b>Canada:</b> +1 647 374 4685 o
+	r +1 647 558 0588 or +1 778 907 2071 or +1 204 272 7920 or +1 438 809 7799
+	 or +1 587 328 1099 or 855 703 8985 (Toll Free)</p>\n</div>\n<p>Meeting ID
+	: 96981252767</p>\n<p>Meeting Passcode: 766762</p>\n<a href="https://eur03
+	.safelinks.protection.outlook.com/?url=https%3A%2F%2Fzoom.us%2Fu%2FalwnPIa
+	VT&amp\;data=05%7C02%7Ceric.murray%40vodafone.com%7Cecebcf0aaf844dbaaf5608
+	dc58cfeaec%7C68283f3b84874c86adb3a5228f18b893%7C0%7C0%7C638482897253901694
+	%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1ha
+	WwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp\;sdata=NAsUP%2F3hAtElAUoCVvnTSsXRgFWAqX
+	IIa%2Bs9mand1q4%3D&amp\;reserved=0" originalsrc="https://zoom.us/u/alwnPIa
+	VT" shash="O9EkpAzXKMHHN4ljW5DPJFab0s8xsB/izBtYG3wNyhF4LydTl2dBvdqMzyjAmGO
+	CrDt8BPzVcR3yFzj+9yPH/vHbR6xVMPYyWyIfABixIDVYhzSN4MXFNIVoBadKP3SfK3wL1qCd+
+	eN1QhJTe/mCy1Iegt1D0am9IO8nToij8J0=">International numbers</a> </div>\n</d
+	iv>\n</div>\n</div>\n</div>\n</body>\n</html>\n
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+END:VEVENT
+END:VCALENDAR
