@@ -130,8 +130,9 @@ paths:
 
       parameters:
         - in: header
-          name: X-Correlator
+          name: x-correlator
           required: false
+          description: Correlation id for the different services
           schema:
             type: string
             format: uuid
@@ -182,7 +183,8 @@ paths:
 
       parameters:
         - in: header
-          name: X-Correlator
+          name: x-correlator
+          description: Correlation id for the different services
           required: false
           schema:
             type: string
@@ -239,7 +241,7 @@ components:
     200RetrieveIdentifier:
       description: An device identifier has been found for the specified subscriber
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -255,7 +257,7 @@ components:
     200RetrieveType:
       description: An device identifier has been found for the specified subscriber
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -270,7 +272,7 @@ components:
     400BadRequest:
       description: Bad Request
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -317,7 +319,7 @@ components:
     401Unauthorized:
       description: Unauthorized
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -333,7 +335,7 @@ components:
     403Forbidden:
       description: Forbidden
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -349,7 +351,7 @@ components:
     404NotFound:
       description: Subscriber Not Found
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -366,7 +368,7 @@ components:
     405MethodNotAllowed:
       description: Method Not Allowed
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -383,7 +385,7 @@ components:
     406Unacceptable:
       description: Not Acceptable
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -400,7 +402,7 @@ components:
     429TooManyRequests:
       description: Too Many Requests
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -417,7 +419,7 @@ components:
     500InternalServerError:
       description: Internal Server Error
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -431,7 +433,7 @@ components:
     502BadGateway:
       description: Bad Gateway
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -445,7 +447,7 @@ components:
     503ServiceUnavailable:
       description: Service Unavailable
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
@@ -459,7 +461,7 @@ components:
     504GatewayTimeout:
       description: Gateway Time-Out
       headers:
-        X-Correlator:
+        x-correlator:
           $ref: "#/components/headers/X-Correlator"
       content:
         application/json:
