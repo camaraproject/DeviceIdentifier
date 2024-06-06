@@ -14,12 +14,12 @@ Repository to describe, develop, document and test the Device Identifier API fam
 * Started: October 2022
 
 ## Project Wiki
-* The project wiki can be found [here](https://wiki.camaraproject.org/display/CAM/Device+Identifier)
+* The project wiki can be found [here](https://wiki.camaraproject.org/display/CAM/DeviceIdentifier)
 
 ## Meetings
 * Schedule: First Friday of each month at 09:00 BST / 10:00 CEST via Linux Foundation Zoom service
  * Meeting invite can be found [here](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Device%20Identifier%20Monthly%20Meeting.ics)
- * Meeting minutes can be found [here](https://wiki.camaraproject.org/display/CAM/Device+Identifier+Meeting+Minutes)
+ * Meeting minutes can be found [here](https://wiki.camaraproject.org/display/CAM/DeviceIdentifier+Meeting+Minutes)
 
 ## Results
 * **Device Identifier API**
