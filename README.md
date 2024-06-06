@@ -9,9 +9,7 @@
 Repository to describe, develop, document and test the Device Identifier API family
 
 ## Scope
-* Service APIs for:
-  * “Device Identifier” (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
-  * "IMEI Fraud" (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/IMEI%20Fraud.md))  
+* Service APIs for “Device Identifier API” (see [API Proposal](https://github.com/camaraproject/APIBacklog/blob/main/documentation/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
 * Describe, develop, document and test the APIs (with 1-2 Telcos)  
 * Started: October 2022
 
