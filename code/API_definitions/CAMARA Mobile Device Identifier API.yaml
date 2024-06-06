@@ -131,8 +131,8 @@ paths:
       parameters:
         - in: header
           name: x-correlator
-          required: false
           description: Correlation id for the different services
+          required: false
           schema:
             type: string
             format: uuid
