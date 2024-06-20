@@ -9,19 +9,17 @@
 Repository to describe, develop, document and test the Device Identifier API family
 
 ## Scope
-* Service APIs for:
-  * “Device Identifier” (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
-  * "IMEI Fraud" (see [API Proposal](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/IMEI%20Fraud.md))  
+* Service APIs for “Device Identifier API” (see [API Proposal](https://github.com/camaraproject/APIBacklog/blob/main/documentation/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
 * Describe, develop, document and test the APIs (with 1-2 Telcos)  
 * Started: October 2022
 
 ## Project Wiki
-* The project wiki can be found [here](https://wiki.camaraproject.org/display/CAM/Device+Identifier)
+* The project wiki can be found [here](https://wiki.camaraproject.org/display/CAM/DeviceIdentifier)
 
 ## Meetings
 * Schedule: First Friday of each month at 09:00 BST / 10:00 CEST via Linux Foundation Zoom service
  * Meeting invite can be found [here](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Device%20Identifier%20Monthly%20Meeting.ics)
- * Meeting minutes can be found [here](https://wiki.camaraproject.org/display/CAM/Device+Identifier+Meeting+Minutes)
+ * Meeting minutes can be found [here](https://wiki.camaraproject.org/display/CAM/DeviceIdentifier+Meeting+Minutes)
 
 ## Results
 * **Device Identifier API**
