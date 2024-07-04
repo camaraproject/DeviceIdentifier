@@ -433,7 +433,7 @@ components:
       headers:
         X-Correlator:
           $ref: "#/components/headers/X-Correlator"
-      content: 
+      content:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
