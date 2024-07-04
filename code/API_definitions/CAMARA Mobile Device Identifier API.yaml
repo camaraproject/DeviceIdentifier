@@ -184,7 +184,7 @@ paths:
         "406":
           $ref: '#/components/responses/406Unacceptable'
         "422":
-          $ref: '#/component/responses/422UnprocessableContent'
+          $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
         "500":
@@ -239,7 +239,7 @@ paths:
         "406":
           $ref: '#/components/responses/406Unacceptable'
         "422":
-          $ref: '#/component/responses/422UnprocessableContent'
+          $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
         "500":
