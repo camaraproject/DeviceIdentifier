@@ -436,7 +436,7 @@ components:
       content: 
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: "#/components/schemas/ErrorResponse"
           examples:
             GENERIC_422_DEVICE_IDENTIFIERS_MISMATCH:
               description: Inconsistency between device identifiers not pointing to the same device
