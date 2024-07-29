@@ -54,33 +54,31 @@ info:
 
     ### Authorization and authentication
 
-    CAMARA guidelines defines a set of authorization flows which can grant API clients access to the API functionality, as outlined in the document [CAMARA-API-access-and-user-consent.md](https://github.com/camaraproject/IdentityAndConsentManagement/blob/main/documentation/CAMARA-API-access-and-user-consent.md). Which specific authorization flows are to be used will be determined during onboarding process, happening between the API Client and the Telco Operator exposing the API, taking into account the declared purpose for accessing the API, while also being subject to the prevailing legal framework dictated by local legislation.
+    [Camara Security and Interoperability Profile](https://github.com/camaraproject/IdentityAndConsentManagement/blob/main/documentation/CAMARA-Security-Interoperability.md) provides details on how a client requests an access token.
+
+    Which specific authorization flows are to be used will be determined during onboarding process, happening between the API Client and the Telco Operator exposing the API, taking into account the declared purpose for accessing the API, while also being subject to the prevailing legal framework dictated by local legislation.
 
     It is important to remark that in cases where personal user data is processed by the API, and users can exercise their rights through mechanisms such as opt-in and/or opt-out, the use of 3-legged access tokens becomes mandatory. This measure ensures that the API remains in strict compliance with user privacy preferences and regulatory obligations, upholding the principles of transparency and user-centric data control.
 
-    # Identifying a device from the access token
+    ## Handling of mobile subscription information:
 
-    This specification defines the `device` object field as optional in API requests, specifically in cases where the API is accessed using a 3-legged access token and the device can be uniquelly identified by the token. This approach simplifies API usage for API consumers by relying on the device information associated with the access token used to invoke the API.
+    ### Optional mobile subscription identifiers for 3-legged tokens:
 
-    ## Handling of device information:
-
-    ### Optional device object for 3-legged tokens:
-
-    - When using a 3-legged access token, the device associated with the access token must be considered as the device for the API request. This means that the device object is not required in the request, and if included it must identify the same device, therefore **it is recommended NOT to include it in these scenarios** to simplify the API usage and avoid additional validations.
+    - When using a 3-legged access token, the mobile subscription identifier associated with the access token must be considered as the mobile subscription identifier for the API request. This means that no mobile subscription identifiers are required in the request, and if included it must identify the same subscription. Hence **it is recommended NOT to include it in these scenarios** to simplify the API usage and avoid additional validations.
 
     ### Validation mechanism:
 
-    - The server will extract the device identification from the access token, if available.
-    - If the API request additionally includes a `device` object when using a 3-legged access token, the API will validate that the device identifier provided matches the one associated with the access token.
-    - If there is a mismatch, the API will respond with a 403 - INVALID_TOKEN_CONTEXT error, indicating that the device information in the request does not match the token.
+    - The server will extract the mobile subscription identifier (i.e. MSISDN) from the access token, if available.
+    - If the API request additionally includes one or more mobile subscription identifiers when using a 3-legged access token, the API will validate that the identifier(s) provided matches the one associated with the access token.
+    - If there is a mismatch, the API will respond with a 403 - INVALID_TOKEN_CONTEXT error, indicating that the mobile subscription information in the request does not match the token.
 
     ### Error handling for unidentifiable devices:
 
-    - If the `device` object is not included in the request and the device information cannot be derived from the 3-legged access token, the server will return a 422 `UNIDENTIFIABLE_DEVICE` error.
+    - If no mobile subscription information is included in the request and the mobile subscription information cannot be derived from the 3-legged access token, the server will return a 422 `UNIDENTIFIABLE_DEVICE` error.
 
     ### Restrictions for tokens without an associated authenticated identifier:
 
-    - For scenarios which do not have a single device identifier associated to the token during the authentication flow, e.g. 2-legged access tokens, the `device` object MUST be provided in the API request. This ensures that the device identification is explicit and valid for each API call made with these tokens.
+    - For scenarios which do not have a mobile subscription identifier associated to the token during the authentication flow, e.g. 2-legged access tokens, mobile subscription identifiers MUST be provided in the API request. This ensures that the mobile subscription identifier is explicit and valid for each API call made with these tokens.
 
     # API functionality
 
