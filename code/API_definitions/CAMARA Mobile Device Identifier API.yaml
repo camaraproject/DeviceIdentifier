@@ -68,13 +68,13 @@ info:
 
     ### Validation mechanism:
 
-    - The server will extract the mobile subscription identifier (i.e. MSISDN) from the access token, if available.
+    - The server will extract the mobile subscription identifier (e.g. MSISDN) from the access token, if available.
     - If the API request additionally includes one or more mobile subscription identifiers when using a 3-legged access token, the API will validate that the identifier(s) provided matches the one associated with the access token.
-    - If there is a mismatch, the API will respond with a 403 - INVALID_TOKEN_CONTEXT error, indicating that the mobile subscription information in the request does not match the token.
+    - If there is a mismatch, the API will respond with a `403 INVALID_TOKEN_CONTEXT` error, indicating that the mobile subscription information in the request does not match the token.
 
     ### Error handling for unidentifiable devices:
 
-    - If no mobile subscription information is included in the request and the mobile subscription information cannot be derived from the 3-legged access token, the server will return a 422 `UNIDENTIFIABLE_DEVICE` error.
+    - If no mobile subscription information is included in the request and the mobile subscription information cannot be derived from the 3-legged access token, the server will return a `422 UNIDENTIFIABLE_DEVICE` error.
 
     ### Restrictions for tokens without an associated authenticated identifier:
 
