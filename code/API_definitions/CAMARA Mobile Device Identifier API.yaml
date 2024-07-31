@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: CAMARA Mobile Device Identifier API
+  title: CAMARA Mobile Device Identifier
   version: wip
   description: |
     # Summary
@@ -104,6 +104,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-camara-commonalities: 0.4.0
 
 externalDocs:
   description: Product documentation at CAMARA
@@ -114,7 +115,7 @@ servers:
     variables:
       apiRoot:
         default: https://localhost:443
-        description: API root
+        description: API root, to be defined by the service provider
 
 paths:
   "/retrieve-identifier":
