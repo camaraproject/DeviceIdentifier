@@ -135,7 +135,6 @@ paths:
           required: false
           schema:
             type: string
-            format: uuid
 
       requestBody:
         description: Parameters to create a new session
@@ -188,7 +187,6 @@ paths:
           required: false
           schema:
             type: string
-            format: uuid
 
       requestBody:
         description: Parameters to create a new session
@@ -235,7 +233,6 @@ components:
       required: false
       schema:
         type: string
-        format: uuid
 
   responses:
     200RetrieveIdentifier:
