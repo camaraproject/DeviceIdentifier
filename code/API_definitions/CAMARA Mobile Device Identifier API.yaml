@@ -54,7 +54,7 @@ info:
 
     ### Authorization and authentication
 
-    [Camara Security and Interoperability Profile](https://github.com/camaraproject/IdentityAndConsentManagement/blob/main/documentation/CAMARA-Security-Interoperability.md) provides details on how a client requests an access token.
+    The "Camara Security and Interoperability Profile" provides details on how a client requests an access token. Please refer to Identify and Consent Management (https://github.com/camaraproject/IdentityAndConsentManagement/) for the released version of the Profile.
 
     Which specific authorization flows are to be used will be determined during onboarding process, happening between the API Client and the Telco Operator exposing the API, taking into account the declared purpose for accessing the API, while also being subject to the prevailing legal framework dictated by local legislation.
 
@@ -68,8 +68,8 @@ info:
 
     ### Validation mechanism:
 
-    - The server will extract the mobile subscription identifier (e.g. MSISDN) from the access token, if available.
-    - If the API request additionally includes one or more mobile subscription identifiers when using a 3-legged access token, the API will validate that the identifier(s) provided matches the one associated with the access token.
+    - The API server will determine the mobile subscription identifier (e.g. phone number) from the access token itself if that information is associated with it (i.e. 3-legged token).
+    - If the API request itself additionally includes one or more mobile subscription identifiers when using a 3-legged access token, the API will validate that the identifier(s) provided matches the one associated with the access token.
     - If there is a mismatch, the API will respond with a `403 INVALID_TOKEN_CONTEXT` error, indicating that the mobile subscription information in the request does not match the token.
 
     ### Error handling for unidentifiable devices:
@@ -95,7 +95,7 @@ info:
 
     If the mobile subscription parameters contain a formatting error, a `400 INVALID_ARGUMENT` error is returned.
 
-    If the mobile subscription cannot be identified from the provided parameters, a `404 NOT_FOUND` error is returned.
+    If the mobile subscription cannot be identified from the provided parameters, a `404 DEVICE_NOT_FOUND` error is returned.
 
     If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
 
@@ -349,50 +349,70 @@ components:
       description: Unauthorized
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorInfo"
           examples:
-            InvalidCredentials:
+            GENERIC_401_UNAUTHENTICATED:
+              description: Request cannot be authenticated
               value:
                 status: 401
                 code: UNAUTHENTICATED
-                message: "Request not authenticated due to missing, invalid, or expired credentials"
+                message: Request not authenticated due to missing, invalid, or expired credentials.
+            GENERIC_401_AUTHENTICATION_REQUIRED:
+              description: New authentication is needed, authentication is no longer valid
+              value:
+                status: 401
+                code: AUTHENTICATION_REQUIRED
+                message: New authentication is required.
 
     403Forbidden:
       description: Forbidden
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorInfo"
           examples:
-            InsufficientPermissions:
+            GENERIC_403_PERMISSION_DENIED:
+              description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
               value:
                 status: 403
                 code: PERMISSION_DENIED
-                message: "API consumer does not have sufficient permissions to perform this action"
+                message: Client does not have sufficient permissions to perform this action.
+            GENERIC_403_INVALID_TOKEN_CONTEXT:
+              description: Reflect some inconsistency between information in some field of the API and the related OAuth2 Token
+              value:
+                status: 403
+                code: INVALID_TOKEN_CONTEXT
+                message: "{{field}} is not consistent with access token."
 
     404NotFound:
-      description: Subscriber Not Found
+      description: Not found
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorInfo"
           examples:
-            SubscriberNotFound:
-              description: The specified parameters are either inconsistent (if multiple parameters are specified) or not currently associated with any customers of this service
+            GENERIC_404_NOT_FOUND:
+              description: Resource is not found
               value:
                 status: 404
                 code: NOT_FOUND
-                message: "No device found for the specified parameters"
+                message: The specified resource is not found.
+            GENERIC_404_DEVICE_NOT_FOUND:
+              description: Device identifier not found
+              value:
+                status: 404
+                code: DEVICE_NOT_FOUND
+                message: Device identifier not found.
 
     405MethodNotAllowed:
       description: Method Not Allowed
