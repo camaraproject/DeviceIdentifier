@@ -60,7 +60,7 @@ Feature: Camara Device Identifer API retrieve identifier
     And the response header "Content-Type" is "application/json"
     And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     Then the response status code is 200
-    And the response property "$.DeviceIdentifier" is IMEISV2
+    And the response property "$.imeisv" is IMEISV2
 
   @DeviceIdentifier_retrieve_identifier102_ipv4Address_success
   Scenario:  retrieve device identifer for phone number PHONENUMBER2, network connection and access token matches PHONENUMBER2
