@@ -11,6 +11,23 @@ Feature: Camara Device Identifer API retrieve identifier
 # * a mobile device with imei IMEISV2  and phone number PHONENUMBER2
 # * a mobile device with DeviceIpv4Addr value IPV4ADDRESS
 
+@NumberVerification_verify
+Feature: Camara Number Verification API verify
+
+  # Input to be provided by the implementation to the tests
+  # References to OAS spec schemas refer to schemas specified in
+  # https://raw.githubusercontent.com/camaraproject/NumberVerification/main/code/API_definitions/number_verification.yaml
+  #
+  # Implementation indications:
+  # * api_root: API root of the server URL
+  #
+  # Testing assets:
+  # * a mobile device with SIM card with NUMBERVERIFY_VERIFY_MATCH_PHONENUMBER1
+  # * a mobile device with SIM card with NUMBERVERIFY_VERIFY_MATCH_PHONENUMBER2
+  # * a mobile device with SIM card with NUMBERVERIFY_VERIFY_MATCH_PHONENUMBER_HASHED1
+  # * a mobile device with SIM card with NUMBERVERIFY_VERIFY_MATCH_PHONENUMBER_HASHED2
+
+
   Background: Common Device Identifier retrieve identifer setup
     Given the resource "/retrieve-identifier/v0"  as  base url
     And the header "Content-Type" is set to "application/json"
