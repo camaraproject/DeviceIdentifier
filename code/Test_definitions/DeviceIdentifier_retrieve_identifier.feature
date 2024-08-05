@@ -26,7 +26,6 @@ Feature: Camara Device Identifer API retrieve identifier
     And the response property "$.status" is 400
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
-    And they acquired a valid access token associated with PHONENUMBER1 through OIDC authorization code flow
 
     Examples:
       | phone_number_value |
