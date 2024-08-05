@@ -68,7 +68,8 @@ Feature: Camara Device Identifer API retrieve identifier
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
-    And the request body has the field ipv4Address with a value of IPV4ADDRESS
+    And the request body has the field ipv4Address.publicAddress with a value of PUBLICIPV4ADDRESS
+    And the request body has the field ipv4Address.publicPort with a value of PUBLICPORT
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
