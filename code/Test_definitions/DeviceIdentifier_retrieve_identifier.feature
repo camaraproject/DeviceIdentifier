@@ -66,7 +66,7 @@ Feature: Camara Number Verification API verify
     And the response header "Content-Type" is "application/json"
     And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     Then the response status code is 200
-    And the response property "$.DeviceIdentifier" is IMEI1
+    And the response property "$.imei" is IMEI1
 
   @DeviceIdentifier_retrieve_identifier101_success
   Scenario:  retrieve device identifer for phone number PHONENUMBER2, network connection and access token matches PHONENUMBER2
