@@ -92,7 +92,7 @@ Feature: Camara Number Verification API verify
     And the response header "Content-Type" is "application/json"
     And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     Then the response status code is 200
-    And the response property "$.DeviceIdentifier" is IMEISV2
+    And the response property "$.imeisv" is IMEISV2
 
   @DeviceIdentifier_retrieve_identifier200_missing_device_information
   Scenario:  retrieve identifier but no device information in request
