@@ -17,7 +17,6 @@ Feature: Camara Device Identifer API retrieve identifier
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
     And the request body is compliant with the schema Device
-    And the header "x-correlator" is set to a UUID value
     
   @DeviceIdentifier_retrieve_identifier0_phoneNumber_does_not_match_schema
   Scenario Outline: phoneNumber value does not comply with the schema
