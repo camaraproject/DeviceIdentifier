@@ -28,7 +28,7 @@ Feature: Camara Device Identifer API retrieve identifier
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
     And they acquired a valid access token associated with PHONENUMBER1 through OIDC authorization code flow
-    
+
     Examples:
       | phone_number_value |
       | string_value       |
@@ -37,7 +37,6 @@ Feature: Camara Device Identifer API retrieve identifier
       | +00012230304913849 |
       | 123                |
       | ++49565456787      |
-
 
   @DeviceIdentifier_retrieve_identifier100_success
   Scenario:  retrieve device identifer for phone number PHONENUMBER1, network connection and access token matches PHONENUMBER1
