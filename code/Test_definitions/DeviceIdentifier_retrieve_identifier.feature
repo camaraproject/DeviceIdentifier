@@ -9,7 +9,7 @@ Feature: Camara Device Identifer API retrieve identifier
 # Testing assets:
 # * a mobile device with imei IMEI1 and phone number PHONENUMBER1
 # * a mobile device with imei IMEISV2  and phone number PHONENUMBER2
-# * a mobile device with DeviceIpv4Addr value IPV4ADDRESS
+# * a mobile device with imei IMEISV2, public IPv4 address PUBLICIPV4ADDRESS and public port PUBLICPORT
 
   Background: Common Device Identifier retrieve identifer setup
     Given the resource "/retrieve-identifier/v0"  as  base url
