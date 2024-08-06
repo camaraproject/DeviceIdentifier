@@ -9,6 +9,17 @@
 | ***Post-Conditions*** | None  |
 | ***Exceptions*** | Several exceptions might occur after a request to the Device Identifier API<br>- **Unauthorized**: Invalid credentials (e.g. use of already expired access token).<br>- **Invalid Input**: Invalid input data to retrieve device details (e.g. MSISDN format not as expected, or MSISDN not associated with a customer of the CSP).<br>- **Forbidden**: End user has not consented to device identifier information being provided to the Customer:User|
 
+# EUDI Wallet Device-Binding User Story
+
+| **Item** | **Details** |
+| ---- | ------- |
+| ***Summary*** | As an application developer working for an EUDI Wallet provider, I want to bind the user's wallet to their device. For that purpose I want to retrieve the device identifier of the user's device. |
+| ***Roles, Actors and Scope*** | **Roles:** Customer:User<br> **Actors:** Application Service Providers, Hyperscalers, Application Developers, End Users<br> **Scope:** *Order To Activate (OTA)* \- Retrieve device identifier details |
+| ***Pre-Conditions*** |The preconditions are listed below:<br><ol><li>The Customer:BusinessManager and Customer:Administrator have been onboarded to the CSP's API platform.</li><li>The Customer:BusinessManager has successfully subscribed to the Device Identifier product from the product catalog.</li><li>The Customer:Administrator has onboarded the Customer:User to the platform.</li><li>The Customer:BusinessManager has agreed to the terms and conditions of the CSP for managing consent of mobile subscription owners.</li><li>The means to get the access token are known to the Customer:User to ensure secure access of the API.|
+| ***Activities/Steps*** | **Starts when:** The Customer:User has installed the EUDI Wallet and the wallet runs for the first time. The EUDI Wallet retrieves an access-token using OIDC authentication code flow and creates a POST request to the DeviceIdentifier API to retrieve the device identifer.<br>**Ends when:** The Device Identifier API returns the requested information, or an error message |
+| ***Post-Conditions*** | None  |
+| ***Exceptions*** | Several exceptions might occur after a request to the Device Identifier API<br>- **Unauthorized**: Invalid credentials (e.g. use of already expired access token).<br>- **Invalid Input**: Invalid input data to retrieve device details (e.g. MSISDN format not as expected, or MSISDN not associated with a customer of the CSP).<br>- **Forbidden**: End user has not consented to device identifier information being provided to the Customer:User|
+
 # Device Type API User Story
 
 | **Item** | **Details** |
