@@ -50,7 +50,7 @@ info:
       - IPv6 address
       - IPv4 address
 
-    In scenarios where a primary MSISDN is shared between multiple devices, each of which has its own "secondary" MSISDN (e.g. OneNumber), the MSISDN passed by the API consumer will be treated as the secondary MSISDN, and hence the identifier returned will be that of the relevant associated device (such as a smartwatch). In such scenarios, the "primary" device (e.g. smartphone) is usually allocated the same primary and secondary MSISDN, and hence providing the primary MSISDN will always return the identity of the primary device and not any associated devices.
+    In scenarios where a main phone number is shared between multiple devices, each of which has its own individual "secondary" phone number (e.g. connectivity plans that let you share your airtime and data allowances with a smartwatch or eSIM-enabled tablet), the phone number passed by the API consumer will be treated as the secondary phone number, and hence the identifier returned will be that of a single device associated with that phone number (e.g. smartphone, smartwatch, or eSIM-enabled tablet). In such scenarios, the "primary" device (usually the smartphone) is normally allocated the same main and secondary phone numbers, and hence providing the main phone number will always return the identity of the primary device and not any associated devices.
 
     ### Authorization and authentication
 
