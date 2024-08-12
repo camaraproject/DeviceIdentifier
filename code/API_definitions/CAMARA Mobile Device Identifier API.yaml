@@ -647,6 +647,10 @@ components:
         message:
           type: string
           description: This parameter appears when there was an error. Human readable explanation specific to this occurrence of the problem
+      required:
+        - code
+        - status
+        - message
 
     NetworkAccessIdentifier:
       description: A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.
