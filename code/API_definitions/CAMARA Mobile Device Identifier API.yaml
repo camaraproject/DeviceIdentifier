@@ -5,7 +5,7 @@ info:
   description: |
     # Summary
 
-    The Mobile Device Identifier API returns details of the mobile device (also know as the UE, or User Equipment) currently being used by a specified mobile subscriber. The following information can be returned:
+    The Mobile Device Identifier API returns details of the physical mobile device currently being used by a specified mobile subscriber. The following information can be returned:
      - A unique network identifier for the specific device itself (IMEI SV and IMEI)
      - A network identifier for the device make and model (IMEI Type Allocation Code)
      - Device manufacturer name and model
