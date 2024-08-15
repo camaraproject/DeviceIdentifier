@@ -8,8 +8,11 @@ Feature: Camara Device Identifer API retrieve identifier
 #
 # Testing assets:
 # * a mobile device with imei IMEI1 and phone number PHONENUMBER1
+# * a mobile device with imei IMEI1 and phone number PHONENUMBER2
 # * a mobile device with imei IMEISV2  and phone number PHONENUMBER2
 # * a mobile device with imei IMEISV2, public IPv4 address PUBLICIPV4ADDRESS and public port PUBLICPORT
+# * a SIM card SIMCARD1 by telco1
+# * a SIM card SIMCARD2 by telco2
 
   Background: Common Device Identifier retrieve identifer setup
     Given the resource "/retrieve-identifier/v0"  as  base url
@@ -61,6 +64,16 @@ Feature: Camara Device Identifer API retrieve identifier
     And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     Then the response status code is 200
     And the response property "$.imeisv" is IMEISV2
+
+  @DeviceIdentifier_retrieve_identifier103_same_device_different_SIMs
+  Scenario:  retrieve device identifer on the same device but for different SIMs by different telcos. The device identifier MUST be the same.
+    Given they use the base url
+    And the resource is "/retrieve-identifier"
+    And one of the scopes associated with the access token is device-identifier:retrieve-identifier
+    When a device_identifier1 is retrieved on the device with SIMCARD1 in slot1
+    And a device_identifier2 is retrieved on the same device with SIMCARD2 in slot1
+    Then device_identifier1 and device_identifier2 are equal
+
 
   @DeviceIdentifier_retrieve_identifier102_ipv4Address_success
   Scenario:  retrieve device identifer for phone number PHONENUMBER2, network connection and access token matches PHONENUMBER2
