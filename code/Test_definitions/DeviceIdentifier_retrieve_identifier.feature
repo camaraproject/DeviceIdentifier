@@ -7,12 +7,10 @@ Feature: Camara Device Identifer API retrieve identifier
 # * api_root: API root of the server URL
 #
 # Testing assets:
-# * a mobile device with imei IMEI1 and phone number PHONENUMBER1
-# * a mobile device with imei IMEI1 and phone number PHONENUMBER2
-# * a mobile device with imei IMEISV2  and phone number PHONENUMBER2
-# * a mobile device with imei IMEISV2, public IPv4 address PUBLICIPV4ADDRESS and public port PUBLICPORT
-# * a SIM card SIMCARD1 by telco1
-# * a SIM card SIMCARD2 by telco2
+# * a mobile device with IMEI IMEI1
+# * a mobile device with IMEI IMEISV2, public IPv4 address PUBLICIPV4ADDRESS and public port PUBLICPORT
+# * a SIM card SIMCARD1 by telco1 and phone number PHONENUMBER1
+# * a SIM card SIMCARD2 by telco2 and phone number PHONENUMBER2
 
   Background: Common Device Identifier retrieve identifer setup
     Given the resource "/retrieve-identifier/v0"  as  base url
