@@ -178,8 +178,6 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "405":
-          $ref: '#/components/responses/405MethodNotAllowed'
         "406":
           $ref: '#/components/responses/406Unacceptable'
         "422":
@@ -233,8 +231,6 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "405":
-          $ref: '#/components/responses/405MethodNotAllowed'
         "406":
           $ref: '#/components/responses/406Unacceptable'
         "422":
@@ -411,23 +407,6 @@ components:
                 status: 404
                 code: DEVICE_NOT_FOUND
                 message: Device identifier not found.
-
-    405MethodNotAllowed:
-      description: Method Not Allowed
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            MethodNotAllowed:
-              description: An HTTP verb other than GET has been used to try and access the resource
-              value:
-                status: 404
-                code: METHOD_NOT_ALLOWED
-                message: "The request method is not supported by this resource"
 
     406Unacceptable:
       description: Not Acceptable
