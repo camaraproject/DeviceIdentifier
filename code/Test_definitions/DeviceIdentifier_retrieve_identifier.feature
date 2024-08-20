@@ -20,7 +20,7 @@ Feature: Camara Device Identifer API retrieve identifier
     And the request body is compliant with the schema Device
     
   @DeviceIdentifier_retrieve_identifier0_phoneNumber_does_not_match_schema
-  Scenario Outline: phoneNumber value does not comply with the schema
+  Scenario Outline: phoneNumber value does not comply with the defined pattern
     Given the request body property "$.phoneNumber" is set to: <phone_number_value>
     When the HTTP "POST" request is sent
     Then the response status code is 400
