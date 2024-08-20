@@ -38,7 +38,7 @@ Feature: Camara Device Identifer API retrieve identifier
       | ++49565456787      |
 
   @DeviceIdentifier_retrieve_identifier100_success
-  Scenario:  retrieve device identifer for phone number PHONENUMBER1, network connection and access token matches PHONENUMBER1
+  Scenario:  retrieve device identifier for phone number PHONENUMBER1, network connection, and access token matches PHONENUMBER1
     Given they use the base url
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
