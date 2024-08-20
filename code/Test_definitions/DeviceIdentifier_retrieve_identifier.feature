@@ -44,10 +44,10 @@ Feature: Camara Device Identifer API retrieve identifier
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
     And the request body has the field phoneNumber with a value of PHONENUMBER1
+    Then the response status code is 200
+    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
-    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
-    Then the response status code is 200
     And the response property "$.imei" is IMEI1
 
   @DeviceIdentifier_retrieve_identifier101_success
