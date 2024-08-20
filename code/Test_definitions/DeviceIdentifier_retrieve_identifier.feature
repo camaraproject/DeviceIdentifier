@@ -124,14 +124,14 @@ Feature: Camara Device Identifer API retrieve identifier
     Given they use the base url
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
+    And the access token has expired
     When the HTTPS "POST" request is sent
     And the connection the request is sent over originates from a device with PHONENUMBER1
-    And the access token has expired
     And the request body has the field phoneNumber with a value of PHONENUMBER1
+    Then the response status code is 401
+    And the response body complies with the OAS schema at "/components/schemas/ErrorResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
-    And the response body complies with the OAS schema at "/components/schemas/ErrorResponse"
-    Then the response status code is 401
     And the response property "$.status" is 401
     And the response property "$.code" is "AUTHENTICATION_REQUIRED"
     And the response property "$.message" is "New authentication is required."
