@@ -13,7 +13,7 @@ Feature: Camara Device Identifer API retrieve identifier
 # * a SIM card SIMCARD2 by telco2 and phone number PHONENUMBER2
 
   Background: Common Device Identifier retrieve identifer setup
-    Given the resource "/retrieve-identifier/v0"  as  base url
+    Given the resource "/retrieve-identifier/vwip"  as  base url
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
