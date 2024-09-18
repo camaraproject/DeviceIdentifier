@@ -143,7 +143,3 @@ Feature: Camara Device Identifer API retrieve identifier
     And the response property "$.status" is 401
     And the response property "$.code" is "AUTHENTICATION_REQUIRED"
     And the response property "$.message" is "New authentication is required."
-
-
-
-
