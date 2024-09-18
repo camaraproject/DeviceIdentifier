@@ -60,11 +60,12 @@ Feature: Camara Device Identifer API retrieve identifier
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
     And the request body has the field phoneNumber with a value of PHONENUMBER2
+    Then the response status code is 200
+    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
-    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
-    Then the response status code is 200
     And the response property "$.imeisv" is IMEISV2
+    And the response property "$.imei" is IMEI2
 
   @DeviceIdentifier_retrieve_identifier103_same_device_different_SIMs
   Scenario:  retrieve device identifer on the same device but for different SIMs by different telcos. The device identifier MUST be the same.
