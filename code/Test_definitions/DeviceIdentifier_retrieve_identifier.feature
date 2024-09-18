@@ -102,7 +102,7 @@ Feature: Camara Device Identifer API retrieve identifier
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
     And the connection the request is sent over originates from a device with PHONENUMBER1
-    And the request body has NO the field phoneNumber nor other device information
+    And there is no request body
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response body complies with the OAS schema at "/components/schemas/ErrorResponse"
