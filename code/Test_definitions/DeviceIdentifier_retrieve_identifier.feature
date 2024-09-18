@@ -98,6 +98,7 @@ Feature: Camara Device Identifer API retrieve identifier
   Scenario:  retrieve identifier but 2-legged access token used and no device information in request
     Given the correct base url for the API provider is used
     And the resource is "/retrieve-identifier"
+    And a 2-legged access token is used
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
     And the connection the request is sent over originates from a device with PHONENUMBER1
