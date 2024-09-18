@@ -105,7 +105,7 @@ Feature: Camara Device Identifer API retrieve identifier
 
   @DeviceIdentifier_retrieve_identifier201_missing_scope
   Scenario:  retrieve device identifier with valid access token but scope device-identifier:retrieve-identifier is missing
-    Given they use the base url
+    Given the correct base url for the API provider is used
     And the resource is "/retrieve-identifier"
     And none of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
