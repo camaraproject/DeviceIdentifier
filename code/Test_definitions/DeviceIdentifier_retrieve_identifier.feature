@@ -87,11 +87,12 @@ Feature: Camara Device Identifer API retrieve identifier
     When the HTTPS "POST" request is sent
     And the request body has the field ipv4Address.publicAddress with a value of PUBLICIPV4ADDRESS
     And the request body has the field ipv4Address.publicPort with a value of PUBLICPORT
+    Then the response status code is 200
+    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
-    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
-    Then the response status code is 200
     And the response property "$.imeisv" is IMEISV2
+    And the response property "$.imei" is IMEI
 
   @DeviceIdentifier_retrieve_identifier200_missing_device_information
   Scenario:  retrieve identifier but no device information in request
