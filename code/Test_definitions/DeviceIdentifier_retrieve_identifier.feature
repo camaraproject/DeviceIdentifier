@@ -103,12 +103,12 @@ Feature: Camara Device Identifer API retrieve identifier
     When the HTTPS "POST" request is sent
     And the connection the request is sent over originates from a device with PHONENUMBER1
     And there is no request body
+    Then the response status code is 400
+    And the response body complies with the OAS schema at "/components/schemas/ErrorResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
-    And the response body complies with the OAS schema at "/components/schemas/ErrorResponse"
-    Then the response status code is 400
-    And the response property "$.status" is 400
-    And the response property "$.code" is "INVALID_ARGUMENT"
+    And the response property "$.status" is 404
+    And the response property "$.code" is "DEVICE_NOT_FOUND"
     And the response property "$.message" contains a user friendly text
 
   @DeviceIdentifier_retrieve_identifier201_missing_scope
