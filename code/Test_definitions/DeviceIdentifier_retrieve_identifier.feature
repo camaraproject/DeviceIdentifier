@@ -95,7 +95,7 @@ Feature: Camara Device Identifer API retrieve identifier
     And the response property "$.imei" is IMEI
 
   @DeviceIdentifier_retrieve_identifier200_missing_device_information
-  Scenario:  retrieve identifier but no device information in request
+  Scenario:  retrieve identifier but 2-legged access token used and no device information in request
     Given they use the base url
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
