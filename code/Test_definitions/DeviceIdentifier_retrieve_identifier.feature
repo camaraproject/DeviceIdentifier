@@ -78,8 +78,10 @@ Feature: Camara Device Identifer API retrieve identifier
 
 
   @DeviceIdentifier_retrieve_identifier102_ipv4Address_success
-  Scenario:  retrieve device identifer for phone number PHONENUMBER2, network connection and access token matches PHONENUMBER2
-    Given they use the base url
+  Scenario:  retrieve device identifier for phone number PHONENUMBER2, network connection, and access token matches PHONENUMBER2
+    Given SIMCARD2 is installed within DEVICE2, which is connected to the network
+    And the correct base url for the API provider is used
+    And the API provider supports responding with the IMEISV of the identified device
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When the HTTPS "POST" request is sent
