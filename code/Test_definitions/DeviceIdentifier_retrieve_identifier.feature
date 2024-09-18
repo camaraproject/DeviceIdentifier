@@ -121,7 +121,7 @@ Feature: Camara Device Identifer API retrieve identifier
 
   @DeviceIdentifier_retrieve_identifier202_expired_access_token
   Scenario:  retrieve device identifier with expired access token
-    Given they use the base url
+    Given the correct base url for the API provider is used
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     And the access token has expired
