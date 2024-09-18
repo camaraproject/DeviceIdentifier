@@ -69,7 +69,7 @@ Feature: Camara Device Identifer API retrieve identifier
 
   @DeviceIdentifier_retrieve_identifier103_same_device_different_SIMs
   Scenario:  retrieve device identifer on the same device but for different SIMs by different telcos. The device identifier MUST be the same.
-    Given they use the base url
+    Given the correct base url for the API provider is used
     And the resource is "/retrieve-identifier"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
     When a device_identifier1 is retrieved on the device with SIMCARD1 in slot1
