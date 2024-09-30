@@ -139,6 +139,10 @@ servers:
         default: https://localhost:443
         description: API root, to be defined by the service provider
 
+tags:
+  - name: Get Device Identifiers
+    description: Retrieve details about the device being used by a mobile subscriber
+
 paths:
   "/retrieve-identifier":
     post:
