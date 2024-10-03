@@ -10,24 +10,32 @@ Repository to describe, develop, document and test the Device Identifier API fam
 
 ## Scope
 * Service APIs for “Device Identifier API” (see [API Proposal](https://github.com/camaraproject/APIBacklog/blob/main/documentation/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
-* Describe, develop, document and test the APIs (with 1-2 Telcos)  
+* It provides the customer with the ability to:
+  * Retrieve the current identity (IMEI) of the mobile device being used by a given mobile subscriber
+  * Retrieve the type (manufacturer and model) of the mobile device being used by a given mobile subscriber
+* Describe, develop, document and test the APIs (with 1-2 Service Providers)  
 * Started: October 2022
 
 ## Project Wiki
-* The project wiki can be found [here](https://wiki.camaraproject.org/display/CAM/DeviceIdentifier)
+* The project wiki can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
 
 ## Meetings
 * Schedule: First Friday of each month at 09:00 BST / 10:00 CEST via Linux Foundation Zoom service
  * Meeting invite can be found [here](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Device%20Identifier%20Monthly%20Meeting.ics)
- * Meeting minutes can be found [here](https://wiki.camaraproject.org/display/CAM/DeviceIdentifier+Meeting+Minutes)
+ * Meeting minutes can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
 
-## Results
-* **Device Identifier API**
-  - Current work-in-progress version is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier)
-    - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/main/code/API_definitions/CAMARA%20Mobile%20Device%20Identifier%20API.yaml)
-    - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/code/API_definitions/CAMARA%20Mobile%20Device%20Identifier%20API.yaml&nocors)
-    - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/code/API_definitions/CAMARA%20Mobile%20Device%20Identifier%20API.yaml)
-  - Initial release 0.1.0 is available [here](https://github.com/camaraproject/DeviceIdentifier/releases/tag/device-identifier-0.1.0)
+## Release Information
+
+* Note: Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest public release**.
+
+* **The latest public pre-release is [r2.1](https://github.com/camaraproject/DeviceIdentifier/tree/r2.1) with the following API definitions:**
+
+  * **device-identifier v0.2.0-alpha.1**
+  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r2.1/code/API_definitions/device-identifier.yaml)
+  [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml&nocors)
+  [[View it on Swagger Editor]](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml)
+
+- Current work-in-progress version is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier)
 
 ## Contributorship and mailing list
 * To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-dvi>.
