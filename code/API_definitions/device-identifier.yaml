@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Mobile Device Identifier
-  version: wip
+  version: 0.2.0-alpha.1
   description: |
     # Summary
 
@@ -133,7 +133,7 @@ externalDocs:
   url: https://github.com/camaraproject/DeviceIdentifier
 
 servers:
-  - url: "{apiRoot}/device-identifier/vwip"
+  - url: "{apiRoot}/device-identifier/v0.2alpha1"
     variables:
       apiRoot:
         default: https://localhost:443
