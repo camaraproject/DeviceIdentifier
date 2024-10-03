@@ -4,18 +4,18 @@ Checklist for device-identifier v0.2.0-alpha.1 in r2.1.
 
 | Nr | API release assets  | alpha | release-candidate |  initial<br>public | stable<br> public | Status  | Comments                                                               |
 |----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----------------------------------------------------------------------:|
-|  1 | API definition                               |   M   |         M         |    M    |    M   |      | [device-identifier.yaml](/code/API_definitions/device-identifier.yaml) |
-|  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |      | Y 0.4.0                                                                |
-|  3 | Guidelines from ICM applied                  |   O   |         M         |    M    |    M   |      | Y 0.2.1                                                                |
-|  4 | API versioning convention applied            |   M   |         M         |    M    |    M   |      | Y                                                                      |
-|  5 | API documentation                            |   M   |         M         |    M    |    M   |      | Inline in OAS definition                                               |
-|  6 | User stories                                 |   O   |         O         |    O    |    M   |      | [Device Identifier User Story.md](/documentation/API_documentation/Device%20Identifier%20User%20Story.md) |
-|  7 | Basic API test cases & documentation         |   O   |         M         |    M    |    M   |      | [DeviceIdentifier_retrieve_identifier.feature](/code/Test_definitions/DeviceIdentifier_retrieve_identifier.feature) |
-|  8 | Enhanced API test cases & documentation      |   O   |         O         |    O    |    M   |      | N                                                                      |
-|  9 | Test result statement                        |   O   |         O         |    O    |    M   |      | N                                                                      |
-| 10 | API release numbering convention applied     |   M   |         M         |    M    |    M   |      | Y                                                                      |
-| 11 | Change log updated                           |   M   |         M         |    M    |    M   |      | [CHANGELOG.md](/CHANGELOG.md)                                          |
-| 12 | Previous public release was certified        |   O   |         O         |    O    |    M   |      | N                                                                      |
+|  1 | API definition                               |   M   |         M         |    M    |    M   |  Y   | [device-identifier.yaml](/code/API_definitions/device-identifier.yaml) |
+|  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |  Y   | 0.4.0                                                                  |
+|  3 | Guidelines from ICM applied                  |   O   |         M         |    M    |    M   |  Y   | 0.2.1                                                                  |
+|  4 | API versioning convention applied            |   M   |         M         |    M    |    M   |  Y   |                                                                        |
+|  5 | API documentation                            |   M   |         M         |    M    |    M   |  Y   | Inline in OAS definition                                               |
+|  6 | User stories                                 |   O   |         O         |    O    |    M   |  Y   | [Device Identifier User Story.md](/documentation/API_documentation/Device%20Identifier%20User%20Story.md) |
+|  7 | Basic API test cases & documentation         |   O   |         M         |    M    |    M   |  Y   | [DeviceIdentifier_retrieve_identifier.feature](/code/Test_definitions/DeviceIdentifier_retrieve_identifier.feature) |
+|  8 | Enhanced API test cases & documentation      |   O   |         O         |    O    |    M   |  N   |                                                                        |
+|  9 | Test result statement                        |   O   |         O         |    O    |    M   |  N   |                                                                        |
+| 10 | API release numbering convention applied     |   M   |         M         |    M    |    M   |  Y   |                                                                        |
+| 11 | Change log updated                           |   M   |         M         |    M    |    M   |  Y   | [CHANGELOG.md](/CHANGELOG.md)                                          |
+| 12 | Previous public release was certified        |   O   |         O         |    O    |    M   |  N   |                                                                        |
 
 To fill the checklist:
 - in the line above the table, replace the api-name, api-version and the rx.y by their actual values for the current API version and release.
