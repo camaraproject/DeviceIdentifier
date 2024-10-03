@@ -10,7 +10,7 @@ Checklist for device-identifier v0.2.0-alpha.1 in r2.1.
 |  4 | API versioning convention applied            |   M   |         M         |    M    |    M   |      | Y                                                                      |
 |  5 | API documentation                            |   M   |         M         |    M    |    M   |      | Inline in OAS definition                                               |
 |  6 | User stories                                 |   O   |         O         |    O    |    M   |      | [Device Identifier User Story.md](/documentation/API_documentation/Device%20Identifier%20User%20Story.md) |
-|  7 | Basic API test cases & documentation         |   O   |         M         |    M    |    M   |      | [DeviceIdentifier_retrieve_identifier.feature](code/Test_definitions/DeviceIdentifier_retrieve_identifier.feature) |
+|  7 | Basic API test cases & documentation         |   O   |         M         |    M    |    M   |      | [DeviceIdentifier_retrieve_identifier.feature](/code/Test_definitions/DeviceIdentifier_retrieve_identifier.feature) |
 |  8 | Enhanced API test cases & documentation      |   O   |         O         |    O    |    M   |      | N                                                                      |
 |  9 | Test result statement                        |   O   |         O         |    O    |    M   |      | N                                                                      |
 | 10 | API release numbering convention applied     |   M   |         M         |    M    |    M   |      | Y                                                                      |
