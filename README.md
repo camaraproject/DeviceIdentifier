@@ -30,13 +30,13 @@ Repository to describe, develop, document and test the Device Identifier API fam
 
 * **The latest public pre-release is [r2.1](https://github.com/camaraproject/DeviceIdentifier/tree/r2.1) with the following API definitions:**
 
-  * **device-identifier v0.2.0-alpha.1**
+  * **device-identifier v0.2.0-alpha.1**  
   [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r2.1/code/API_definitions/device-identifier.yaml)
   [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml&nocors)
   [[View it on Swagger Editor]](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml)
 
 - Current work-in-progress version is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier)
 
-## Contributorship and mailing list
+## Contributorship and Mailing List
 * To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-dvi>.
 * A message to all Contributors of this Sub Project can be sent using <sp-dvi@lists.camaraproject.org>.
