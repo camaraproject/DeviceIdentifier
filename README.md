@@ -9,7 +9,7 @@
 Repository to describe, develop, document and test the Device Identifier API family
 
 ## Scope
-* Service APIs for “Device Identifier API” (see [API Proposal](https://github.com/camaraproject/APIBacklog/blob/main/documentation/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md))
+* Service APIs for “Device Identifier API” (see [API Backlog](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md))
 * It provides the customer with the ability to:
   * Retrieve the current identity (IMEI) of the mobile device being used by a given mobile subscriber
   * Retrieve the type (manufacturer and model) of the mobile device being used by a given mobile subscriber
