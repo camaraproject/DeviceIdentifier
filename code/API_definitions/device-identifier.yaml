@@ -36,7 +36,7 @@ info:
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
 
-    The API can be called by an application server or other 3rd party server to establish the identity of the device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in reponse to their request. Otherwise, the information that the end user has consented to being given will be returned.
+    The API can be called by an API consumer to establish the identity of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
 
     # Relevant terms and definitions
 
