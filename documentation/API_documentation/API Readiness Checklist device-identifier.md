@@ -1,6 +1,6 @@
 # API Readiness Checklist
 
-Checklist for device-identifier v0.2.0-alpha.1 in r2.1.
+Checklist for device-identifier v0.2.0-alpha.1 in r1.1.
 
 | Nr | API release assets  | alpha | release-candidate |  initial<br>public | stable<br> public | Status  | Comments                                                               |
 |----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----------------------------------------------------------------------:|
