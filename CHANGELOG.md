@@ -16,7 +16,7 @@ The API definition(s) are based on
 * Commonalities v0.4.0
 * Identity and Consent Management v0.2.1
 
-## quality-on-demand v0.2.0-alpha.1
+## device-identifier v0.2.0-alpha.1
 
 Version 0.2.0-alpha.1 contains many small changes for compliance with Commonalities v0.4.0 and Identity and Consent Management v0.2.1. **There are breaking changes compared to v0.1.0.**
 
