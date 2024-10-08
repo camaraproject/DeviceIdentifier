@@ -1,12 +1,12 @@
 # Changelog DeviceIdentifier
 
 ## Table of Contents
-- **[r2.1](#r21)**
+- **[r1.1](#r11)**
 - [v0.1.0](#v010)
 
 **Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until it has been released. For example, changes may be reverted before a release is published. For the best results, use the latest published release.**
 
-# r2.1
+# r1.1
 ## Release Notes
 
 This public release contains the definition and documentation of
@@ -21,9 +21,9 @@ The API definition(s) are based on
 Version 0.2.0-alpha.1 contains many small changes for compliance with Commonalities v0.4.0 and Identity and Consent Management v0.2.1. **There are breaking changes compared to v0.1.0.**
 
 - API definition **with inline documentation**:
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml)
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r2.1/code/API_definitions/device-identifier.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.1/code/API_definitions/device-identifier.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.1/code/API_definitions/device-identifier.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r1.1/code/API_definitions/device-identifier.yaml)
 
 ### Added
 * Create Device Identifier User Story.md by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/59
@@ -46,7 +46,7 @@ Version 0.2.0-alpha.1 contains many small changes for compliance with Commonalit
 ### Removed
 * Remove 405 error response from YAML by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/81
 
-**Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/device-identifier-0.1.0...r2.1
+**Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/device-identifier-0.1.0...r1.1
 
 # v0.1.0
 ## Release Notes
