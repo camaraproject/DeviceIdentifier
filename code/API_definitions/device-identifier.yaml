@@ -99,7 +99,7 @@ info:
 
     If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
 
-    Otherwise, a JSON object is returned containing the data the the end user has consented to sharing with the API consumer.
+    Otherwise, a JSON object is returned containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
@@ -121,8 +121,6 @@ info:
 
     (FAQs will be added in a later version of the documentation)
 
-  contact:
-    email: sp-dvi@lists.camaraproject.org
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
