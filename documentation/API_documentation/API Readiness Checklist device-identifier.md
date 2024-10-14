@@ -24,4 +24,4 @@ To fill the checklist:
 
 Note: the checklists of a public API version and of its preceding release-candidate API version can be the same.
 
-The documentation for the content of the checklist is here: [API Readiness Checklist](https://wiki.camaraproject.org/display/CAM/API+Release+Process#APIReleaseProcess-APIreadinesschecklist).
+The documentation for the content of the checklist is here: [API Readiness Checklist](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14559630/API+Release+Process#API-readiness-checklist).
