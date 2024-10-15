@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Mobile Device Identifier
-  version: wip
+  version: 0.2.0-alpha.1
   description: |
     # Summary
 
@@ -36,7 +36,7 @@ info:
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
 
-    The API can be called by an application server or other 3rd party server to establish the identity of the device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in reponse to their request. Otherwise, the information that the end user has consented to being given will be returned.
+    The API can be called by an API consumer to establish the identity of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
 
     # Relevant terms and definitions
 
@@ -99,7 +99,7 @@ info:
 
     If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
 
-    Otherwise, a JSON object is returned containing the data the the end user has consented to sharing with the API consumer.
+    Otherwise, a JSON object is returned containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
@@ -121,8 +121,6 @@ info:
 
     (FAQs will be added in a later version of the documentation)
 
-  contact:
-    email: sp-dvi@lists.camaraproject.org
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -133,7 +131,7 @@ externalDocs:
   url: https://github.com/camaraproject/DeviceIdentifier
 
 servers:
-  - url: "{apiRoot}/device-identifier/vwip"
+  - url: "{apiRoot}/device-identifier/v0.2alpha1"
     variables:
       apiRoot:
         default: https://localhost:443
