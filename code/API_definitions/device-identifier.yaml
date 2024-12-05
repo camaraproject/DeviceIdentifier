@@ -526,10 +526,10 @@ components:
   schemas:
     LastChecked:
       description: |
-        Last time that the associated device identity was checked and, if necessary, updated
+        The last time that the information returned (e.g. IMEI) was confirmed to be correct by the mobile operator for the device identifier (e.g. phone number) provided
       properties:
         lastChecked:
-          description: Date and time information was last checked
+          description: Date and time that the information was last confirmed by the mobile operator to be correct
           type: string
           format: date-time
           example: "2024-02-20T10:41:38.657Z"
