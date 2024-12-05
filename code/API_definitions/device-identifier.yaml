@@ -157,11 +157,11 @@ paths:
 
       requestBody:
         description: Parameters to create a new session
-        required: false
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/RequestBody"
 
       responses:
         "200":
@@ -210,11 +210,11 @@ paths:
 
       requestBody:
         description: Parameters to create a new session
-        required: false
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/RequestBody"
 
       responses:
         "200":
@@ -641,6 +641,13 @@ components:
       type: integer
       minimum: 1024
       maximum: 65535
+
+    RequestBody:
+      description: Common request body to allow optional Device object to be passed
+      type: object
+      properties:
+        device:
+          $ref: "#/components/schemas/Device"
 
     SingleIpv4Addr:
       description: A single IPv4 address with no subnet mask
