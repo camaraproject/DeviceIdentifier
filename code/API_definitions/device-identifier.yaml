@@ -730,7 +730,8 @@ components:
           "publicPort": 59765
         }
 
-    ErrorResponse:
+    ErrorInfo:
+      description: Common CAMARA error response object
       type: object
       properties:
         code:
