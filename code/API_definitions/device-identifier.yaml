@@ -301,7 +301,17 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 400
+                  code:
+                    enum:
+                      - INVALID_ARGUMENT
+                      - OUT_OF_RANGE
           examples:
             InsufficientParameters:
               description: Sufficient parameters must be provided to allow the target UE to be identified
@@ -349,7 +359,17 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 401
+                  code:
+                    enum:
+                      - UNAUTHENTICATED
+                      - AUTHENTICATION_REQUIRED
           examples:
             GENERIC_401_UNAUTHENTICATED:
               description: Request cannot be authenticated
@@ -372,7 +392,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 403
+                  code:
+                    enum:
+                      - PERMISSION_DENIED
           examples:
             GENERIC_403_PERMISSION_DENIED:
               description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
@@ -380,12 +409,6 @@ components:
                 status: 403
                 code: PERMISSION_DENIED
                 message: Client does not have sufficient permissions to perform this action.
-            GENERIC_403_INVALID_TOKEN_CONTEXT:
-              description: Reflect some inconsistency between information in some field of the API and the related OAuth2 Token
-              value:
-                status: 403
-                code: INVALID_TOKEN_CONTEXT
-                message: "{{field}} is not consistent with access token."
 
     404NotFound:
       description: Not found
@@ -395,20 +418,23 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 404
+                  code:
+                    enum:
+                      - IDENTIFIER_NOT_FOUND
           examples:
-            GENERIC_404_NOT_FOUND:
-              description: Resource is not found
-              value:
-                status: 404
-                code: NOT_FOUND
-                message: The specified resource is not found.
             GENERIC_404_DEVICE_NOT_FOUND:
               description: Device identifier not found
               value:
                 status: 404
-                code: DEVICE_NOT_FOUND
-                message: Device identifier not found.
+                code: IDENTIFIER_NOT_FOUND
+                message: The supplied device identifier cannot be matched to a device.
 
     406Unacceptable:
       description: Not Acceptable
@@ -418,7 +444,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 406
+                  code:
+                    enum:
+                      - NOT_ACCEPTABLE
           examples:
             NotAcceptable:
               description: A response format other than JSON has been requested
@@ -435,20 +470,49 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 422
+                  code:
+                    enum:
+                      - IDENTIFIER_MISMATCH
+                      - SERVICE_NOT_APPLICABLE
+                      - MISSING_IDENTIFIER
+                      - UNSUPPORTED_IDENTIFIER
+                      - UNNECESSARY_IDENTIFIER
           examples:
-            GENERIC_422_DEVICE_IDENTIFIERS_MISMATCH:
-              description: Inconsistency between device identifiers not pointing to the same device
+            DeviceIdentifiersMismatch:
+              description: Inconsistency between device identifiers not identifying the same device
               value:
                 status: 422
-                code: DEVICE_IDENTIFIERS_MISMATCH
+                code: IDENTIFIER_MISMATCH
                 message: Provided device identifiers are not consistent.
-            GENERIC_422_DEVICE_NOT_APPLICABLE:
-              description: Service is not available for the provided device
+            ServiceNotApplicableForDevice:
+              description: Service is not available for the identified device
               value:
                 status: 422
-                code: DEVICE_NOT_APPLICABLE
-                message: The service is not available for the provided device.
+                code: SERVICE_NOT_APPLICABLE
+                message: The service is not applicable to the identified device.
+            UnsupportedDeviceIdentifier:
+              description: Service is not available for the identified device
+              value:
+                status: 422
+                code: UNSUPPORTED_IDENTIFIER
+                message: None of the provided device identifiers is supported by the implementation.
+            UnnecessaryDeviceIdentifier:
+              value:
+                status: 422
+                code: UNNECESSARY_IDENTIFIER
+                message: The device is already identified by the access token
+            MissingIdentifier:
+              value:
+                status: 422
+                code: MISSING_IDENTIFIER
+                message: The device cannot be identified
 
     429TooManyRequests:
       description: Too Many Requests
@@ -458,14 +522,30 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 429
+                  code:
+                    enum:
+                      - QUOTA_EXCEEDED
+                      - TOO_MANY_REQUESTS
           examples:
-            TooManyRequests:
-              description: Access to the API has been temporarily blocked due to quota or spike arrest limits being reached
+            GENERIC_429_QUOTA_EXCEEDED:
+              description: Request is rejected due to exceeding a business quota limit
+              value:
+                status: 429
+                code: QUOTA_EXCEEDED
+                message: Either out of resource quota or reaching rate limiting.
+            GENERIC_429_TOO_MANY_REQUESTS:
+              description: API Server request limit is overpassed
               value:
                 status: 429
                 code: TOO_MANY_REQUESTS
-                message: "Either out of resource quota or reaching rate limiting"
+                message: Either out of resource quota or reaching rate limiting.
 
     500InternalServerError:
       description: Internal Server Error
@@ -475,7 +555,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 500
+                  code:
+                    enum:
+                      - INTERNAL
           example:
             status: 500
             code: INTERNAL
@@ -489,7 +578,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 502
+                  code:
+                    enum:
+                      - BAD_GATEWAY
           example:
             status: 502
             code: BAD_GATEWAY
@@ -503,7 +601,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 503
+                  code:
+                    enum:
+                      - SERVICE_UNAVAILABLE
           example:
             status: 503
             code: UNAVAILABLE
@@ -517,7 +624,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 504
+                  code:
+                    enum:
+                      - TIMEOUT
           example:
             status: 504
             code: TIMEOUT
