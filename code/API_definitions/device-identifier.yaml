@@ -702,7 +702,7 @@ components:
         device:
           ipv4Address:
             publicAddress: "84.125.93.10"
-            publicPort: "59765"
+            publicPort: 59765
             
     IdentifyDeviceByMultipleIdentifiers:
       description: Identifying device by multiple device identifiers
@@ -711,5 +711,5 @@ components:
           phoneNumber: "+123456789"
           ipv4Address:
             publicAddress: "84.125.93.10"
-            publicPort: "59765"
+            publicPort: 59765
           networkAccessIdentifier: "123456789@domain.com"
