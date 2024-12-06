@@ -17,7 +17,7 @@ info:
 
     # Introduction
 
-    Mobile devices are allocated a unique identity by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identity is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
+    Mobile devices are allocated a unique identifier by the manufacturer, known as the International Mobile Equipment Identifier, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identifier is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
 
     The IMEI is a 15 digit integer, and the IMEI SV is a 16 digit integer:
     - The first 8 digits are known as the Type Allocation Code (TAC), and identify the manufacturer and model of the device
@@ -36,7 +36,7 @@ info:
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
 
-    The API can be called by an API consumer to establish the identity of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
+    The API can be called by an API consumer to establish the identifier of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
 
     # Relevant terms and definitions
 
@@ -526,7 +526,7 @@ components:
   schemas:
     LastChecked:
       description: |
-        Last time that the associated device identity was checked and, if necessary, updated
+        Last time that the associated device identifier was checked and, if necessary, updated
       properties:
         lastChecked:
           description: Date and time information was last checked
