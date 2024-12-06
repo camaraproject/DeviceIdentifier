@@ -613,7 +613,7 @@ components:
                       - SERVICE_UNAVAILABLE
           example:
             status: 503
-            code: UNAVAILABLE
+            code: SERVICE_UNAVAILABLE
             message: "The service is currently not available"
 
     504GatewayTimeout:
