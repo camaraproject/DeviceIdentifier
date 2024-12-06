@@ -162,6 +162,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RequestBody"
+            examples:
+              IdentifyDeviceBy2LeggedToken:
+                $ref: '#/components/examples/IdentifyDeviceBy2LeggedToken'
+              IdentifyDeviceByPhoneNumber:
+                $ref: '#/components/examples/IdentifyDeviceByPhoneNumber'
+              IdentifyDeviceByIPAddress:
+                $ref: '#/components/examples/IdentifyDeviceByIPAddress'
+              IdentifyDeviceByMultipleIdentifiers:
+                $ref: '#/components/examples/IdentifyDeviceByMultipleIdentifiers'
 
       responses:
         "200":
@@ -215,6 +224,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RequestBody"
+            examples:
+              IdentifyDeviceBy2LeggedToken:
+                $ref: '#/components/examples/IdentifyDeviceBy2LeggedToken'
+              IdentifyDeviceByPhoneNumber:
+                $ref: '#/components/examples/IdentifyDeviceByPhoneNumber'
+              IdentifyDeviceByIPAddress:
+                $ref: '#/components/examples/IdentifyDeviceByIPAddress'
+              IdentifyDeviceByMultipleIdentifiers:
+                $ref: '#/components/examples/IdentifyDeviceByMultipleIdentifiers'
 
       responses:
         "200":
@@ -665,3 +683,33 @@ components:
       type: string
       format: ipv6
       example: 2001:db8:85a3:8d3:1319:8a2e:370:7344
+
+  examples:
+    IdentifyDeviceBy2LeggedToken:
+      description: Empty JSON when device is identified by access token
+      value:
+        {}
+        
+    IdentifyDeviceByPhoneNumber:
+      description: Identifying device by phone number
+      value:
+        device:
+          phoneNumber: "+123456789"
+        
+    IdentifyDeviceByIPAddress:
+      description: Identifying device by IP address
+      value:
+        device:
+          ipv4Address:
+            publicAddress: "84.125.93.10"
+            publicPort: "59765"
+            
+    IdentifyDeviceByMultipleIdentifiers:
+      description: Identifying device by multiple device identifiers
+      value:
+        device:
+          phoneNumber: "+123456789"
+          ipv4Address:
+            publicAddress: "84.125.93.10"
+            publicPort: "59765"
+          networkAccessIdentifier: "123456789@domain.com"
