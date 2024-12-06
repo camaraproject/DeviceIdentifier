@@ -5,8 +5,9 @@ info:
   description: |
     # Summary
 
-    The Mobile Device Identifier API returns details of the physical mobile device currently being used by a specified mobile subscriber. The following information can be returned:
-     - A unique network identifier for the specific device itself (IMEI SV and IMEI)
+    The Mobile Device Identifier API returns details of the physical mobile device currently being used by a specified mobile subscriber. 
+    The following information can be returned:
+     - A unique network identifier for the specific device itself (IMEI SV or IMEI or PPID)
      - A network identifier for the device make and model (IMEI Type Allocation Code)
      - Device manufacturer name and model
 
@@ -24,6 +25,9 @@ info:
     - The following 6 digits are the serial number of the device for that TAC
     - For IMEI, the remaining digit is a check digit
     - For IMEI SV, the remaining two digits are the software version
+    The IMEI and IMEISV are global permanent identifiers which can be used for user tracking.
+
+    The PPID is a pairwise pseudonymous identifier, which is often derived from IMEI or IMEISV but it can also be a randomly generated database entry. The [OpenId Connect standard](https://openid.net/specs/openid-connect-core-1_0.html#PairwiseAlg) discusses several algorithms to compute a PPID.
 
     TACs are issued and managed by the GSMA, and can be queried using the [GSMA IMEI database](https://www.gsma.com/aboutus/workinggroups/terminal-steering-group/imei-database).
 
@@ -151,7 +155,17 @@ paths:
         - Get Device Identifiers
       security:
         - openId:
-            - device-identifier:retrieve-identifier
+            - device-identifier:retrieve-identifier-imei
+        - openId:
+            - device-identifier:retrieve-identifier-imeisv
+        - openId:
+            - device-identifier:retrieve-identifier-ppid
+        - openId:
+            - device-identifier:retrieve-identifier-tac
+        - openId:
+            - device-identifier:retrieve-identifier-model
+        - openId:
+            - device-identifier:retrieve-identifier-manufacturer
 
       parameters:
         - in: header
@@ -272,7 +286,6 @@ components:
           schema:
             required:
               - lastChecked
-              - imei
             allOf:
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DeviceIdentifier"
@@ -547,6 +560,10 @@ components:
           type: string
           description: IMEI of the device
           example: "4901542032375181"
+        ppid:
+          type: string
+          description: a pairwise pseudonymous identifier
+          example: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
 
     DeviceType:
       description: |
