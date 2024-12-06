@@ -262,6 +262,7 @@ paths:
 
 components:
   securitySchemes:
+    description: Common security scheme for all CAMARA APIs
     openId:
       type: openIdConnect
       openIdConnectUrl: .well-known/openid-configuration
@@ -689,13 +690,13 @@ components:
       description: Empty JSON when device is identified by access token
       value:
         {}
-        
+
     IdentifyDeviceByPhoneNumber:
       description: Identifying device by phone number
       value:
         device:
           phoneNumber: "+123456789"
-        
+
     IdentifyDeviceByIPAddress:
       description: Identifying device by IP address
       value:
@@ -703,7 +704,7 @@ components:
           ipv4Address:
             publicAddress: "84.125.93.10"
             publicPort: 59765
-            
+
     IdentifyDeviceByMultipleIdentifiers:
       description: Identifying device by multiple device identifiers
       value:
