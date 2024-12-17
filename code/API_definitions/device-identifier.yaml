@@ -610,10 +610,10 @@ components:
                       - 503
                   code:
                     enum:
-                      - SERVICE_UNAVAILABLE
+                      - UNAVAILABLE
           example:
             status: 503
-            code: SERVICE_UNAVAILABLE
+            code: UNAVAILABLE
             message: "The service is currently not available"
 
     504GatewayTimeout:
