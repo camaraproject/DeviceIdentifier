@@ -443,7 +443,8 @@ components:
               value:
                 status: 422
                 code: IDENTIFIER_MISMATCH
-                message: Provided device identifiers are not consistent.
+                message: Provided identifiers are not consistent.
+
             ServiceNotApplicableForDevice:
               description: Service is not available for the identified device
               value:
