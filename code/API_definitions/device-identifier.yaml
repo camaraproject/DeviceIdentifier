@@ -180,20 +180,10 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "406":
-          $ref: '#/components/responses/406Unacceptable'
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
-        "500":
-          $ref: '#/components/responses/500InternalServerError'
-        "502":
-          $ref: '#/components/responses/502BadGateway'
-        "503":
-          $ref: '#/components/responses/503ServiceUnavailable'
-        "504":
-          $ref: '#/components/responses/504GatewayTimeout'
 
   "/retrieve-type":
     post:
@@ -233,20 +223,10 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "406":
-          $ref: '#/components/responses/406Unacceptable'
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
-        "500":
-          $ref: '#/components/responses/500InternalServerError'
-        "502":
-          $ref: '#/components/responses/502BadGateway'
-        "503":
-          $ref: '#/components/responses/503ServiceUnavailable'
-        "504":
-          $ref: '#/components/responses/504GatewayTimeout'
 
 components:
   securitySchemes:
@@ -436,32 +416,6 @@ components:
                 code: IDENTIFIER_NOT_FOUND
                 message: The supplied device identifier cannot be matched to a device.
 
-    406Unacceptable:
-      description: Not Acceptable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
-              - type: object
-                properties:
-                  status:
-                    enum:
-                      - 406
-                  code:
-                    enum:
-                      - NOT_ACCEPTABLE
-          examples:
-            NotAcceptable:
-              description: A response format other than JSON has been requested
-              value:
-                status: 406
-                code: NOT_ACCEPTABLE
-                message: "The server cannot produce a response matching the content requested by the client through Accept-* headers"
-
     422UnprocessableContent:
       description: Unprocessable Content
       headers:
@@ -546,98 +500,6 @@ components:
                 status: 429
                 code: TOO_MANY_REQUESTS
                 message: Either out of resource quota or reaching rate limiting.
-
-    500InternalServerError:
-      description: Internal Server Error
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
-              - type: object
-                properties:
-                  status:
-                    enum:
-                      - 500
-                  code:
-                    enum:
-                      - INTERNAL
-          example:
-            status: 500
-            code: INTERNAL
-            message: "The service is currently not available"
-
-    502BadGateway:
-      description: Bad Gateway
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
-              - type: object
-                properties:
-                  status:
-                    enum:
-                      - 502
-                  code:
-                    enum:
-                      - BAD_GATEWAY
-          example:
-            status: 502
-            code: BAD_GATEWAY
-            message: "The service is currently not available"
-
-    503ServiceUnavailable:
-      description: Service Unavailable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
-              - type: object
-                properties:
-                  status:
-                    enum:
-                      - 503
-                  code:
-                    enum:
-                      - UNAVAILABLE
-          example:
-            status: 503
-            code: UNAVAILABLE
-            message: "The service is currently not available"
-
-    504GatewayTimeout:
-      description: Gateway Time-Out
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
-              - type: object
-                properties:
-                  status:
-                    enum:
-                      - 504
-                  code:
-                    enum:
-                      - TIMEOUT
-          example:
-            status: 504
-            code: TIMEOUT
-            message: "The service is currently not available"
 
   schemas:
     LastChecked:
