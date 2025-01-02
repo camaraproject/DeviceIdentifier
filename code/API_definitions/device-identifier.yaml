@@ -455,7 +455,8 @@ components:
               value:
                 status: 422
                 code: UNSUPPORTED_IDENTIFIER
-                message: None of the provided device identifiers is supported by the implementation.
+                message: None of the provided identifiers is supported by the implementation.
+
             UnnecessaryDeviceIdentifier:
               value:
                 status: 422
