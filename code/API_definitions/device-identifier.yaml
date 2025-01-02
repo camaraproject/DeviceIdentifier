@@ -163,13 +163,13 @@ paths:
             schema:
               $ref: "#/components/schemas/RequestBody"
             examples:
-              IdentifyDeviceBy2LeggedToken:
-                $ref: '#/components/examples/IdentifyDeviceBy2LeggedToken'
-              IdentifyDeviceByPhoneNumber:
+              Identify Device By 3-Legged Access Token:
+                $ref: '#/components/examples/IdentifyDeviceBy3LeggedToken'
+              Identify Device By Phone Number:
                 $ref: '#/components/examples/IdentifyDeviceByPhoneNumber'
-              IdentifyDeviceByIPAddress:
+              Identify Device By IP Address:
                 $ref: '#/components/examples/IdentifyDeviceByIPAddress'
-              IdentifyDeviceByMultipleIdentifiers:
+              Identify Device By Multiple Identifiers:
                 $ref: '#/components/examples/IdentifyDeviceByMultipleIdentifiers'
 
       responses:
@@ -183,20 +183,10 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "406":
-          $ref: '#/components/responses/406Unacceptable'
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
-        "500":
-          $ref: '#/components/responses/500InternalServerError'
-        "502":
-          $ref: '#/components/responses/502BadGateway'
-        "503":
-          $ref: '#/components/responses/503ServiceUnavailable'
-        "504":
-          $ref: '#/components/responses/504GatewayTimeout'
 
   "/retrieve-type":
     post:
@@ -225,13 +215,13 @@ paths:
             schema:
               $ref: "#/components/schemas/RequestBody"
             examples:
-              IdentifyDeviceBy2LeggedToken:
-                $ref: '#/components/examples/IdentifyDeviceBy2LeggedToken'
-              IdentifyDeviceByPhoneNumber:
+              Identify Device By 3-Legged Access Token:
+                $ref: '#/components/examples/IdentifyDeviceBy3LeggedToken'
+              Identify Device By Phone Number:
                 $ref: '#/components/examples/IdentifyDeviceByPhoneNumber'
-              IdentifyDeviceByIPAddress:
+              Identify Device By IP Address:
                 $ref: '#/components/examples/IdentifyDeviceByIPAddress'
-              IdentifyDeviceByMultipleIdentifiers:
+              Identify Device By Multiple Identifiers:
                 $ref: '#/components/examples/IdentifyDeviceByMultipleIdentifiers'
 
       responses:
@@ -245,20 +235,10 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "406":
-          $ref: '#/components/responses/406Unacceptable'
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
-        "500":
-          $ref: '#/components/responses/500InternalServerError'
-        "502":
-          $ref: '#/components/responses/502BadGateway'
-        "503":
-          $ref: '#/components/responses/503ServiceUnavailable'
-        "504":
-          $ref: '#/components/responses/504GatewayTimeout'
 
 components:
   securitySchemes:
@@ -316,39 +296,39 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
-            InsufficientParameters:
+            Insufficient Parameters:
               description: Sufficient parameters must be provided to allow the target UE to be identified
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "At least one of phoneNumber, networkAccessIdentifier, ipv4Address and ipv6Address must be specified"
-            InconsistentDeviceProperties:
+            Inconsistent Device Properties:
               description: Device parameters provided identify different devices
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Multiple inconsistent device parameters specified"
-            InvalidExternalId:
+            Invalid Network Access Identifier:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: networkAccessIdentifier"
-            InvalidMSISDN:
+            Invalid Phone Number:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: phoneNumber"
-            InvalidIPv4:
+            Invalid IPv4 Address:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: ipv4Address"
-            InvalidIPv6:
+            Invalid IPv6 Address:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: ipv6Address"
-            InvalidPort:
+            Invalid Port Value:
               value:
                 status: 400
                 code: OUT_OF_RANGE
@@ -364,18 +344,18 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            GENERIC_401_UNAUTHENTICATED:
-              description: Request cannot be authenticated
+            Unauthenticated Request:
+              description: The request cannot be authenticated, as the access token is missing, not a valid token, or has been revoked
               value:
                 status: 401
                 code: UNAUTHENTICATED
                 message: Request not authenticated due to missing, invalid, or expired credentials.
-            GENERIC_401_AUTHENTICATION_REQUIRED:
-              description: New authentication is needed, authentication is no longer valid
+            Re-Authentication Required:
+              description: A new authentication is needed, as the access token has expired
               value:
                 status: 401
                 code: AUTHENTICATION_REQUIRED
-                message: New authentication is required.
+                message: A new authentication is needed, as the access token has expired.
 
     403Forbidden:
       description: Forbidden
@@ -387,7 +367,7 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            GENERIC_403_PERMISSION_DENIED:
+            Permision Denied:
               description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
               value:
                 status: 403
@@ -404,29 +384,12 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            GENERIC_404_DEVICE_NOT_FOUND:
-              description: Device identifier not found
+            Device Cannot Be Found:
+              description: The provided identifier cannot be matched to a device known to the API provider
               value:
                 status: 404
                 code: IDENTIFIER_NOT_FOUND
-                message: The supplied device identifier cannot be matched to a device.
-
-    406Unacceptable:
-      description: Not Acceptable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            NotAcceptable:
-              description: A response format other than JSON has been requested
-              value:
-                status: 406
-                code: NOT_ACCEPTABLE
-                message: "The server cannot produce a response matching the content requested by the client through Accept-* headers"
+                message: The provided identifier cannot be matched to a device.
 
     422UnprocessableContent:
       description: Unprocessable Content
@@ -438,36 +401,36 @@ components:
           schema:
             $ref: "#/components/schemas/ErrorResponse"
           examples:
-            DeviceIdentifiersMismatch:
-              description: Inconsistency between device identifiers not identifying the same device
+            Identifiers Do Not Match:
+              description: Multiple identifiers provided which do not all identify the same device
               value:
                 status: 422
                 code: IDENTIFIER_MISMATCH
                 message: Provided identifiers are not consistent.
-
-            ServiceNotApplicableForDevice:
-              description: Service is not available for the identified device
+            Service Not Applicable For Device:
+              description: The service is not applicable for the identified device
               value:
                 status: 422
                 code: SERVICE_NOT_APPLICABLE
-                message: The service is not applicable to the identified device.
-            UnsupportedDeviceIdentifier:
-              description: Service is not available for the identified device
+                message: The service is not applicable for the identified device.
+            Unsupported Identifier:
+              description: None of the provided identifiers is supported by the implementation
               value:
                 status: 422
                 code: UNSUPPORTED_IDENTIFIER
                 message: None of the provided identifiers is supported by the implementation.
-
-            UnnecessaryDeviceIdentifier:
+            Unnecessary Identifier:
+              description: An explicit identifier has been provided for the device when this is already identified by the access token
               value:
                 status: 422
                 code: UNNECESSARY_IDENTIFIER
-                message: The device is already identified by the access token
-            MissingIdentifier:
+                message: An explicit identifier has been provided for the device when this is already identified by the access token
+            Missing Identifier:
+              description: An identifier is not included in the request and the device cannot be identified from the 3-legged access token
               value:
                 status: 422
                 code: MISSING_IDENTIFIER
-                message: The device cannot be identified
+                message: An identifier is not included in the request and the device cannot be identified from the 3-legged access token
 
     429TooManyRequests:
       description: Too Many Requests
@@ -479,68 +442,12 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
-            TooManyRequests:
+            Too Many Requests:
               description: Access to the API has been temporarily blocked due to quota or spike arrest limits being reached
               value:
                 status: 429
                 code: TOO_MANY_REQUESTS
                 message: "Either out of resource quota or reaching rate limiting"
-
-    500InternalServerError:
-      description: Internal Server Error
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 500
-            code: INTERNAL
-            message: "The service is currently not available"
-
-    502BadGateway:
-      description: Bad Gateway
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 502
-            code: BAD_GATEWAY
-            message: "The service is currently not available"
-
-    503ServiceUnavailable:
-      description: Service Unavailable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 503
-            code: UNAVAILABLE
-            message: "The service is currently not available"
-
-    504GatewayTimeout:
-      description: Gateway Time-Out
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 504
-            code: TIMEOUT
-            message: "The service is currently not available"
 
   schemas:
     LastChecked:
@@ -688,7 +595,7 @@ components:
       example: 2001:db8:85a3:8d3:1319:8a2e:370:7344
 
   examples:
-    IdentifyDeviceBy2LeggedToken:
+    IdentifyDeviceBy3LeggedToken:
       description: Empty JSON when device is identified by access token
       value:
         {}
