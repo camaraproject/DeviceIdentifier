@@ -526,7 +526,8 @@ components:
   schemas:
     LastChecked:
       description: |
-        The last time that the information returned (e.g. IMEI) was confirmed to be correct by the mobile operator for the provided device identifier (e.g. phone number)
+        The last time that the information returned (e.g. IMEI) was confirmed to be correct by the mobile operator for the provided identifier (e.g. phone number)
+
       properties:
         lastChecked:
           description: Date and time that the information was last confirmed by the mobile operator to be correct
