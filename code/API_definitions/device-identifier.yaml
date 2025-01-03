@@ -431,7 +431,8 @@ components:
               value:
                 status: 422
                 code: MISSING_IDENTIFIER
-                message: An identifier is not included in the request and the device cannot be identified from the 3-legged access token
+                message: An identifier is not included in the request and the device cannot be identified from the 2-legged access token
+
 
     429TooManyRequests:
       description: Too Many Requests
