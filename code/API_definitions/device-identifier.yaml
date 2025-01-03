@@ -426,7 +426,8 @@ components:
                 code: UNNECESSARY_IDENTIFIER
                 message: An explicit identifier has been provided for the device when this is already identified by the access token
             Missing Identifier:
-              description: An identifier is not included in the request and the device cannot be identified from the 3-legged access token
+              description: An identifier is not included in the request and the device cannot be identified from the 2-legged access token
+
               value:
                 status: 422
                 code: MISSING_IDENTIFIER
