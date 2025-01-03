@@ -17,7 +17,8 @@ info:
 
     # Introduction
 
-    Mobile devices are allocated a unique identifier by the manufacturer, known as the International Mobile Equipment Identifier, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identifier is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
+    Mobile devices are allocated a unique identifier by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identifier is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
+
 
     The IMEI is a 15 digit integer, and the IMEI SV is a 16 digit integer:
     - The first 8 digits are known as the Type Allocation Code (TAC), and identify the manufacturer and model of the device
