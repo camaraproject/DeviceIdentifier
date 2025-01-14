@@ -129,7 +129,73 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imeisv", if present, is equal to IMEISV2
 
   # Generic 400 errors
-    
+
+    @device_identifier_retrieveIdentifier_400.1_schema_not_compliant
+    Scenario: Invalid Argument. Generic Syntax Exception
+        Given the request body is set to any value which is not compliant with the schema at "/components/schemas/RequestBody"
+        When the request "retrieveIdentifier" is sent
+        Then the response status code is 400
+        And the response header "x-correlator" has same value as the request header "x-correlator"
+        And the response header "Content-Type" is "application/json"
+        And the response property "$.status" is 400
+        And the response property "$.code" is "INVALID_ARGUMENT"
+        And the response property "$.message" contains a user friendly text
+
+    @device_identifier_retrieveIdentifier_400.2_no_request_body
+    Scenario: Missing request body
+        Given the request body is not included
+        When the request "retrieveIdentifier" is sent
+        Then the response status code is 400
+        And the response header "x-correlator" has same value as the request header "x-correlator"
+        And the response header "Content-Type" is "application/json"
+        And the response property "$.status" is 400
+        And the response property "$.code" is "INVALID_ARGUMENT"
+        And the response property "$.message" contains a user friendly text
+
+    @device_identifier_retrieveIdentifier_400.3_device_empty
+    Scenario: The device value is an empty object
+        Given the request body property "$.device" is set to: {}
+        When the request "retrieveIdentifier" is sent
+        Then the response status code is 400
+        And the response header "x-correlator" has same value as the request header "x-correlator"
+        And the response header "Content-Type" is "application/json"
+        And the response property "$.status" is 400
+        And the response property "$.code" is "INVALID_ARGUMENT"
+        And the response property "$.message" contains a user friendly text
+
+    # Note that device schema validation errors (if any) should be thrown even if a 3-legged access token is being used
+    @device_identifier_retrieveIdentifier_400.4_device_identifiers_not_schema_compliant
+    # Test every type of identifier even if not supported by the implementation
+    Scenario Outline: Some device identifier value does not comply with the schema
+        Given the request body property "<device_identifier>" does not comply with the OAS schema at "<oas_spec_schema>"
+        And a 2-legged or 3-legged access token is being used
+        When the request "retrieveIdentifier" is sent
+        Then the response status code is 400
+        And the response header "x-correlator" has same value as the request header "x-correlator"
+        And the response header "Content-Type" is "application/json"
+        And the response property "$.status" is 400
+        And the response property "$.code" is "INVALID_ARGUMENT"
+        And the response property "$.message" contains a user friendly text
+
+        Examples:
+            | device_identifier          | oas_spec_schema                             |
+            | $.device.phoneNumber       | /components/schemas/PhoneNumber             |
+            | $.device.ipv4Address       | /components/schemas/DeviceIpv4Addr          |
+            | $.device.ipv6Address       | /components/schemas/DeviceIpv6Address       |
+            | $.device.networkIdentifier | /components/schemas/NetworkAccessIdentifier |
+
+    # The maximum is considered in the schema so a generic schema validator may fail and generate a 400 INVALID_ARGUMENT without further distinction, and both could be accepted
+    @device_identifier_retrieveIdentifier_400.5_out_of_range_port
+    Scenario: Out of range port
+        Given the request body property  "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
+        When the request "retrieveIdentifier" is sent
+        Then the response status code is 400
+        And the response header "x-correlator" has same value as the request header "x-correlator"
+        And the response header "Content-Type" is "application/json"
+        And the response property "$.status" is 400
+        And the response property "$.code" is "OUT_OF_RANGE" or "INVALID_ARGUMENT"
+        And the response property "$.message" contains a user friendly text
+   
   @DeviceIdentifier_retrieve_identifier0_phoneNumber_does_not_match_schema
   Scenario Outline: phoneNumber value does not comply with the defined pattern
     Given the request body property "$.phoneNumber" is set to: <phone_number_value>
