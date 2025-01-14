@@ -7,8 +7,8 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
 # * api_root: API root of the server URL
 #
 # Testing assets:
-# * a mobile device "DEVICE1" with IMEI "IMEI1", and IMEISV "IMEISV1"
-# * a mobile device "DEVICE2" with IMEI "IMEI2", IMEISV "IMEISV2", public IPv4 address "PUBLICIPV4ADDRESS", and public port "PUBLICPORT"
+# * a mobile device "DEVICE1" with IMEI "IMEI1", IMEISV "IMEISV1", public IPv4 address "PUBLICIPV4ADDRESS", and public port "PUBLICPORT"
+# * a mobile device "DEVICE2" with IMEI "IMEI2", and IMEISV "IMEISV2"
 # * a SIM card "SIMCARD1" from "TELCO1" and phone number "PHONENUMBER1"
 # * a SIM card "SIMCARD2" from "TELCO2" and phone number "PHONENUMBER2"
 
@@ -22,8 +22,8 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
 
   # Success scenarios
 
-  @DeviceIdentifier_retrieve_identifier_01_success_scenario_3-legged_token
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1
+  @DeviceIdentifier_retrieve_identifier_200.01_success_scenario_3-legged_token
+  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 with 3-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is identified by the access token
     And request property "$.device" does not exist
@@ -35,10 +35,10 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
-    And the response property "$.imeisv", if present, it equal to IMEISV1
+    And the response property "$.imeisv", if present, is equal to IMEISV1
 
-  @DeviceIdentifier_retrieve_identifier_02_success_scenario_2-legged_token
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1
+  @DeviceIdentifier_retrieve_identifier_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
+  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by phone number
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is not identified by the access token
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
@@ -50,10 +50,26 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
-    And the response property "$.imeisv", if present, it equal to IMEISV1
+    And the response property "$.imeisv", if present, is equal to IMEISV1
 
-  @DeviceIdentifier_retrieve_identifier_03_success_scenario_3-legged_token_after_SIM_card_swap
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2
+  @DeviceIdentifier_retrieve_identifier_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
+  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
+    Given SIMCARD1 is installed within DEVICE1, which is connected to the network
+    And DEVICE1 is not identified by the access token
+    And request property "$.device.ipv4address.publicAddress" is set to PUBLICIPV4ADDRESS
+    And request property "$.device.ipv4address.publicPort" is set to PUBLICPORT
+    And one of the scopes associated with the access token is device-identifier:retrieve-identifier
+    When the HTTPS "POST" request is sent
+    Then the response status code is 200
+    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.imei" exists and is equal to IMEI1
+    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.imeisv", if present, is equal to IMEISV1
+
+  @DeviceIdentifier_retrieve_identifier_200.04_success_scenario_3-legged_token_after_SIM_card_swap
+  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 with 3-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is identified by the access token
     And request property "$.device" does not exist
@@ -65,10 +81,10 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
-    And the response property "$.imeisv", if present, it equal to IMEISV1
+    And the response property "$.imeisv", if present, is equal to IMEISV1
 
-  @DeviceIdentifier_retrieve_identifier_04_success_scenario_2-legged_token_after_SIM_card_swap
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2
+  @DeviceIdentifier_retrieve_identifier_200.05_success_scenario_2-legged_token_after_SIM_card_swap
+  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 with 2-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is not identified by the access token
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
@@ -80,10 +96,10 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
-    And the response property "$.imeisv", if present, it equal to IMEISV1
+    And the response property "$.imeisv", if present, is equal to IMEISV1
 
-  @DeviceIdentifier_retrieve_identifier_05_success_scenario_3-legged_token_after_device_swap
-  Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1
+  @DeviceIdentifier_retrieve_identifier_200.06_success_scenario_3-legged_token_after_device_swap
+  Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 with 3-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And DEVICE2 is identified by the access token
     And request property "$.device" does not exist
@@ -95,10 +111,10 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI2
     And the response property "$.lastChecked" exists and is a valid date-time in the past
-    And the response property "$.imeisv", if present, it equal to IMEISV2
+    And the response property "$.imeisv", if present, is equal to IMEISV2
 
-  @DeviceIdentifier_retrieve_identifier_06_success_scenario_2-legged_token_after_device_swap
-  Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1
+  @DeviceIdentifier_retrieve_identifier_200.07_success_scenario_2-legged_token_after_device_swap
+  Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 with 2-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And DEVICE2 is not identified by the access token
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
@@ -110,33 +126,7 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI2
     And the response property "$.lastChecked" exists and is a valid date-time in the past
-    And the response property "$.imeisv", if present, it equal to IMEISV2
-
-  @DeviceIdentifier_retrieve_identifier103_same_device_different_SIMs
-  Scenario:  retrieve device identifer on the same device but for different SIMs by different telcos. The device identifier MUST be the same.
-    Given the correct base url for the API provider is used
-    And the resource is "/retrieve-identifier"
-    And one of the scopes associated with the access token is device-identifier:retrieve-identifier
-    When a device_identifier1 is retrieved on the device with SIMCARD1 in slot1
-    And a device_identifier2 is retrieved on the same device with SIMCARD2 in slot1
-    Then device_identifier1 and device_identifier2 are equal
-
-  @DeviceIdentifier_retrieve_identifier102_ipv4Address_success
-  Scenario:  retrieve device identifier for phone number PHONENUMBER2, network connection, and access token matches PHONENUMBER2
-    Given SIMCARD2 is installed within DEVICE2, which is connected to the network
-    And the correct base url for the API provider is used
-    And the API provider supports responding with the IMEISV of the identified device
-    And the resource is "/retrieve-identifier"
-    And one of the scopes associated with the access token is device-identifier:retrieve-identifier
-    When the HTTPS "POST" request is sent
-    And the request body has the field ipv4Address.publicAddress with a value of PUBLICIPV4ADDRESS
-    And the request body has the field ipv4Address.publicPort with a value of PUBLICPORT
-    Then the response status code is 200
-    And the response body complies with the OAS schema at "/components/schemas/200RetrieveIdentifier"
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.imeisv" is IMEISV2
-    And the response property "$.imei" is IMEI
+    And the response property "$.imeisv", if present, is equal to IMEISV2
 
   # Generic 400 errors
     
