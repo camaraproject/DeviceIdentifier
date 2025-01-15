@@ -19,7 +19,6 @@ info:
 
     Mobile devices are allocated a unique identifier by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identifier is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
 
-
     The IMEI is a 15 digit integer, and the IMEI SV is a 16 digit integer:
     - The first 8 digits are known as the Type Allocation Code (TAC), and identify the manufacturer and model of the device
     - The following 6 digits are the serial number of the device for that TAC
@@ -295,7 +294,17 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 400
+                  code:
+                    enum:
+                      - INVALID_ARGUMENT
+                      - OUT_OF_RANGE
           examples:
             Insufficient Parameters:
               description: Sufficient parameters must be provided to allow the target UE to be identified
@@ -343,7 +352,17 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 401
+                  code:
+                    enum:
+                      - UNAUTHENTICATED
+                      - AUTHENTICATION_REQUIRED
           examples:
             Unauthenticated Request:
               description: The request cannot be authenticated, as the access token is missing, not a valid token, or has been revoked
@@ -366,7 +385,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 403
+                  code:
+                    enum:
+                      - PERMISSION_DENIED
           examples:
             Permision Denied:
               description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
@@ -383,7 +411,16 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 404
+                  code:
+                    enum:
+                      - IDENTIFIER_NOT_FOUND
           examples:
             Device Cannot Be Found:
               description: The provided identifier cannot be matched to a device known to the API provider
@@ -400,7 +437,20 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 422
+                  code:
+                    enum:
+                      - IDENTIFIER_MISMATCH
+                      - SERVICE_NOT_APPLICABLE
+                      - MISSING_IDENTIFIER
+                      - UNSUPPORTED_IDENTIFIER
+                      - UNNECESSARY_IDENTIFIER
           examples:
             Identifiers Do Not Match:
               description: Multiple identifiers provided which do not all identify the same device
@@ -428,12 +478,10 @@ components:
                 message: An explicit identifier has been provided for the device when this is already identified by the access token
             Missing Identifier:
               description: An identifier is not included in the request and the device cannot be identified from the 2-legged access token
-
               value:
                 status: 422
                 code: MISSING_IDENTIFIER
                 message: An identifier is not included in the request and the device cannot be identified from the 2-legged access token
-
 
     429TooManyRequests:
       description: Too Many Requests
@@ -443,15 +491,30 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 429
+                  code:
+                    enum:
+                      - QUOTA_EXCEEDED
+                      - TOO_MANY_REQUESTS
           examples:
             Too Many Requests:
               description: Access to the API has been temporarily blocked due to quota or spike arrest limits being reached
               value:
                 status: 429
                 code: TOO_MANY_REQUESTS
-                message: "Either out of resource quota or reaching rate limiting"
-
+                message: Rate limit reached
+            Quota Exceeded:
+              description: Request is rejected due to exceeding a business quota limit
+              value:
+                status: 429
+                code: QUOTA_EXCEEDED
+                message: Out of resource quota
   schemas:
     LastChecked:
       description: |
@@ -543,7 +606,8 @@ components:
           "publicPort": 59765
         }
 
-    ErrorResponse:
+    ErrorInfo:
+      description: Common CAMARA error response object
       type: object
       properties:
         code:
