@@ -7,8 +7,24 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
 # * api_root: API root of the server URL
 #
 # Testing assets:
-# * a mobile device "DEVICE1" with IMEI "IMEI1", IMEISV "IMEISV1", public IPv4 address "PUBLICIPV4ADDRESS", and public port "PUBLICPORT"
-# * a mobile device "DEVICE2" with IMEI "IMEI2", and IMEISV "IMEISV2"
+# * a mobile device "DEVICE1" with the folowing parameter values:
+#         | Parameter           | Value             |
+#         |---------------------|-------------------|
+#         | IMEISV              | IMEISV1           |
+#         | IMEI                | IMEI1             |
+#         | TAC                 | TAC1              |
+#         | Manufacturer        | MANUFACTURER1     |
+#         | Model               | MODEL1            |
+#         | Public IPv4 Address | PUBLICIPV4ADDRESS |
+#         | Public Port         | PUBLICPORT        |
+# * a mobile device "DEVICE2" with the folowing parameter values:
+#         | Parameter           | Value             |
+#         |---------------------|-------------------|
+#         | IMEISV              | IMEISV2           |
+#         | IMEI                | IMEI2             |
+#         | TAC                 | TAC2              |
+#         | Manufacturer        | MANUFACTURER2     |
+#         | Model               | MODEL2            |
 # * a SIM card "SIMCARD1" from "TELCO1" and phone number "PHONENUMBER1"
 # * a SIM card "SIMCARD2" from "TELCO2" and phone number "PHONENUMBER2"
 
@@ -36,6 +52,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV1
+    And the response property "$.tac", if present, is equal to TAC1
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And the response property "$.model", if present, is equal to MODEL1
 
   @DeviceIdentifier_retrieve_identifier_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by phone number
@@ -51,6 +70,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV1
+    And the response property "$.tac", if present, is equal to TAC1
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And the response property "$.model", if present, is equal to MODEL1
 
   @DeviceIdentifier_retrieve_identifier_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
@@ -67,6 +89,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV1
+    And the response property "$.tac", if present, is equal to TAC1
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And the response property "$.model", if present, is equal to MODEL1
 
   @DeviceIdentifier_retrieve_identifier_200.04_success_scenario_3-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 with 3-legged access token
@@ -82,6 +107,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV1
+    And the response property "$.tac", if present, is equal to TAC1
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And the response property "$.model", if present, is equal to MODEL1
 
   @DeviceIdentifier_retrieve_identifier_200.05_success_scenario_2-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 with 2-legged access token
@@ -97,6 +125,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV1
+    And the response property "$.tac", if present, is equal to TAC1
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And the response property "$.model", if present, is equal to MODEL1
 
   @DeviceIdentifier_retrieve_identifier_200.06_success_scenario_3-legged_token_after_device_swap
   Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 with 3-legged access token
@@ -112,6 +143,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI2
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV2
+    And the response property "$.tac", if present, is equal to TAC2
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER2
+    And the response property "$.model", if present, is equal to MODEL2
 
   @DeviceIdentifier_retrieve_identifier_200.07_success_scenario_2-legged_token_after_device_swap
   Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 with 2-legged access token
@@ -127,6 +161,9 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
     And the response property "$.imei" exists and is equal to IMEI2
     And the response property "$.lastChecked" exists and is a valid date-time in the past
     And the response property "$.imeisv", if present, is equal to IMEISV2
+    And the response property "$.tac", if present, is equal to TAC2
+    And the response property "$.manufacturer", if present, is equal to MANUFACTURER2
+    And the response property "$.model", if present, is equal to MODEL2
 
   # Generic 400 errors
 
