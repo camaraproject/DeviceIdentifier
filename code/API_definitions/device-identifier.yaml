@@ -125,7 +125,7 @@ externalDocs:
   url: https://github.com/camaraproject/DeviceIdentifier
 
 servers:
-  - url: "{apiRoot}/device-identifier/v0.2.0rc1"
+  - url: "{apiRoot}/device-identifier/v0.2rc1"
     variables:
       apiRoot:
         default: https://example.com:443
