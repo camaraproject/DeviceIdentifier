@@ -7,7 +7,7 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
 # * api_root: API root of the server URL
 #
 # Testing assets:
-# * a mobile device "DEVICE1" with the folowing parameter values:
+# * A mobile device "DEVICE1" with the folowing parameter values:
 #         | Parameter           | Value             |
 #         |---------------------|-------------------|
 #         | IMEISV              | IMEISV1           |
@@ -17,7 +17,7 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
 #         | Model               | MODEL1            |
 #         | Public IPv4 Address | PUBLICIPV4ADDRESS |
 #         | Public Port         | PUBLICPORT        |
-# * a mobile device "DEVICE2" with the folowing parameter values:
+# * A mobile device "DEVICE2" with the folowing parameter values:
 #         | Parameter           | Value             |
 #         |---------------------|-------------------|
 #         | IMEISV              | IMEISV2           |
@@ -25,8 +25,8 @@ Feature: Camara Device Identifer API, vwip - Operation: retrieveIdentifier
 #         | TAC                 | TAC2              |
 #         | Manufacturer        | MANUFACTURER2     |
 #         | Model               | MODEL2            |
-# * a SIM card "SIMCARD1" from "TELCO1" and phone number "PHONENUMBER1"
-# * a SIM card "SIMCARD2" from "TELCO2" and phone number "PHONENUMBER2"
+# * A SIM card "SIMCARD1" from "TELCO1" and phone number "PHONENUMBER1"
+# * A SIM card "SIMCARD2" from "TELCO2" and phone number "PHONENUMBER2"
 
   Background: Common Device Identifier retrieveIdentifier setup
     Given an environment at "apiRoot"
