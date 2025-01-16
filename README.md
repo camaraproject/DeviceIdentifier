@@ -21,7 +21,7 @@ Repository to describe, develop, document and test the Device Identifier API fam
 
 ## Meetings
 * Schedule: First Friday of each month at 09:00 UTC via Linux Foundation Zoom service
- * Meeting invite can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier#Registration-%2F-Join)
+ * Meeting invite can be found [here](https://zoom-lfx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06-450f-b80a-229bb6a88c39)
  * Meeting minutes can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
 
 ## Release Information
