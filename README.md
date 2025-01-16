@@ -20,20 +20,20 @@ Repository to describe, develop, document and test the Device Identifier API fam
 * The project wiki can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
 
 ## Meetings
-* Schedule: First Friday of each month at 09:00 BST / 10:00 CEST via Linux Foundation Zoom service
- * Meeting invite can be found [here](https://github.com/camaraproject/DeviceIdentifier/blob/main/documentation/MeetingMinutes/CAMARA%20Device%20Identifier%20Monthly%20Meeting.ics)
+* Schedule: First Friday of each month at 09:00 UTC via Linux Foundation Zoom service
+ * Meeting invite can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier#Registration-%2F-Join)
  * Meeting minutes can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
 
 ## Release Information
 
 * Note: Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest public release**.
 
-* **The latest public pre-release is [r1.1](https://github.com/camaraproject/DeviceIdentifier/tree/r1.1) with the following API definitions:**
+* **The latest public pre-release is [r1.2](https://github.com/camaraproject/DeviceIdentifier/tree/r1.2) with the following API definitions:**
 
-  * **device-identifier v0.2.0-alpha.1**  
-  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r1.1/code/API_definitions/device-identifier.yaml)
-  [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.1/code/API_definitions/device-identifier.yaml&nocors)
-  [[View it on Swagger Editor]](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.1/code/API_definitions/device-identifier.yaml)
+  * **device-identifier v0.2.0-rc.1**  
+  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r1.2/code/API_definitions/device-identifier.yaml)
+  [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/code/API_definitions/device-identifier.yaml&nocors)
+  [[View it on Swagger Editor]](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/code/API_definitions/device-identifier.yaml)
 
 - Current work-in-progress version is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier)
 
