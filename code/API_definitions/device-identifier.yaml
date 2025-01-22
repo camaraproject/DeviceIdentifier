@@ -67,7 +67,7 @@ info:
 
     If the mobile subscription parameters contain a formatting error, a `400 INVALID_ARGUMENT` error is returned.
 
-    If the mobile subscription cannot be identified from the provided parameters, a `404 DEVICE_NOT_FOUND` error is returned.
+    If the mobile subscription cannot be identified from the provided parameters, a `404 IDENTIFIER_NOT_FOUND` error is returned.
 
     If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
 
