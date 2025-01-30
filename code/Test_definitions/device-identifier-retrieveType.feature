@@ -30,7 +30,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   Background: Common Device Identifier retrieveIdentifier setup
     Given an environment at "apiRoot"
-    And the resource "/device-identifier/vwip/retrieve-type"
+    And the resource "/device-identifier/v0.2rc1/retrieve-type"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
@@ -38,7 +38,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   # Success scenarios
 
-  @DeviceIdentifier_retrieve_identifier_200.01_success_scenario_3-legged_token
+  @DeviceIdentifier_retrieveType_200.01_success_scenario_3-legged_token
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 with 3-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is identified by the access token
@@ -54,7 +54,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
-  @DeviceIdentifier_retrieve_identifier_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
+  @DeviceIdentifier_retrieveType_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by phone number
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is not identified by the access token
@@ -70,7 +70,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
-  @DeviceIdentifier_retrieve_identifier_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
+  @DeviceIdentifier_retrieveType_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is not identified by the access token
@@ -87,7 +87,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
-  @DeviceIdentifier_retrieve_identifier_200.04_success_scenario_3-legged_token_after_SIM_card_swap
+  @DeviceIdentifier_retrieveType_200.04_success_scenario_3-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 with 3-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is identified by the access token
@@ -103,7 +103,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
-  @DeviceIdentifier_retrieve_identifier_200.05_success_scenario_2-legged_token_after_SIM_card_swap
+  @DeviceIdentifier_retrieveType_200.05_success_scenario_2-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 with 2-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And DEVICE1 is not identified by the access token
@@ -119,7 +119,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
-  @DeviceIdentifier_retrieve_identifier_200.06_success_scenario_3-legged_token_after_device_swap
+  @DeviceIdentifier_retrieveType_200.06_success_scenario_3-legged_token_after_device_swap
   Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 with 3-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And DEVICE2 is identified by the access token
@@ -135,7 +135,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER2
     And the response property "$.model", if present, is equal to MODEL2
 
-  @DeviceIdentifier_retrieve_identifier_200.07_success_scenario_2-legged_token_after_device_swap
+  @DeviceIdentifier_retrieveType_200.07_success_scenario_2-legged_token_after_device_swap
   Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 with 2-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And DEVICE2 is not identified by the access token
@@ -153,7 +153,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   # Generic 400 errors
 
-  @device_identifier_retrieveIdentifier_400.1_schema_not_compliant
+  @DeviceIdentifier_retrieveType_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
       Given the request body is set to any value which is not compliant with the schema at "/components/schemas/RequestBody"
       When the request "retrieveIdentifier" is sent
@@ -164,7 +164,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.code" is "INVALID_ARGUMENT"
       And the response property "$.message" contains a user friendly text
 
-  @device_identifier_retrieveIdentifier_400.2_no_request_body
+  @DeviceIdentifier_retrieveType_400.2_no_request_body
   Scenario: Missing request body
       Given the request body is not included
       When the request "retrieveIdentifier" is sent
@@ -175,7 +175,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.code" is "INVALID_ARGUMENT"
       And the response property "$.message" contains a user friendly text
 
-  @device_identifier_retrieveIdentifier_400.3_device_empty
+  @DeviceIdentifier_retrieveType_400.3_device_empty
   Scenario: The device value is an empty object
       Given the request body property "$.device" is set to: {}
       When the request "retrieveIdentifier" is sent
@@ -186,7 +186,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.code" is "INVALID_ARGUMENT"
       And the response property "$.message" contains a user friendly text
 
-  @device_identifier_retrieveIdentifier_400.4_device_identifiers_not_schema_compliant
+  @DeviceIdentifier_retrieveType_400.4_device_identifiers_not_schema_compliant
   # Test every type of identifier even if not supported by the implementation
   # Note that device schema validation errors (if any) should be thrown even if a 3-legged access token is being used
   Scenario Outline: Some device identifier value does not comply with the schema
@@ -208,7 +208,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
           | $.device.networkIdentifier | /components/schemas/NetworkAccessIdentifier |
 
   # The maximum is considered in the schema so a generic schema validator may fail and generate a 400 INVALID_ARGUMENT without further distinction, and both could be accepted
-  @device_identifier_retrieveIdentifier_400.5_out_of_range_port
+  @DeviceIdentifier_retrieveType_400.5_out_of_range_port
   Scenario: Out of range port
       Given the request body property  "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
       When the request "retrieveIdentifier" is sent
@@ -221,7 +221,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   # Generic 401 errors
 
-  @device_identifier_retrieveIdentifier_401.1_no_authorization_header
+  @DeviceIdentifier_retrieveType_401.1_no_authorization_header
   Scenario: No Authorization header
       Given the header "Authorization" is removed
       When the request "retrieveIdentifier" is sent
@@ -233,7 +233,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.message" contains a user friendly text
 
   # In this case both codes could make sense depending on whether the access token can be refreshed or not
-  @device_identifier_retrieveIdentifier_401.2_expired_access_token
+  @DeviceIdentifier_retrieveType_401.2_expired_access_token
   Scenario: Expired access token
       Given the header "Authorization" is set to an expired access token
       When the request "retrieveIdentifier" is sent
@@ -244,7 +244,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.code" is "UNAUTHENTICATED" or "AUTHENTICATION_REQUIRED"
       And the response property "$.message" contains a user friendly text
 
-  @device_identifier_retrieveIdentifier_401.3_invalid_access_token
+  @DeviceIdentifier_retrieveType_401.3_invalid_access_token
   Scenario: Invalid access token
       Given the header "Authorization" is set to an invalid access token
       When the request "retrieveIdentifier" is sent
@@ -257,7 +257,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   # Generic 403 errors
 
-  @device_identifier_retrieveIdentifier_403.1_missing_access_token_scope
+  @DeviceIdentifier_retrieveType_403.1_missing_access_token_scope
   Scenario: Invalid access token
       Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-identifier
       When the request "retrieveIdentifier" is sent
@@ -271,7 +271,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
   # Generic 404 errors
 
   # Typically with a 2-legged access token when the identified device is managed by a different API provider
-  @device_identifier_retrieveIdentifier_404.1_device_not_found
+  @DeviceIdentifier_retrieveType_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
       Given that the device cannot be identified from the access token
       And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
@@ -285,7 +285,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   # Generic 422 errors
 
-  @device_identifier_retrieveIdentifier_422.1_device_identifiers_unsupported
+  @DeviceIdentifier_retrieveType_422.1_device_identifiers_unsupported
   Scenario: None of the provided device identifiers is supported by the implementation
       Given that some type of device identifiers are not supported by the implementation
       And the request body property "$.device" only includes device identifiers not supported by the implementation
@@ -297,7 +297,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.code" is "UNSUPPORTED_IDENTIFIER"
       And the response property "$.message" contains a user friendly text
 
-  @device_identifier_retrieveIdentifier_422.2_device_identifiers_mismatch
+  @DeviceIdentifier_retrieveType_422.2_device_identifiers_mismatch
   Scenario: Device identifiers mismatch
       Given that at least 2 types of device identifiers are supported by the implementation
       And the request body property "$.device" includes several identifiers, each of them identifying a valid but different device
@@ -309,7 +309,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
       And the response property "$.code" is "IDENTIFIER_MISMATCH"
       And the response property "$.message" contains a user friendly text
 
-    @device_identifier_retrieveIdentifier_422.3_device_not_supported
+    @DeviceIdentifier_retrieveType_422.3_device_not_supported
     Scenario: Service not available for the device
         Given that service is not supported for all devices commercialized by the operator
         And the service is not applicable for the device identified by the token or provided in the request body
@@ -322,7 +322,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
         And the response property "$.message" contains a user friendly text
 
     # Typically with a 2-legged access token
-    @device_identifier_retrieveIdentifier_422.4_unidentifiable_device
+    @DeviceIdentifier_retrieveType_422.4_unidentifiable_device
     Scenario: Device not included and cannot be deduced from the access token
         Given the header "Authorization" is set to a valid access token which does not identify a device
         And the request body property "$.device" is not included
@@ -335,7 +335,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
         And the response property "$.message" contains a user friendly text
 
     # Typically with a 3-legged access token
-    @device_identifier_retrieveIdentifier_422.5_device_token_mismatch
+    @DeviceIdentifier_retrieveType_422.5_device_token_mismatch
     Scenario: Inconsistent access token context for the device
         # To test this, a token has to be obtained for a different device
         Given the request body property "$.device" is set to a valid testing device
@@ -349,7 +349,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
         And the response property "$.message" contains a user friendly text
 
     # Typically with a 3-legged access token
-    @device_identifier_retrieveIdentifier_422.6_unnecessary_device_identifier_in_request
+    @DeviceIdentifier_retrieveType_422.6_unnecessary_device_identifier_in_request
     Scenario: Explicit device identifier provided when device is identified by the access token
         Given the request body property "$.device" is set to a valid testing device
         And the header "Authorization" is set to a valid access token for that same device
