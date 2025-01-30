@@ -30,7 +30,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveId
 
   Background: Common Device Identifier retrieveIdentifier setup
     Given an environment at "apiRoot"
-    And the resource "/device-identifier/vwip/retrieve-identifier"
+    And the resource "/device-identifier/v0.2rc1/retrieve-identifier"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
