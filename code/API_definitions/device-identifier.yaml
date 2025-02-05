@@ -78,9 +78,9 @@ info:
     ```
 
     ## Error handling
-    
+
     Errors may be returned for the following reasons. Note that this list is not exhaustive.
-    
+
     `401 UNAUTHENTICATED`or `401 AUTHENTICATION_REQUIRED`:
     - The access token is not a valid access token for the API provider
     - The access token was valid but has now expired
@@ -146,7 +146,7 @@ info:
     ## Multi-SIM scenario handling
 
     In scenarios where a main phone number is shared between multiple devices, each of which has its own individual "secondary" phone number (e.g. connectivity plans that let you share your airtime and data allowances with a smartwatch or eSIM-enabled tablet), the phone number passed by the API consumer will be treated as the secondary phone number, and hence the identifier returned will be that of the single device associated with that phone number (e.g. smartphone, smartwatch, or eSIM-enabled tablet).
-    
+
     In such scenarios, the "primary" device is usually allocated the same main and secondary phone numbers, and hence providing the main phone number to the API will return the identity of the primary device (usually the smartphone) and not any associated devices.
 
     (FAQs will be added in a later version of the documentation)
