@@ -31,7 +31,7 @@ info:
 
     ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/documentation/API_documentation/resources/Device_Identifier_Overview.png)
 
-    The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one of the following subscription identifiers:
+    The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one or more of the following subscription identifiers:
     - the subscription phone number (also known as MSISDN)
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
@@ -50,8 +50,6 @@ info:
       - IPv6 address
       - IPv4 address
 
-    In scenarios where a main phone number is shared between multiple devices, each of which has its own individual "secondary" phone number (e.g. connectivity plans that let you share your airtime and data allowances with a smartwatch or eSIM-enabled tablet), the phone number passed by the API consumer will be treated as the secondary phone number, and hence the identifier returned will be that of the single device associated with that phone number (e.g. smartphone, smartwatch, or eSIM-enabled tablet). In such scenarios, the "primary" device is usually allocated the same main and secondary phone numbers, and hence providing the main phone number to the API will return the identity of the primary device (usually the smartphone) and not any associated devices.
-
     # API functionality
 
     The API defines two service endpoints:
@@ -59,11 +57,9 @@ info:
     - `POST /retrieve-identifier` to get details about the specific device being used by a given mobile subscriber, including IMEI / IMEISV and the type of device
     - `POST /retrieve-type` to get details only about the type (i.e. manufacturer and model) of device being used by a given mobile subscriber
 
-    To call either of these endpoints, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
+    To call either of these endpoints, the API consumer must first obtain a valid access token from the token endpoint, which is then passed as an Authorization header. When a 2-legged access token is used, the API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
-    Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
-
-    The API response is a JSON object is returned containing the data that the end user has consented to sharing with the API consumer.
+    If the request is valid, the API response is a JSON object containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
@@ -103,7 +99,7 @@ info:
     - The end user has not consented to the API consumer getting access to the device identifier information (2-legged access token only)
 
     `422 IDENTIFIER_MISMATCH`:
-    - Different parameters provided in the `device` object do not identify the same device
+    - Multiple parameters have been provided in the `device` object, and these do not identify the same device
 
     `422 SERVICE_NOT_APPLICABLE`:
     - A device identifier cannot be provided for the identified device. For example, the phone number might identify a landline.
@@ -146,6 +142,10 @@ info:
     - If the subject cannot be identified from the access token and the optional `device` object is not included in the request, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
 
     - If the subject can be identified from the access token and the optional `device` object is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same device is identified by these two methods, as the server is unable to make this comparison.
+
+    ## Multi-SIM scenario handling
+
+    In scenarios where a main phone number is shared between multiple devices, each of which has its own individual "secondary" phone number (e.g. connectivity plans that let you share your airtime and data allowances with a smartwatch or eSIM-enabled tablet), the phone number passed by the API consumer will be treated as the secondary phone number, and hence the identifier returned will be that of the single device associated with that phone number (e.g. smartphone, smartwatch, or eSIM-enabled tablet). In such scenarios, the "primary" device is usually allocated the same main and secondary phone numbers, and hence providing the main phone number to the API will return the identity of the primary device (usually the smartphone) and not any associated devices.
 
     (FAQs will be added in a later version of the documentation)
 
