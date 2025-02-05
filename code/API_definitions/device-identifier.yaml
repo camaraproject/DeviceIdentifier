@@ -63,15 +63,7 @@ info:
 
     Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
 
-    If the authentication token is not valid, a `401 UNAUTHENTICATED` error is returned
-
-    If the mobile subscription parameters contain a formatting error, a `400 INVALID_ARGUMENT` error is returned.
-
-    If the mobile subscription cannot be identified from the provided parameters, a `404 DEVICE_NOT_FOUND` error is returned.
-
-    If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
-
-    Otherwise, a JSON object is returned containing the data that the end user has consented to sharing with the API consumer.
+    The API response is a JSON object is returned containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
@@ -88,6 +80,48 @@ info:
        "manufacturer": "Nokia"
     }
     ```
+
+    ## Error handling
+    
+    Errors may be returned for the following reasons. Note that this list is not exhaustive.
+    
+    `401 UNAUTHENTICATED`or `401 AUTHENTICATION_REQUIRED`:
+    - The access token is not a valid access token for the API provider
+    - The access token was valid but has now expired
+
+    `400 INVALID_ARGUMENT`:
+    - The API request is not compliant with this OAS definition
+
+    `400 OUT_OF_RANGE`:
+    - A parameter value in the API request is outwith the range documented in this OAS definition for that parameter
+
+    `404 IDENTIFIER_NOT_FOUND`:
+    - The device identified by the `device` object in the request is not managed by the API provider
+
+    `403 PERMISSION_DENIED`:
+    - The access token does not have the required scope for the endpoint being called
+    - The end user has not consented to the API consumer getting access to the device identifier information (2-legged access token only)
+
+    `422 IDENTIFIER_MISMATCH`:
+    - Different parameters provided in the `device` object do not identify the same device
+
+    `422 SERVICE_NOT_APPLICABLE`:
+    - A device identifier cannot be provided for the identified device. For example, the phone number might identify a landline.
+
+    `422 UNSUPPORTED_IDENTIFIER`:
+    - A parameter provided in the `device` object is not supported by this implementation (e.g. `networkAccessIdentifier`)
+
+    `422 MISSING_IDENTIFIER`:
+    `422 UNNECESSARY_IDENTIFIER`:
+    - See the section "Identifying the device from the access token" below
+
+    `429 QUOTA_EXCEEDED`:
+    - The API consumer has used up the quota of API requests that they were allocated for this API
+
+    `429 TOO_MANY_REQUESTS`:
+    - The rate at which the API consumer is sending requests has exceeded that allowed by the API provider. Try again later.
+
+    Other errors may be returned by implementations. These will have their usual meaning for the associated HTTP status codes.
 
     # Further info and support
 
