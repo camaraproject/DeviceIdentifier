@@ -2,7 +2,7 @@
 
 Checklist for device-identifier v0.2.0-rc.1 in r1.2.
 
-| Nr | API release assets  | alpha | release-candidate |  initial<br>public | stable<br> public | Status  | Comments                                                               |
+| Nr | API release assets  | alpha | release-candidate |  initial<br>public | stable<br> public | Status  | Reference information |
 |----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----------------------------------------------------------------------:|
 |  1 | API definition                               |   M   |         M         |    M    |    M   |  Y   | [device-identifier.yaml](/code/API_definitions/device-identifier.yaml) |
 |  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |  Y   | r2.2 0.5.0-rc.1                                                          |
