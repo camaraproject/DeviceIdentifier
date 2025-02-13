@@ -1,5 +1,5 @@
 @device-identifier-retrieveType
-Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveType
+Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
 
 # Input to be provided by the implementation to the tests
 # References to OAS spec schemas refer to schemas specified in /code/API_definitions/device-identifier.yaml
@@ -30,7 +30,7 @@ Feature: Camara Mobile Device Identifer API, v0.2.0-rc.1 - Operation: retrieveTy
 
   Background: Common Device Identifier retrieveIdentifier setup
     Given an environment at "apiRoot"
-    And the resource "/device-identifier/v0.2rc1/retrieve-type"
+    And the resource "/device-identifier/vwip/retrieve-type"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
