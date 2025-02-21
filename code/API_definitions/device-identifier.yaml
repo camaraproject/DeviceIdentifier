@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CAMARA Mobile Device Identifier
-  version: wip
+  version: 0.2.0
   description: |
     # Summary
 
@@ -29,7 +29,7 @@ info:
 
     The mobile network associates this device identifier with the mobile subscription currently using the device. The mobile subscription is defined by the Subscriber Identity Module (SIM) currently active in the mobile device. This may be a removable SIM or an eSIM. In either case, it is possible for the association between the device identifier and subscription to change - for example, when a physical SIM is transferred to another mobile device.
 
-    ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/documentation/API_documentation/resources/Device_Identifier_Overview.png)
+    ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.3/documentation/API_documentation/resources/Device_Identifier_Overview.png)
 
     The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one or more of the following subscription identifiers:
     - the subscription phone number (also known as MSISDN)
@@ -161,7 +161,7 @@ externalDocs:
   url: https://github.com/camaraproject/DeviceIdentifier
 
 servers:
-  - url: "{apiRoot}/device-identifier/vwip"
+  - url: "{apiRoot}/device-identifier/v0.2"
     variables:
       apiRoot:
         default: https://example.com:443
@@ -606,8 +606,8 @@ components:
         * `ipv6Address`
         * `phoneNumber`
         * `networkAccessIdentifier`
-        NOTE 1: the MNO might support only a subset of these options. The API invoker can provide multiple identifiers to be compatible across different MNOs. In this case the identifiers MUST belong to the same device.
-        NOTE 2: for the Commonalities release v0.4, we are enforcing that the networkAccessIdentifier is only part of the schema for future-proofing, and CAMARA does not currently allow its use. After the CAMARA meta-release work is concluded and the relevant issues are resolved, its use will need to be explicitly documented in the guidelines.
+        NOTE 1: The MNO might support only a subset of these options. The API invoker can provide multiple identifiers to be compatible across different MNOs. In this case the identifiers MUST belong to the same device.
+        NOTE 2: For the current Commonalities release, we are enforcing that the networkAccessIdentifier is only part of the schema for future-proofing, and CAMARA does not currently allow its use. After the CAMARA meta-release work is concluded and the relevant issues are resolved, its use will need to be explicitly documented in the guidelines.
       type: object
       properties:
         phoneNumber:
