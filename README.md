@@ -9,18 +9,18 @@
 
 # DeviceIdentifier
 
-Sandbox API Repository to describe, develop, document, and test the DeviceIdentifier Service API(s) within the Sub Project [DeviceIdentifier](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
+Sandbox API Repository to describe, develop, document, and test the DeviceIdentifier Service API within the Sub Project [DeviceIdentifier](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
 
 * API Repository wiki page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier
 * Sub Project home page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier
 
 ## Scope
 
-* Service API(s) “DeviceIdentifier” (see [APIBacklog](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md)) 
-* The API(s) provide(s) the API consumer with the ability to:  
+* Service API “DeviceIdentifier” (see [APIBacklog](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md)) 
+* The API provides the API consumer with the ability to:  
   * Retrieve the current identity (IMEI) of the mobile device being used by a given mobile subscriber
   * Retrieve the type (manufacturer and model) of the mobile device being used by a given mobile subscriber
-* Describe, develop, document, and test the API(s)
+* Describe, develop, document, and test the API
 * Started: October 2022
 
 
