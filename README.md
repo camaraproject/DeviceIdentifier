@@ -4,39 +4,37 @@
 <a href="https://github.com/camaraproject/DeviceIdentifier/graphs/contributors" title="Contributors"><img src="https://img.shields.io/github/contributors/camaraproject/DeviceIdentifier?style=plastic"></a>
 <a href="https://github.com/camaraproject/DeviceIdentifier" title="Repo Size"><img src="https://img.shields.io/github/repo-size/camaraproject/DeviceIdentifier?style=plastic"></a>
 <a href="https://github.com/camaraproject/DeviceIdentifier/blob/main/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=plastic"></a>
+<a href="https://github.com/camaraproject/DeviceIdentifier/releases/latest" title="Latest Release"><img src="https://img.shields.io/github/release/camaraproject/DeviceIdentifier?style=plastic"></a>
+<a href="https://github.com/camaraproject/Governance/blob/main/ProjectStructureAndRoles.md" title="Sandbox API Repository"><img src="https://img.shields.io/badge/Sandbox%20API%20Repository-yellow?style=plastic"></a>
 
 # DeviceIdentifier
-Repository to describe, develop, document and test the Device Identifier API family
+
+Sandbox API Repository to describe, develop, document, and test the DeviceIdentifier Service API(s) within the Sub Project [DeviceIdentifier](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
+
+* API Repository wiki page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier
+* Sub Project home page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier
 
 ## Scope
-* Service APIs for “Device Identifier API” (see [API Backlog](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md))
-* It provides the customer with the ability to:
+
+* Service API(s) “DeviceIdentifier” (see [APIBacklog](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md)) 
+* The API(s) provide(s) the API consumer with the ability to:  
   * Retrieve the current identity (IMEI) of the mobile device being used by a given mobile subscriber
   * Retrieve the type (manufacturer and model) of the mobile device being used by a given mobile subscriber
-* Describe, develop, document and test the APIs (with 1-2 Service Providers)  
+* Describe, develop, document, and test the API(s)
 * Started: October 2022
 
-## Project Wiki
-* The project wiki can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
-
-## Meetings
-* Schedule: First Friday of each month at 09:00 UTC via Linux Foundation Zoom service
- * Meeting invite can be found [here](https://zoom-lfx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06-450f-b80a-229bb6a88c39)
- * Meeting minutes can be found [here](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
 
 ## Release Information
 
-* Note: Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest public release**.
+The latest public release is available here: https://github.com/camaraproject/DeviceIdentifier/releases/latest
 
-* **The latest public pre-release is [r1.2](https://github.com/camaraproject/DeviceIdentifier/tree/r1.2) with the following API definitions:**
+For changes see [CHANGELOG.md](https://github.com/camaraproject/DeviceIdentifier/blob/main/CHANGELOG.md)
 
-  * **device-identifier v0.2.0-rc.1**  
-  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r1.2/code/API_definitions/device-identifier.yaml)
-  [[View it on ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/code/API_definitions/device-identifier.yaml&nocors)
-  [[View it on Swagger Editor]](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/code/API_definitions/device-identifier.yaml)
-
-- Current work-in-progress version is available within the [main branch](https://github.com/camaraproject/DeviceIdentifier)
-
-## Contributorship and Mailing List
-* To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-dvi>.
-* A message to all Contributors of this Sub Project can be sent using <sp-dvi@lists.camaraproject.org>.
+## Contributing
+* Meetings are held virtually
+    * Schedule: First Friday of each month at 09:00 UTC via Linux Foundation Zoom service
+    * [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06-450f-b80a-229bb6a88c39) 
+    * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
+* Mailing List
+    * Subscribe / Unsubscribe to the mailing list [https://lists.camaraproject.org/g/sp-dvi](https://lists.camaraproject.org/g/sp-dvi) .
+    * A message to the community of this Sub Project can be sent using [sp-dvi@lists.camaraproject.org](mailto:sp-dvi@lists.camaraproject.org).
