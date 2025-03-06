@@ -5,7 +5,7 @@ Checklist for device-identifier v0.2.0 in r1.3.
 | Nr | API release assets  | alpha | release-candidate |  initial<br>public | stable<br> public | Status  | Reference information |
 |----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:-------------------------------------------------------------------------------:|
 |  1 | API definition                               |   M   |         M         |    M    |    M   |  Y   | [device-identifier.yaml](/code/API_definitions/device-identifier.yaml)          |
-|  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |  Y   | r2.3 v0.5.0                                                                     |
+|  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |  Y   | [r2.3](https://github.com/camaraproject/Commonalities/releases/tag/r2.3)                                                                      |
 |  3 | Guidelines from ICM applied                  |   O   |         M         |    M    |    M   |  Y   | r2.3 v0.3.0                                                                     |
 |  4 | API versioning convention applied            |   M   |         M         |    M    |    M   |  Y   | v0.2.0                                                                          |
 |  5 | API documentation                            |   M   |         M         |    M    |    M   |  Y   | [API Readiness Checklist device-identifier.md](/documentation/API_documentation/API%20Readiness%20Checklist%20device-identifier.md) |
