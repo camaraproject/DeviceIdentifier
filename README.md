@@ -9,10 +9,9 @@
 
 # DeviceIdentifier
 
-Sandbox API Repository to describe, develop, document, and test the DeviceIdentifier Service API within the Sub Project [DeviceIdentifier](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
+Sandbox API Repository to describe, develop, document, and test the DeviceIdentifier Service API
 
-* API Repository wiki page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier
-* Sub Project home page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier
+API Repository wiki page: [https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14561907/DeviceIdentifier)
 
 ## Scope
 
