@@ -65,7 +65,7 @@ info:
     - `POST /retrieve-type` to get details only about the type (i.e. manufacturer and model) of device being used by a given mobile subscriber
     - `POST /retrieve-ppid` to get a pseudonymised identifier for the specific device being used by a given mobile subscriber
 
-    To call either of these endpoints, the API consumer must first obtain a valid access token from the token endpoint, which is then passed as an Authorization header. When a 2-legged access token is used, the API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
+    To call any of these endpoints, the API consumer must first obtain a valid access token from the token endpoint, which is then passed as an Authorization header. When a 2-legged access token is used, the API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
     If the request is valid, the API response is a JSON object containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
