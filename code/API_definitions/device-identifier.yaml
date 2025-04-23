@@ -7,6 +7,7 @@ info:
 
     The Mobile Device Identifier API returns details of the physical mobile device currently being used by a specified mobile subscriber. The following information can be returned:
      - A unique network identifier for the specific device itself (IMEI SV and IMEI)
+     - A pseudonymised network identifier for the specific device itself (Pairwise Pseudonymous Identifier)
      - A network identifier for the device make and model (IMEI Type Allocation Code)
      - Device manufacturer name and model
 
@@ -36,7 +37,7 @@ info:
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
 
-    The API can be called by an API consumer to establish the identifier of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
+    The API can be called by an API consumer to establish an identifier for the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
 
     # Relevant terms and definitions
 
@@ -50,20 +51,28 @@ info:
       - IPv6 address
       - IPv4 address
 
+    ### Identifier for the physical mobile device
+    The IMEI or IMEISV of the physical mobile device
+
+    ### Pairwise Pseudonymous Identifier
+    An identifier that has been pseudonymised such that the resulting pseudonymous identifier is unique to but persistent for a given API consumer
+
     # API functionality
 
-    The API defines two service endpoints:
+    The API defines three service endpoints:
 
     - `POST /retrieve-identifier` to get details about the specific device being used by a given mobile subscriber, including IMEI / IMEISV and the type of device
     - `POST /retrieve-type` to get details only about the type (i.e. manufacturer and model) of device being used by a given mobile subscriber
+    - `POST /retrieve-ppid` to get a pseudonymised identifier for the specific device being used by a given mobile subscriber
 
     To call either of these endpoints, the API consumer must first obtain a valid access token from the token endpoint, which is then passed as an Authorization header. When a 2-legged access token is used, the API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
     If the request is valid, the API response is a JSON object containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
+    - When calling endpoint `retrieve-ppid`, the response will always contain `ppid`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
-    - Other response parameters are implementation dependent
+    - Other response parameters are implementation dependent, and thus optional
 
     An example of a JSON response object is as follows:
     ```
