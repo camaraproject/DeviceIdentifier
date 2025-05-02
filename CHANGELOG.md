@@ -1,10 +1,113 @@
-# Changelog DeviceIdentifier
+# Device Identifier Changelog
+> **Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until it has been released. For example, changes may be reverted before a release is published.
+For the best results, use the latest published release.**
 
 ## Table of Contents
-- **[r1.1](#r11)**
+- **[r1.3](#r13)**
+- [r1.2](#r12)
+- [r1.1](#r11)
 - [v0.1.0](#v010)
 
-**Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until it has been released. For example, changes may be reverted before a release is published. For the best results, use the latest published release.**
+The below sections record the changes for each API version in each release as follows:
+
+* for an alpha release, the delta with respect to the previous release
+* for the first release-candidate, all changes since the last public release
+* for subsequent release-candidate(s), only the delta to the previous release-candidate
+* for a public release, the consolidated changes since the previous public release
+
+# r1.3
+## Release Notes
+
+This public release contains the definition and documentation of
+* device-identifier v0.2.0
+
+The API definition(s) are based on
+* Commonalities 0.5.0
+* Identity and Consent Management v0.3.0
+
+## device-identifier v0.2.0
+
+**There are breaking changes compared to v0.1.0**
+
+- API definition **with inline documentation**:
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.3/code/API_definitions/device-identifier.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.3/code/API_definitions/device-identifier.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r1.3/code/API_definitions/device-identifier.yaml)
+
+### Added
+* Create Device Identifier User Story.md by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/59
+* Add EUDI Wallet and Mobile Device Insurance User Stories by @AxelNennker in https://github.com/camaraproject/DeviceIdentifier/pull/73
+* Initial Test Definitions for DeviceIdentifier retrieve identifier by @AxelNennker in https://github.com/camaraproject/DeviceIdentifier/pull/72
+* Add global tag definitions to OAS definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/83
+
+### Changed
+* Use identifier instead of identity by @AxelNennker in https://github.com/camaraproject/DeviceIdentifier/pull/90
+* Update LastChecked description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/88
+* Update Device object handling and description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/87
+* Update error response schema following Commonalities update by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/91
+* Update test cases for meta-release by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/93
+* Rename `X-Correlator` header to `x-correlator` by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/62
+* Incorporate Commonalities WG recommendations on Simplification of Device object by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/64
+* Reduce telco language in the API description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/77
+* Rewrite text around treatment of primary / secondary MSISDN by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/76
+* Update `info` section of OAS to comply with Commonalities guidelines v0.4.0 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/66
+* Rename CAMARA Mobile Device Identifier API.yaml to device-identifier.yaml by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/84
+
+### Fixed
+* Fixes the missing `required` property in the the error response schema by @sfnuser in https://github.com/camaraproject/DeviceIdentifier/pull/75
+* Remove `format: uuid` from x-correlator definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/67
+
+### Removed
+* Remove 405 error response from YAML by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/81
+
+**Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/device-identifier-0.1.0...r1.3
+
+# r1.2
+## Release Notes
+
+This pre-release contains the definition and documentation of
+* device-identifier v0.2.0-rc.1
+
+The API definition(s) are based on
+* Commonalities 0.5.0-rc.1
+* Identity and Consent Management v0.3.0-rc.1
+
+## device-identifier v0.2.0-rc.1
+
+Version 0.2.0-rc.1 contains many small changes for compliance with Commonalities v0.5.0-rc.1 and Identity and Consent Management v0.3.0-rc.1. **There are breaking changes compared to v0.2.0-alpha.1.**
+
+- API definition **with inline documentation**:
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/code/API_definitions/device-identifier.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r1.2/code/API_definitions/device-identifier.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r1.2/code/API_definitions/device-identifier.yaml)
+
+### Added
+* Create Device Identifier User Story.md by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/59
+* Add EUDI Wallet and Mobile Device Insurance User Stories by @AxelNennker in https://github.com/camaraproject/DeviceIdentifier/pull/73
+* Initial Test Definitions for DeviceIdentifier retrieve identifier by @AxelNennker in https://github.com/camaraproject/DeviceIdentifier/pull/72
+* Add global tag definitions to OAS definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/83
+
+### Changed
+* Use identifier instead of identity by @AxelNennker in https://github.com/camaraproject/DeviceIdentifier/pull/90
+* Update LastChecked description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/88
+* Update Device object handling and description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/87
+* Update error response schema following Commonalities update by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/91
+* Update test cases for meta-release by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/93
+* Rename `X-Correlator` header to `x-correlator` by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/62
+* Incorporate Commonalities WG recommendations on Simplification of Device object by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/64
+* Reduce telco language in the API description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/77
+* Rewrite text around treatment of primary / secondary MSISDN by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/76
+* Update `info` section of OAS to comply with Commonalities guidelines v0.4.0 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/66
+* Rename CAMARA Mobile Device Identifier API.yaml to device-identifier.yaml by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/84
+
+### Fixed
+* Fixes the missing `required` property in the the error response schema by @sfnuser in https://github.com/camaraproject/DeviceIdentifier/pull/75
+* Remove `format: uuid` from x-correlator definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/67
+
+### Removed
+* Remove 405 error response from YAML by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/81
+
+**Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/device-identifier-0.1.0...r1.2
 
 # r1.1
 ## Release Notes

@@ -18,7 +18,7 @@ info:
 
     # Introduction
 
-    Mobile devices are allocated a unique identity by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identity is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
+    Mobile devices are allocated a unique identifier by the manufacturer, known as the International Mobile Equipment Identity, or IMEI. The current software version (SV) of the device can be appended to this, in which case the identifier is known as the IMEI SV. This identifier is signalled to the mobile network when the device connects, both to confirm that the device is not blocked, and also allow device dependent network configurations to be implemented.
 
     The IMEI is a 15 digit integer, and the IMEI SV is a 16 digit integer:
     - The first 8 digits are known as the Type Allocation Code (TAC), and identify the manufacturer and model of the device
@@ -40,7 +40,7 @@ info:
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
     - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
 
-    The API can be called by an API consumer to establish the identity of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
+    The API can be called by an API consumer to establish the identifier of the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
 
     # Relevant terms and definitions
 
@@ -54,36 +54,6 @@ info:
       - IPv6 address
       - IPv4 address
 
-    In scenarios where a main phone number is shared between multiple devices, each of which has its own individual "secondary" phone number (e.g. connectivity plans that let you share your airtime and data allowances with a smartwatch or eSIM-enabled tablet), the phone number passed by the API consumer will be treated as the secondary phone number, and hence the identifier returned will be that of the single device associated with that phone number (e.g. smartphone, smartwatch, or eSIM-enabled tablet). In such scenarios, the "primary" device is usually allocated the same main and secondary phone numbers, and hence providing the main phone number to the API will return the identity of the primary device (usually the smartphone) and not any associated devices.
-
-    ### Authorization and authentication
-
-    The "Camara Security and Interoperability Profile" provides details on how a client requests an access token. Please refer to Identify and Consent Management (https://github.com/camaraproject/IdentityAndConsentManagement/) for the released version of the Profile.
-
-    Which specific authorization flows are to be used will be determined during onboarding process, happening between the API Client and the Telco Operator exposing the API, taking into account the declared purpose for accessing the API, while also being subject to the prevailing legal framework dictated by local legislation.
-
-    It is important to remark that in cases where personal user data is processed by the API, and users can exercise their rights through mechanisms such as opt-in and/or opt-out, the use of 3-legged access tokens becomes mandatory. This measure ensures that the API remains in strict compliance with user privacy preferences and regulatory obligations, upholding the principles of transparency and user-centric data control.
-
-    ## Handling of mobile subscription information:
-
-    ### Optional mobile subscription identifiers for 3-legged tokens:
-
-    - When using a 3-legged access token, the mobile subscription identifier associated with the access token must be considered as the mobile subscription identifier for the API request. This means that no mobile subscription identifiers are required in the request, and if included it must identify the same subscription. Hence **it is recommended NOT to include it in these scenarios** to simplify the API usage and avoid additional validations.
-
-    ### Validation mechanism:
-
-    - The API server will determine the mobile subscription identifier (e.g. phone number) from the access token itself if that information is associated with it (i.e. 3-legged token).
-    - If the API request itself additionally includes one or more mobile subscription identifiers when using a 3-legged access token, the API will validate that the identifier(s) provided matches the one associated with the access token.
-    - If there is a mismatch, the API will respond with a `403 INVALID_TOKEN_CONTEXT` error, indicating that the mobile subscription information in the request does not match the token.
-
-    ### Error handling for unidentifiable devices:
-
-    - If no mobile subscription information is included in the request and the mobile subscription information cannot be derived from the 3-legged access token, the server will return a `422 UNIDENTIFIABLE_DEVICE` error.
-
-    ### Restrictions for tokens without an associated authenticated identifier:
-
-    - For scenarios which do not have a mobile subscription identifier associated to the token during the authentication flow, e.g. 2-legged access tokens, mobile subscription identifiers MUST be provided in the API request. This ensures that the mobile subscription identifier is explicit and valid for each API call made with these tokens.
-
     # API functionality
 
     The API defines two service endpoints:
@@ -91,19 +61,9 @@ info:
     - `POST /retrieve-identifier` to get details about the specific device being used by a given mobile subscriber, including IMEI / IMEISV and the type of device
     - `POST /retrieve-type` to get details only about the type (i.e. manufacturer and model) of device being used by a given mobile subscriber
 
-    To call either of these endpoints, the API consumer must first obtain a valid OAuth2 token from the token endpoint, which is then passed as an Authorization header. The API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
+    To call either of these endpoints, the API consumer must first obtain a valid access token from the token endpoint, which is then passed as an Authorization header. When a 2-legged access token is used, the API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
-    Not all possible mobile subscription identifiers may be valid for a given network or implementation, and hence the API consumer should provide as many identifiers as are known to them. If the API consumer provides identifiers for different mobile subscriptions, the API may return an error, or it may take each identifier provided in the order specified above until it finds a valid subscription identifier.
-
-    If the authentication token is not valid, a `401 UNAUTHENTICATED` error is returned
-
-    If the mobile subscription parameters contain a formatting error, a `400 INVALID_ARGUMENT` error is returned.
-
-    If the mobile subscription cannot be identified from the provided parameters, a `404 DEVICE_NOT_FOUND` error is returned.
-
-    If the end user has not consented to the API consumer getting access to the device identifier information, then a `403 PERMISSION_DENIED` error is returned.
-
-    Otherwise, a JSON object is returned containing the data that the end user has consented to sharing with the API consumer.
+    If the request is valid, the API response is a JSON object containing the data that the end user has consented to sharing with the API consumer.
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
@@ -121,14 +81,84 @@ info:
     }
     ```
 
+    ## Error handling
+
+    Errors may be returned for the following reasons. Note that this list is not exhaustive.
+
+    `401 UNAUTHENTICATED`or `401 AUTHENTICATION_REQUIRED`:
+    - The access token is not a valid access token for the API provider
+    - The access token was valid but has now expired
+
+    `400 INVALID_ARGUMENT`:
+    - The API request is not compliant with this OAS definition
+
+    `400 OUT_OF_RANGE`:
+    - A parameter value in the API request is outwith the range documented in this OAS definition for that parameter
+
+    `404 IDENTIFIER_NOT_FOUND`:
+    - The device identified by the `device` object in the request is not managed by the API provider
+
+    `403 PERMISSION_DENIED`:
+    - The access token does not have the required scope for the endpoint being called
+    - The end user has not consented to the API consumer getting access to the device identifier information (2-legged access token only)
+
+    `422 IDENTIFIER_MISMATCH`:
+    - Multiple parameters have been provided in the `device` object, and these do not identify the same device
+
+    `422 SERVICE_NOT_APPLICABLE`:
+    - A device identifier cannot be provided for the identified device. For example, the phone number might identify a landline.
+
+    `422 UNSUPPORTED_IDENTIFIER`:
+    - A parameter provided in the `device` object is not supported by this implementation (e.g. `networkAccessIdentifier`)
+
+    `422 MISSING_IDENTIFIER`:
+    `422 UNNECESSARY_IDENTIFIER`:
+    - See the section "Identifying the device from the access token" below
+
+    `429 QUOTA_EXCEEDED`:
+    - The API consumer has used up the quota of API requests that they were allocated for this API
+
+    `429 TOO_MANY_REQUESTS`:
+    - The rate at which the API consumer is sending requests has exceeded that allowed by the API provider. Try again later.
+
+    Other errors may be returned by implementations. These will have their usual meaning for the associated HTTP status codes.
+
     # Further info and support
+
+    ## Authorization and authentication
+
+    The "Camara Security and Interoperability Profile" provides details of how an API consumer requests an access token. Please refer to Identity and Consent Management (https://github.com/camaraproject/IdentityAndConsentManagement/) for the released version of the profile.
+
+    The specific authorization flows to be used will be agreed upon during the onboarding process, happening between the API consumer and the API provider, taking into account the declared purpose for accessing the API, whilst also being subject to the prevailing legal framework dictated by local legislation.
+
+    In cases where personal data is processed by the API and users can exercise their rights through mechanisms such as opt-in and/or opt-out, the use of three-legged access tokens is mandatory. This ensures that the API remains in compliance with privacy regulations, upholding the principles of transparency and user-centric privacy-by-design.
+
+    ## Identifying the device from the access token
+
+    This API requires the API consumer to identify a device as the subject of the API as follows:
+    - When the API is invoked using a two-legged access token, the subject will be identified from the optional `device` object, which therefore MUST be provided.
+
+    - When a three-legged access token is used however, this optional identifier MUST NOT be provided, as the subject will be uniquely identified from the access token.
+
+    This approach simplifies API usage for API consumers using a three-legged access token to invoke the API by relying on the information that is associated with the access token and was identified during the authentication process.
+
+    ### Error handling:
+    - If the subject cannot be identified from the access token and the optional `device` object is not included in the request, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
+
+    - If the subject can be identified from the access token and the optional `device` object is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same device is identified by these two methods, as the server is unable to make this comparison.
+
+    ## Multi-SIM scenario handling
+
+    In scenarios where a main phone number is shared between multiple devices, each of which has its own individual "secondary" phone number (e.g. connectivity plans that let you share your airtime and data allowances with a smartwatch or eSIM-enabled tablet), the phone number passed by the API consumer will be treated as the secondary phone number, and hence the identifier returned will be that of the single device associated with that phone number (e.g. smartphone, smartwatch, or eSIM-enabled tablet).
+
+    In such scenarios, the "primary" device is usually allocated the same main and secondary phone numbers, and hence providing the main phone number to the API will return the identity of the primary device (usually the smartphone) and not any associated devices.
 
     (FAQs will be added in a later version of the documentation)
 
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  x-camara-commonalities: 0.4.0
+  x-camara-commonalities: 0.5
 
 externalDocs:
   description: Product documentation at CAMARA
@@ -138,7 +168,7 @@ servers:
   - url: "{apiRoot}/device-identifier/vwip"
     variables:
       apiRoot:
-        default: https://localhost:443
+        default: https://example.com:443
         description: API root, to be defined by the service provider
 
 tags:
@@ -177,11 +207,20 @@ paths:
 
       requestBody:
         description: Parameters to create a new session
-        required: false
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/RequestBody"
+            examples:
+              Identify Device By 3-Legged Access Token:
+                $ref: '#/components/examples/IdentifyDeviceBy3LeggedToken'
+              Identify Device By Phone Number:
+                $ref: '#/components/examples/IdentifyDeviceByPhoneNumber'
+              Identify Device By IP Address:
+                $ref: '#/components/examples/IdentifyDeviceByIPAddress'
+              Identify Device By Multiple Identifiers:
+                $ref: '#/components/examples/IdentifyDeviceByMultipleIdentifiers'
 
       responses:
         "200":
@@ -194,20 +233,10 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "406":
-          $ref: '#/components/responses/406Unacceptable'
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
-        "500":
-          $ref: '#/components/responses/500InternalServerError'
-        "502":
-          $ref: '#/components/responses/502BadGateway'
-        "503":
-          $ref: '#/components/responses/503ServiceUnavailable'
-        "504":
-          $ref: '#/components/responses/504GatewayTimeout'
 
   "/retrieve-type":
     post:
@@ -227,14 +256,25 @@ paths:
           required: false
           schema:
             type: string
+            pattern: "^[a-zA-Z0-9-]{0,55}$"
+            example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
       requestBody:
         description: Parameters to create a new session
-        required: false
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/RequestBody"
+            examples:
+              Identify Device By 3-Legged Access Token:
+                $ref: '#/components/examples/IdentifyDeviceBy3LeggedToken'
+              Identify Device By Phone Number:
+                $ref: '#/components/examples/IdentifyDeviceByPhoneNumber'
+              Identify Device By IP Address:
+                $ref: '#/components/examples/IdentifyDeviceByIPAddress'
+              Identify Device By Multiple Identifiers:
+                $ref: '#/components/examples/IdentifyDeviceByMultipleIdentifiers'
 
       responses:
         "200":
@@ -247,24 +287,15 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         "404":
           $ref: '#/components/responses/404NotFound'
-        "406":
-          $ref: '#/components/responses/406Unacceptable'
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
           $ref: '#/components/responses/429TooManyRequests'
-        "500":
-          $ref: '#/components/responses/500InternalServerError'
-        "502":
-          $ref: '#/components/responses/502BadGateway'
-        "503":
-          $ref: '#/components/responses/503ServiceUnavailable'
-        "504":
-          $ref: '#/components/responses/504GatewayTimeout'
 
 components:
   securitySchemes:
     openId:
+      description: Common security scheme for all CAMARA APIs
       type: openIdConnect
       openIdConnectUrl: .well-known/openid-configuration
 
@@ -274,6 +305,8 @@ components:
       required: false
       schema:
         type: string
+        pattern: "^[a-zA-Z0-9-]{0,55}$"
+        example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
   responses:
     200RetrieveIdentifier:
@@ -314,41 +347,51 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 400
+                  code:
+                    enum:
+                      - INVALID_ARGUMENT
+                      - OUT_OF_RANGE
           examples:
-            InsufficientParameters:
+            Insufficient Parameters:
               description: Sufficient parameters must be provided to allow the target UE to be identified
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "At least one of phoneNumber, networkAccessIdentifier, ipv4Address and ipv6Address must be specified"
-            InconsistentDeviceProperties:
+            Inconsistent Device Properties:
               description: Device parameters provided identify different devices
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Multiple inconsistent device parameters specified"
-            InvalidExternalId:
+            Invalid Network Access Identifier:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: networkAccessIdentifier"
-            InvalidMSISDN:
+            Invalid Phone Number:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: phoneNumber"
-            InvalidIPv4:
+            Invalid IPv4 Address:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: ipv4Address"
-            InvalidIPv6:
+            Invalid IPv6 Address:
               value:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "Invalid format: ipv6Address"
-            InvalidPort:
+            Invalid Port Value:
               value:
                 status: 400
                 code: OUT_OF_RANGE
@@ -362,20 +405,30 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 401
+                  code:
+                    enum:
+                      - UNAUTHENTICATED
+                      - AUTHENTICATION_REQUIRED
           examples:
-            GENERIC_401_UNAUTHENTICATED:
-              description: Request cannot be authenticated
+            Unauthenticated Request:
+              description: The request cannot be authenticated, as the access token is missing, not a valid token, or has been revoked
               value:
                 status: 401
                 code: UNAUTHENTICATED
                 message: Request not authenticated due to missing, invalid, or expired credentials.
-            GENERIC_401_AUTHENTICATION_REQUIRED:
-              description: New authentication is needed, authentication is no longer valid
+            Re-Authentication Required:
+              description: A new authentication is needed, as the access token has expired
               value:
                 status: 401
                 code: AUTHENTICATION_REQUIRED
-                message: New authentication is required.
+                message: A new authentication is needed, as the access token has expired.
 
     403Forbidden:
       description: Forbidden
@@ -385,20 +438,23 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 403
+                  code:
+                    enum:
+                      - PERMISSION_DENIED
           examples:
-            GENERIC_403_PERMISSION_DENIED:
+            Permision Denied:
               description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
               value:
                 status: 403
                 code: PERMISSION_DENIED
                 message: Client does not have sufficient permissions to perform this action.
-            GENERIC_403_INVALID_TOKEN_CONTEXT:
-              description: Reflect some inconsistency between information in some field of the API and the related OAuth2 Token
-              value:
-                status: 403
-                code: INVALID_TOKEN_CONTEXT
-                message: "{{field}} is not consistent with access token."
 
     404NotFound:
       description: Not found
@@ -408,37 +464,23 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 404
+                  code:
+                    enum:
+                      - IDENTIFIER_NOT_FOUND
           examples:
-            GENERIC_404_NOT_FOUND:
-              description: Resource is not found
+            Device Cannot Be Found:
+              description: The provided identifier cannot be matched to a device known to the API provider
               value:
                 status: 404
-                code: NOT_FOUND
-                message: The specified resource is not found.
-            GENERIC_404_DEVICE_NOT_FOUND:
-              description: Device identifier not found
-              value:
-                status: 404
-                code: DEVICE_NOT_FOUND
-                message: Device identifier not found.
-
-    406Unacceptable:
-      description: Not Acceptable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            NotAcceptable:
-              description: A response format other than JSON has been requested
-              value:
-                status: 406
-                code: NOT_ACCEPTABLE
-                message: "The server cannot produce a response matching the content requested by the client through Accept-* headers"
+                code: IDENTIFIER_NOT_FOUND
+                message: The provided identifier cannot be matched to a device.
 
     422UnprocessableContent:
       description: Unprocessable Content
@@ -448,20 +490,51 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 422
+                  code:
+                    enum:
+                      - IDENTIFIER_MISMATCH
+                      - SERVICE_NOT_APPLICABLE
+                      - MISSING_IDENTIFIER
+                      - UNSUPPORTED_IDENTIFIER
+                      - UNNECESSARY_IDENTIFIER
           examples:
-            GENERIC_422_DEVICE_IDENTIFIERS_MISMATCH:
-              description: Inconsistency between device identifiers not pointing to the same device
+            Identifiers Do Not Match:
+              description: Multiple identifiers provided which do not all identify the same device
               value:
                 status: 422
-                code: DEVICE_IDENTIFIERS_MISMATCH
-                message: Provided device identifiers are not consistent.
-            GENERIC_422_DEVICE_NOT_APPLICABLE:
-              description: Service is not available for the provided device
+                code: IDENTIFIER_MISMATCH
+                message: Provided identifiers are not consistent.
+            Service Not Applicable For Device:
+              description: The service is not applicable for the identified device
               value:
                 status: 422
-                code: DEVICE_NOT_APPLICABLE
-                message: The service is not available for the provided device.
+                code: SERVICE_NOT_APPLICABLE
+                message: The service is not applicable for the identified device.
+            Unsupported Identifier:
+              description: None of the provided identifiers is supported by the implementation
+              value:
+                status: 422
+                code: UNSUPPORTED_IDENTIFIER
+                message: None of the provided identifiers is supported by the implementation.
+            Unnecessary Identifier:
+              description: An explicit identifier has been provided for the device when this is already identified by the access token
+              value:
+                status: 422
+                code: UNNECESSARY_IDENTIFIER
+                message: An explicit identifier has been provided for the device when this is already identified by the access token
+            Missing Identifier:
+              description: An identifier is not included in the request and the device cannot be identified from the 2-legged access token
+              value:
+                status: 422
+                code: MISSING_IDENTIFIER
+                message: An identifier is not included in the request and the device cannot be identified from the 2-legged access token
 
     429TooManyRequests:
       description: Too Many Requests
@@ -471,78 +544,37 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 429
+                  code:
+                    enum:
+                      - QUOTA_EXCEEDED
+                      - TOO_MANY_REQUESTS
           examples:
-            TooManyRequests:
+            Too Many Requests:
               description: Access to the API has been temporarily blocked due to quota or spike arrest limits being reached
               value:
                 status: 429
                 code: TOO_MANY_REQUESTS
-                message: "Either out of resource quota or reaching rate limiting"
-
-    500InternalServerError:
-      description: Internal Server Error
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 500
-            code: INTERNAL
-            message: "The service is currently not available"
-
-    502BadGateway:
-      description: Bad Gateway
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 502
-            code: BAD_GATEWAY
-            message: "The service is currently not available"
-
-    503ServiceUnavailable:
-      description: Service Unavailable
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 503
-            code: UNAVAILABLE
-            message: "The service is currently not available"
-
-    504GatewayTimeout:
-      description: Gateway Time-Out
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/X-Correlator"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            status: 504
-            code: TIMEOUT
-            message: "The service is currently not available"
-
+                message: Rate limit reached
+            Quota Exceeded:
+              description: Request is rejected due to exceeding a business quota limit
+              value:
+                status: 429
+                code: QUOTA_EXCEEDED
+                message: Out of resource quota
   schemas:
     LastChecked:
       description: |
-        Last time that the associated device identity was checked and, if necessary, updated
+        The last time that the information returned (e.g. IMEI) was confirmed to be correct by the mobile operator for the provided identifier (e.g. phone number)
       properties:
         lastChecked:
-          description: Date and time information was last checked
+          description: Date and time that the information was last confirmed by the mobile operator to be correct
           type: string
           format: date-time
           example: "2024-02-20T10:41:38.657Z"
@@ -591,8 +623,8 @@ components:
         * `ipv6Address`
         * `phoneNumber`
         * `networkAccessIdentifier`
-        NOTE 1: the MNO might support only a subset of these options. The API invoker can provide multiple identifiers to be compatible across different MNOs. In this case the identifiers MUST belong to the same device.
-        NOTE 2: for the Commonalities release v0.4, we are enforcing that the networkAccessIdentifier is only part of the schema for future-proofing, and CAMARA does not currently allow its use. After the CAMARA meta-release work is concluded and the relevant issues are resolved, its use will need to be explicitly documented in the guidelines.
+        NOTE 1: The MNO might support only a subset of these options. The API invoker can provide multiple identifiers to be compatible across different MNOs. In this case the identifiers MUST belong to the same device.
+        NOTE 2: For the current Commonalities release, we are enforcing that the networkAccessIdentifier is only part of the schema for future-proofing, and CAMARA does not currently allow its use. After the CAMARA meta-release work is concluded and the relevant issues are resolved, its use will need to be explicitly documented in the guidelines.
       type: object
       properties:
         phoneNumber:
@@ -631,7 +663,8 @@ components:
           "publicPort": 59765
         }
 
-    ErrorResponse:
+    ErrorInfo:
+      description: Common CAMARA error response object
       type: object
       properties:
         code:
@@ -665,6 +698,13 @@ components:
       minimum: 1024
       maximum: 65535
 
+    RequestBody:
+      description: Common request body to allow optional Device object to be passed
+      type: object
+      properties:
+        device:
+          $ref: "#/components/schemas/Device"
+
     SingleIpv4Addr:
       description: A single IPv4 address with no subnet mask
       type: string
@@ -677,3 +717,33 @@ components:
       type: string
       format: ipv6
       example: 2001:db8:85a3:8d3:1319:8a2e:370:7344
+
+  examples:
+    IdentifyDeviceBy3LeggedToken:
+      description: Empty JSON when device is identified by access token
+      value:
+        {}
+
+    IdentifyDeviceByPhoneNumber:
+      description: Identifying device by phone number
+      value:
+        device:
+          phoneNumber: "+123456789"
+
+    IdentifyDeviceByIPAddress:
+      description: Identifying device by IP address
+      value:
+        device:
+          ipv4Address:
+            publicAddress: "84.125.93.10"
+            publicPort: 59765
+
+    IdentifyDeviceByMultipleIdentifiers:
+      description: Identifying device by multiple device identifiers
+      value:
+        device:
+          phoneNumber: "+123456789"
+          ipv4Address:
+            publicAddress: "84.125.93.10"
+            publicPort: 59765
+          networkAccessIdentifier: "123456789@domain.com"
