@@ -81,7 +81,7 @@ info:
 
     Errors may be returned for the following reasons. Note that this list is not exhaustive.
 
-    `401 UNAUTHENTICATED`or `401 AUTHENTICATION_REQUIRED`:
+    `401 UNAUTHENTICATED`:
     - The access token is not a valid access token for the API provider
     - The access token was valid but has now expired
 
@@ -402,20 +402,13 @@ components:
                   code:
                     enum:
                       - UNAUTHENTICATED
-                      - AUTHENTICATION_REQUIRED
           examples:
             Unauthenticated Request:
-              description: The request cannot be authenticated, as the access token is missing, not a valid token, or has been revoked
+              description: Request cannot be authenticated and a new authentication is required
               value:
                 status: 401
                 code: UNAUTHENTICATED
-                message: Request not authenticated due to missing, invalid, or expired credentials.
-            Re-Authentication Required:
-              description: A new authentication is needed, as the access token has expired
-              value:
-                status: 401
-                code: AUTHENTICATION_REQUIRED
-                message: A new authentication is needed, as the access token has expired.
+                message: Request not authenticated due to missing, invalid, or expired credentials. A new authentication is required.
 
     403Forbidden:
       description: Forbidden
