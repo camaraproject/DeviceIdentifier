@@ -311,19 +311,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
       And the response property "$.code" is "UNSUPPORTED_IDENTIFIER"
       And the response property "$.message" contains a user friendly text
 
-  @DeviceIdentifier_retrieveIdentifier_422.2_device_identifiers_mismatch
-  Scenario: Device identifiers mismatch
-      Given that at least 2 types of device identifiers are supported by the implementation
-      And the request body property "$.device" includes several identifiers, each of them identifying a valid but different device
-      When the request "retrieveIdentifier" is sent
-      Then the response status code is 422
-      And the response header "x-correlator" has same value as the request header "x-correlator"
-      And the response header "Content-Type" is "application/json"
-      And the response property "$.status" is 422
-      And the response property "$.code" is "IDENTIFIER_MISMATCH"
-      And the response property "$.message" contains a user friendly text
-
-    @DeviceIdentifier_retrieveIdentifier_422.3_device_not_supported
+    @DeviceIdentifier_retrieveIdentifier_422.2_device_not_supported
     Scenario: Service not available for the device
         Given that service is not supported for all devices commercialized by the operator
         And the service is not applicable for the device identified by the token or provided in the request body
@@ -336,7 +324,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
         And the response property "$.message" contains a user friendly text
 
     # Typically with a 2-legged access token
-    @DeviceIdentifier_retrieveIdentifier_422.4_unidentifiable_device
+    @DeviceIdentifier_retrieveIdentifier_422.3_unidentifiable_device
     Scenario: Device not included and cannot be deduced from the access token
         Given the header "Authorization" is set to a valid access token which does not identify a device
         And the request body property "$.device" is not included
@@ -349,7 +337,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
         And the response property "$.message" contains a user friendly text
 
     # Typically with a 3-legged access token
-    @DeviceIdentifier_retrieveIdentifier_422.5_device_token_mismatch
+    @DeviceIdentifier_retrieveIdentifier_422.4_device_token_mismatch
     Scenario: Inconsistent access token context for the device
         # To test this, a token has to be obtained for a different device
         Given the request body property "$.device" is set to a valid testing device
@@ -363,7 +351,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
         And the response property "$.message" contains a user friendly text
 
     # Typically with a 3-legged access token
-    @DeviceIdentifier_retrieveIdentifier_422.6_unnecessary_device_identifier_in_request
+    @DeviceIdentifier_retrieveIdentifier_422.5_unnecessary_device_identifier_in_request
     Scenario: Explicit device identifier provided when device is identified by the access token
         Given the request body property "$.device" is set to a valid testing device
         And the header "Authorization" is set to a valid access token for that same device
