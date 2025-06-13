@@ -368,8 +368,7 @@ components:
               - lastChecked
               - imei
             allOf:
-              - $ref: "#/components/schemas/DeviceResponse"
-              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/CommonResponseBody"
               - $ref: "#/components/schemas/DeviceIdentifier"
               - $ref: "#/components/schemas/DeviceType"
 
@@ -385,8 +384,7 @@ components:
               - lastChecked
               - tac
             allOf:
-              - $ref: "#/components/schemas/DeviceResponse"
-              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/CommonResponseBody"
               - $ref: "#/components/schemas/DeviceType"
 
     200RetrievePPID:
@@ -401,8 +399,7 @@ components:
               - lastChecked
               - ppid
             allOf:
-              - $ref: "#/components/schemas/DeviceResponse"
-              - $ref: "#/components/schemas/LastChecked"
+              - $ref: "#/components/schemas/CommonResponseBody"
               - $ref: "#/components/schemas/DevicePPID"
 
     400BadRequest:
@@ -621,10 +618,15 @@ components:
                 code: QUOTA_EXCEEDED
                 message: Out of resource quota
   schemas:
-    LastChecked:
+    CommonResponseBody:
       description: |
-        The last time that the information returned (e.g. IMEI) was confirmed to be correct by the mobile operator for the provided identifier (e.g. phone number)
+        Common parameters to be included in all responses
       properties:
+        device:
+          description: The device subscription identifier that was used to identify the device whose identifier is being returned
+          example: "phoneNumber": "+123456789"
+          allOF:
+            - $ref: "#/components/schemas/DeviceResponse"
         lastChecked:
           description: Date and time that the information was last confirmed by the mobile operator to be correct
           type: string
@@ -701,7 +703,6 @@ components:
 
         If the API consumer provides more than one device identifier in their request, the API provider must return a single identifier which is the one they are using to fulfil the request, even if the identifiers do not match the same device. API provider does not perform any logic to validate/correlate that the indicated device identifiers match the same device. No error should be returned if the identifiers are otherwise valid to prevent API consumers correlating different identifiers with a given end user.
 
-      example: "phoneNumber": "+123456789"
       allOf:
         - $ref: "#/components/schemas/Device"
         - maxProperties: 1
