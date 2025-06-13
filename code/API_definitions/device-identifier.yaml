@@ -624,7 +624,7 @@ components:
       properties:
         device:
           description: The device subscription identifier that was used to identify the device whose identifier is being returned
-          allOF:
+          allOf:
             - $ref: "#/components/schemas/DeviceResponse"
         lastChecked:
           description: Date and time that the information was last confirmed by the mobile operator to be correct
