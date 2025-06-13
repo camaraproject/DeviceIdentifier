@@ -199,6 +199,8 @@ paths:
           required: false
           schema:
             type: string
+            pattern: "^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$"
+            example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
       requestBody:
         description: Parameters to create a new session
@@ -251,7 +253,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: "^[a-zA-Z0-9-]{0,55}$"
+            pattern: "^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$"
             example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
       requestBody:
@@ -305,7 +307,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: "^[a-zA-Z0-9-]{0,55}$"
+            pattern: "^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$"
             example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
       requestBody:
@@ -354,7 +356,7 @@ components:
       required: false
       schema:
         type: string
-        pattern: "^[a-zA-Z0-9-]{0,55}$"
+        pattern: "^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$"
         example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
   responses:
