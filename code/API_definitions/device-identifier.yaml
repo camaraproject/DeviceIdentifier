@@ -368,7 +368,7 @@ components:
               - lastChecked
               - imei
             allOf:
-              - $ref: "#/components/schema/DeviceResponse"
+              - $ref: "#/components/schemas/DeviceResponse"
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DeviceIdentifier"
               - $ref: "#/components/schemas/DeviceType"
@@ -385,7 +385,7 @@ components:
               - lastChecked
               - tac
             allOf:
-              - $ref: "#/components/schema/DeviceResponse"
+              - $ref: "#/components/schemas/DeviceResponse"
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DeviceType"
 
@@ -401,7 +401,7 @@ components:
               - lastChecked
               - ppid
             allOf:
-              - $ref: "#/components/schema/DeviceResponse"
+              - $ref: "#/components/schemas/DeviceResponse"
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DevicePPID"
 
