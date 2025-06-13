@@ -653,7 +653,7 @@ components:
           description: The device subscription identifier that was used to identify the device whose identifier is being returned. If this property is not present, then the device subscription identifier specified in the request was used.
           allOf:
             - $ref: "#/components/schemas/DeviceResponse"
-            - example: { "phoneNumber": "+123456789" }
+            - example: {"phoneNumber": "+123456789"}
         lastChecked:
           description: Date and time that the information was last confirmed by the mobile operator to be correct
           type: string
@@ -733,7 +733,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/Device"
         - maxProperties: 1
-        - example: { "phoneNumber": "+123456789" }
 
     DeviceIpv4Addr:
       type: object
