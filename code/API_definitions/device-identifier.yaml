@@ -371,6 +371,17 @@ components:
               - $ref: "#/components/schemas/CommonResponseBody"
               - $ref: "#/components/schemas/DeviceIdentifier"
               - $ref: "#/components/schemas/DeviceType"
+          examples:
+            Successful Response:
+              description: Device identifier has been successfully retrieved
+              value:
+                device: {"phoneNumber": "+123456789"},
+                lastChecked: "2024-02-20T10:41:38.657Z",
+                imeisv: "49015420323751800",
+                imei: "4901542032375181",
+                tac: "49015420",
+                model: "3110",
+                manufacturer: "Nokia"
 
     200RetrieveType:
       description: An device identifier has been found for the specified subscriber
