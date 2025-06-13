@@ -701,6 +701,7 @@ components:
 
         If the API consumer provides more than one device identifier in their request, the API provider must return a single identifier which is the one they are using to fulfil the request, even if the identifiers do not match the same device. API provider does not perform any logic to validate/correlate that the indicated device identifiers match the same device. No error should be returned if the identifiers are otherwise valid to prevent API consumers correlating different identifiers with a given end user.
 
+      example: "phoneNumber": "+123456789"
       allOf:
         - $ref: "#/components/schemas/Device"
         - maxProperties: 1
