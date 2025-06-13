@@ -77,6 +77,7 @@ info:
     An example of a JSON response object is as follows:
     ```
     {
+       "phoneNumber": "+123456789",
        "lastChecked": "2024-02-20T10:41:38.657Z",
        "imeisv": "49015420323751800",
        "imei": "4901542032375181",
@@ -106,9 +107,6 @@ info:
     `403 PERMISSION_DENIED`:
     - The access token does not have the required scope for the endpoint being called
     - The end user has not consented to the API consumer getting access to the device identifier information (2-legged access token only)
-
-    `422 IDENTIFIER_MISMATCH`:
-    - Multiple parameters have been provided in the `device` object, and these do not identify the same device
 
     `422 SERVICE_NOT_APPLICABLE`:
     - A device identifier cannot be provided for the identified device. For example, the phone number might identify a landline.
@@ -370,6 +368,7 @@ components:
               - lastChecked
               - imei
             allOf:
+              - $ref: "#/components/schema/DeviceResponse"
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DeviceIdentifier"
               - $ref: "#/components/schemas/DeviceType"
@@ -386,6 +385,7 @@ components:
               - lastChecked
               - tac
             allOf:
+              - $ref: "#/components/schema/DeviceResponse"
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DeviceType"
 
@@ -401,6 +401,7 @@ components:
               - lastChecked
               - ppid
             allOf:
+              - $ref: "#/components/schema/DeviceResponse"
               - $ref: "#/components/schemas/LastChecked"
               - $ref: "#/components/schemas/DevicePPID"
 
@@ -557,18 +558,11 @@ components:
                       - 422
                   code:
                     enum:
-                      - IDENTIFIER_MISMATCH
                       - SERVICE_NOT_APPLICABLE
                       - MISSING_IDENTIFIER
                       - UNSUPPORTED_IDENTIFIER
                       - UNNECESSARY_IDENTIFIER
           examples:
-            Identifiers Do Not Match:
-              description: Multiple identifiers provided which do not all identify the same device
-              value:
-                status: 422
-                code: IDENTIFIER_MISMATCH
-                message: Provided identifiers are not consistent.
             Service Not Applicable For Device:
               description: The service is not applicable for the identified device
               value:
@@ -700,6 +694,16 @@ components:
         ipv6Address:
           $ref: "#/components/schemas/DeviceIpv6Address"
       minProperties: 1
+
+    DeviceResponse:
+      description: |
+        An identifier for the end-user equipment able to connect to the network that the response refers to. This parameter is only returned when the API consumer includes the `device` parameter in their request (i.e. they are using a two-legged access token), and is relevant when more than one device identifier is specified, as only one of those device identifiers is allowed in the response.
+
+        If the API consumer provides more than one device identifier in their request, the API provider must return a single identifier which is the one they are using to fulfil the request, even if the identifiers do not match the same device. API provider does not perform any logic to validate/correlate that the indicated device identifiers match the same device. No error should be returned if the identifiers are otherwise valid to prevent API consumers correlating different identifiers with a given end user.
+
+      allOf:
+        - $ref: "#/components/schemas/Device"
+        - maxProperties: 1
 
     DeviceIpv4Addr:
       type: object
