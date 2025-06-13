@@ -77,7 +77,7 @@ info:
     An example of a JSON response object is as follows:
     ```
     {
-       "phoneNumber": "+123456789",
+       "device": {"phoneNumber": "+123456789"},
        "lastChecked": "2024-02-20T10:41:38.657Z",
        "imeisv": "49015420323751800",
        "imei": "4901542032375181",
