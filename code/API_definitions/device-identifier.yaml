@@ -706,6 +706,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/Device"
         - maxProperties: 1
+        - example: { "phoneNumber": "+123456789" }
 
     DeviceIpv4Addr:
       type: object
