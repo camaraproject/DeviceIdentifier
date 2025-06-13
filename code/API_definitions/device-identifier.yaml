@@ -624,7 +624,6 @@ components:
       properties:
         device:
           description: The device subscription identifier that was used to identify the device whose identifier is being returned
-          example: {"phoneNumber": "+123456789"}
           allOF:
             - $ref: "#/components/schemas/DeviceResponse"
         lastChecked:
