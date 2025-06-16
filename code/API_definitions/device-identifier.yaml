@@ -372,8 +372,17 @@ components:
               - $ref: "#/components/schemas/DeviceIdentifier"
               - $ref: "#/components/schemas/DeviceType"
           examples:
-            Successful Response:
-              description: Device identifier has been successfully retrieved
+            Successful Response (Normal Case):
+              description: Device identifier has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
+              value:
+                lastChecked: "2024-02-20T10:41:38.657Z"
+                imeisv: "49015420323751800"
+                imei: "4901542032375181"
+                tac: "49015420"
+                model: "3110"
+                manufacturer: "Nokia"
+            Successful Response (Multiple Device Subscription Identifiers):
+              description: Device identifier has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
               value:
                 device: {"phoneNumber": "+123456789"}
                 lastChecked: "2024-02-20T10:41:38.657Z"
@@ -398,8 +407,15 @@ components:
               - $ref: "#/components/schemas/CommonResponseBody"
               - $ref: "#/components/schemas/DeviceType"
           examples:
-            Successful Response:
-              description: Device type has been successfully retrieved
+            Successful Response (Normal Case):
+              description: Device type has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
+              value:
+                lastChecked: "2024-02-20T10:41:38.657Z"
+                tac: "49015420"
+                model: "3110"
+                manufacturer: "Nokia"
+            Successful Response (Multiple Device Subscription Identifiers):
+              description: Device type has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
               value:
                 device: {"phoneNumber": "+123456789"}
                 lastChecked: "2024-02-20T10:41:38.657Z"
@@ -422,8 +438,13 @@ components:
               - $ref: "#/components/schemas/CommonResponseBody"
               - $ref: "#/components/schemas/DevicePPID"
           examples:
-            Successful Response:
-              description: Device PPID has been successfully retrieved
+            Successful Response (Normal Case):
+              description: Device PPID has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
+              value:
+                lastChecked: "2024-02-20T10:41:38.657Z"
+                ppid: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
+            Successful Response (Multiple Device Subscription Identifiers):
+              description: Device PPID has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
               value:
                 device: {"phoneNumber": "+123456789"}
                 lastChecked: "2024-02-20T10:41:38.657Z"
