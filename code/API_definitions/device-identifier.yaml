@@ -394,7 +394,8 @@ components:
                 manufacturer: "Nokia"
 
     200RetrieveType:
-      description: An device identifier has been found for the specified subscriber
+      description: A device identifier has been found for the specified subscriber
+
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
