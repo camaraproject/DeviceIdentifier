@@ -201,7 +201,7 @@ paths:
           description: Correlation id for the different services
           required: false
           schema:
-            type: string
+            $ref: "#/components/schemas/XCorrelator"
 
       requestBody:
         description: Parameters to create a new session
@@ -253,9 +253,7 @@ paths:
           description: Correlation id for the different services
           required: false
           schema:
-            type: string
-            pattern: "^[a-zA-Z0-9-]{0,55}$"
-            example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
+            $ref: "#/components/schemas/XCorrelator"
 
       requestBody:
         description: Parameters to create a new session
@@ -307,9 +305,7 @@ paths:
           description: Correlation id for the different services
           required: false
           schema:
-            type: string
-            pattern: "^[a-zA-Z0-9-]{0,55}$"
-            example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
+            $ref: "#/components/schemas/XCorrelator"
 
       requestBody:
         description: Parameters to identify the mobile subscription when a 2-legged access token is being used
@@ -356,9 +352,7 @@ components:
       description: Correlation id for the different services
       required: false
       schema:
-        type: string
-        pattern: "^[a-zA-Z0-9-]{0,55}$"
-        example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
+        $ref: "#/components/schemas/XCorrelator"
 
   responses:
     200RetrieveIdentifier:
@@ -845,6 +839,11 @@ components:
       type: string
       format: ipv6
       example: 2001:db8:85a3:8d3:1319:8a2e:370:7344
+
+    XCorrelator:
+      type: string
+      pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
+      example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
   examples:
     IdentifyDeviceBy3LeggedToken:
