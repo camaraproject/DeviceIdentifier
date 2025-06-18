@@ -20,20 +20,20 @@ The below sections record the changes for each API version in each release as fo
 ## Release Notes
 
 This public release contains the definition and documentation of
-* device-identifier v0.3.0
+* device-identifier v0.3.0-rc.1
 
 The API definition(s) are based on
-* Commonalities 0.6.0
-* Identity and Consent Management v0.4.0
+* Commonalities 0.6.0-rc.1
+* Identity and Consent Management v0.4.0-rc.1
 
-## device-identifier v0.3.0
-
-There are no breaking changes compared to v0.2.0
+## device-identifier v0.3.0-rc.1
 
 - API definition **with inline documentation**:
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml&nocors)
   - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml)
   - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r2.1/code/API_definitions/device-identifier.yaml)
+
+There are no breaking changes compared to v0.2.0
 
 ### Added
 * Add additional endpoint to provide PPID as physical device identifier by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/110
