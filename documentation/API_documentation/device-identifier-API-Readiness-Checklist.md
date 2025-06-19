@@ -16,6 +16,7 @@ Checklist for device-identifier v0.3.0-rc.1 in r2.1.
 | 10 | API release numbering convention applied     |   M   |         M         |    M    |    M   |  Y   | r2.1                                                                            |
 | 11 | Change log updated                           |   M   |         M         |    M    |    M   |  Y   | [CHANGELOG.md](/CHANGELOG.md)                                                   |
 | 12 | Previous public release was certified        |   O   |         O         |    O    |    M   |  N   |                                                                                 |
+| 13 | API description (for marketing)              |   O   |         O         |    M    |    M   |      | [wiki link](https://lf-camaraproject.atlassian.net/wiki/xxx) |
 
 To fill the checklist:
 - in the line above the table, replace the api-name, api-version and the rx.y by their actual values for the current API version and release.
