@@ -194,14 +194,8 @@ paths:
       security:
         - openId:
             - device-identifier:retrieve-identifier
-
       parameters:
-        - in: header
-          name: x-correlator
-          description: Correlation id for the different services
-          required: false
-          schema:
-            $ref: "#/components/schemas/XCorrelator"
+        - $ref: "#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to create a new session
@@ -246,14 +240,8 @@ paths:
       security:
         - openId:
             - device-identifier:retrieve-type
-
       parameters:
-        - in: header
-          name: x-correlator
-          description: Correlation id for the different services
-          required: false
-          schema:
-            $ref: "#/components/schemas/XCorrelator"
+        - $ref: "#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to create a new session
@@ -298,14 +286,8 @@ paths:
       security:
         - openId:
             - device-identifier:retrieve-ppid
-
       parameters:
-        - in: header
-          name: x-correlator
-          description: Correlation id for the different services
-          required: false
-          schema:
-            $ref: "#/components/schemas/XCorrelator"
+        - $ref: "#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to identify the mobile subscription when a 2-legged access token is being used
@@ -346,6 +328,14 @@ components:
       description: Common security scheme for all CAMARA APIs
       type: openIdConnect
       openIdConnectUrl: .well-known/openid-configuration
+
+  parameters:
+    x-correlator:
+      name: x-correlator
+      in: header
+      description: Correlation id for the different services
+      schema:
+        $ref: "#/components/schemas/XCorrelator"
 
   headers:
     X-Correlator:
