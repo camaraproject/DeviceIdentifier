@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: CAMARA Mobile Device Identifier
+  title: Device Identifier
   version: wip
   description: |
     # Summary
@@ -658,6 +658,7 @@ components:
                 status: 429
                 code: QUOTA_EXCEEDED
                 message: Out of resource quota
+
   schemas:
     CommonResponseBody:
       description: |
@@ -809,7 +810,7 @@ components:
     Port:
       description: TCP or UDP port number
       type: integer
-      minimum: 1024
+      minimum: 0
       maximum: 65535
 
     RequestBody:
