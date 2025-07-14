@@ -176,8 +176,8 @@ servers:
   - url: "{apiRoot}/device-identifier/vwip"
     variables:
       apiRoot:
-        default: https://example.com:443
-        description: API root, to be defined by the service provider
+        default: http://localhost:9091
+        description: API root, defined by the service provider, e.g. `api.example.com` or `api.example.com/somepath`
 
 tags:
   - name: Get Device Identifiers
@@ -327,7 +327,7 @@ components:
     openId:
       description: Common security scheme for all CAMARA APIs
       type: openIdConnect
-      openIdConnectUrl: .well-known/openid-configuration
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
   parameters:
     x-correlator:
