@@ -247,7 +247,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePPID
 
   @DeviceIdentifier_retrievePPID_403.1_missing_access_token_scope
   Scenario: Invalid access token
-      Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-identifier
+      Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-ppid
       When the request "retrievePPID" is sent
       Then the response status code is 403
       And the response header "x-correlator" has same value as the request header "x-correlator"
