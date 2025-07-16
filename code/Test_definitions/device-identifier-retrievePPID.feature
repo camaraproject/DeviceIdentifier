@@ -35,7 +35,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrievePP
     And the resource "/device-identifier/v0.3rc1/retrieve-ppid"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" is set to a UUID value
+    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
     And the request body is compliant with the RequestBody schema defined by "/components/schemas/RequestBody"
 
   # Success scenarios
@@ -189,11 +189,11 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrievePP
       And the response property "$.message" contains a user friendly text
 
       Examples:
-          | device_identifier          | oas_spec_schema                             |
-          | $.device.phoneNumber       | /components/schemas/PhoneNumber             |
-          | $.device.ipv4Address       | /components/schemas/DeviceIpv4Addr          |
-          | $.device.ipv6Address       | /components/schemas/DeviceIpv6Address       |
-          | $.device.networkIdentifier | /components/schemas/NetworkAccessIdentifier |
+          | device_identifier                | oas_spec_schema                             |
+          | $.device.phoneNumber             | /components/schemas/PhoneNumber             |
+          | $.device.ipv4Address             | /components/schemas/DeviceIpv4Addr          |
+          | $.device.ipv6Address             | /components/schemas/DeviceIpv6Address       |
+          | $.device.networkAccessIdentifier | /components/schemas/NetworkAccessIdentifier |
 
   # The maximum is considered in the schema so a generic schema validator may fail and generate a 400 INVALID_ARGUMENT without further distinction, and both could be accepted
   @DeviceIdentifier_retrievePPID_400.5_out_of_range_port
@@ -247,7 +247,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrievePP
 
   @DeviceIdentifier_retrievePPID_403.1_missing_access_token_scope
   Scenario: Invalid access token
-      Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-identifier
+      Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-ppid
       When the request "retrievePPID" is sent
       Then the response status code is 403
       And the response header "x-correlator" has same value as the request header "x-correlator"

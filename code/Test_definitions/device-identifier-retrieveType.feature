@@ -28,12 +28,12 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
 # * A SIM card "SIMCARD1" from "TELCO1" and phone number "PHONENUMBER1"
 # * A SIM card "SIMCARD2" from "TELCO2" and phone number "PHONENUMBER2"
 
-  Background: Common Device Identifier retrieveIdentifier setup
+  Background: Common Device Identifier retrieveType setup
     Given an environment at "apiRoot"
     And the resource "/device-identifier/v0.3rc1/retrieve-type"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" is set to a UUID value
+    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
     And the request body is compliant with the RequestBody schema defined by "/components/schemas/RequestBody"
 
   # Success scenarios
@@ -156,7 +156,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   @DeviceIdentifier_retrieveType_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
       Given the request body is set to any value which is not compliant with the schema at "/components/schemas/RequestBody"
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 400
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -167,7 +167,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   @DeviceIdentifier_retrieveType_400.2_no_request_body
   Scenario: Missing request body
       Given the request body is not included
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 400
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -178,7 +178,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   @DeviceIdentifier_retrieveType_400.3_device_empty
   Scenario: The device value is an empty object
       Given the request body property "$.device" is set to: {}
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 400
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -192,7 +192,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   Scenario Outline: Some device identifier value does not comply with the schema
       Given the request body property "<device_identifier>" does not comply with the OAS schema at "<oas_spec_schema>"
       And a 2-legged or 3-legged access token is being used
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 400
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -201,17 +201,17 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
       And the response property "$.message" contains a user friendly text
 
       Examples:
-          | device_identifier          | oas_spec_schema                             |
-          | $.device.phoneNumber       | /components/schemas/PhoneNumber             |
-          | $.device.ipv4Address       | /components/schemas/DeviceIpv4Addr          |
-          | $.device.ipv6Address       | /components/schemas/DeviceIpv6Address       |
-          | $.device.networkIdentifier | /components/schemas/NetworkAccessIdentifier |
+          | device_identifier                | oas_spec_schema                             |
+          | $.device.phoneNumber             | /components/schemas/PhoneNumber             |
+          | $.device.ipv4Address             | /components/schemas/DeviceIpv4Addr          |
+          | $.device.ipv6Address             | /components/schemas/DeviceIpv6Address       |
+          | $.device.networkAccessIdentifier | /components/schemas/NetworkAccessIdentifier |
 
   # The maximum is considered in the schema so a generic schema validator may fail and generate a 400 INVALID_ARGUMENT without further distinction, and both could be accepted
   @DeviceIdentifier_retrieveType_400.5_out_of_range_port
   Scenario: Out of range port
       Given the request body property  "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 400
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -224,7 +224,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   @DeviceIdentifier_retrieveType_401.1_no_authorization_header
   Scenario: No Authorization header
       Given the header "Authorization" is removed
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 401
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -236,7 +236,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   @DeviceIdentifier_retrieveType_401.2_expired_access_token
   Scenario: Expired access token
       Given the header "Authorization" is set to an expired access token
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 401
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -247,7 +247,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   @DeviceIdentifier_retrieveType_401.3_invalid_access_token
   Scenario: Invalid access token
       Given the header "Authorization" is set to an invalid access token
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 401
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -259,8 +259,8 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
 
   @DeviceIdentifier_retrieveType_403.1_missing_access_token_scope
   Scenario: Invalid access token
-      Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-identifier
-      When the request "retrieveIdentifier" is sent
+      Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-type
+      When the request "retrieveType" is sent
       Then the response status code is 403
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -275,7 +275,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   Scenario: An identifier cannot be matched to a valid device
       Given that the device cannot be identified from the access token
       And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 404
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -289,7 +289,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
   Scenario: None of the provided device identifiers is supported by the implementation
       Given that some type of device identifiers are not supported by the implementation
       And the request body property "$.device" only includes device identifiers not supported by the implementation
-      When the request "retrieveIdentifier" is sent
+      When the request "retrieveType" is sent
       Then the response status code is 422
       And the response header "x-correlator" has same value as the request header "x-correlator"
       And the response header "Content-Type" is "application/json"
@@ -301,7 +301,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
     Scenario: Service not available for the device
         Given that service is not supported for all devices commercialized by the operator
         And the service is not applicable for the device identified by the token or provided in the request body
-        When the request "retrieveIdentifier" is sent
+        When the request "retrieveType" is sent
         Then the response status code is 422
         And the response header "x-correlator" has same value as the request header "x-correlator"
         And the response header "Content-Type" is "application/json"
@@ -314,7 +314,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
     Scenario: Device not included and cannot be deduced from the access token
         Given the header "Authorization" is set to a valid access token which does not identify a device
         And the request body property "$.device" is not included
-        When the request "retrieveIdentifier" is sent
+        When the request "retrieveType" is sent
         Then the response status code is 422
         And the response header "x-correlator" has same value as the request header "x-correlator"
         And the response header "Content-Type" is "application/json"
@@ -328,7 +328,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
         # To test this, a token has to be obtained for a different device
         Given the request body property "$.device" is set to a valid testing device
         And the header "Authorization" is set to a valid access token obtained for a different device
-        When the request "retrieveIdentifier" is sent
+        When the request "retrieveType" is sent
         Then the response status code is 422
         And the response header "x-correlator" has same value as the request header "x-correlator"
         And the response header "Content-Type" is "application/json"
@@ -341,7 +341,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrieveTy
     Scenario: Explicit device identifier provided when device is identified by the access token
         Given the request body property "$.device" is set to a valid testing device
         And the header "Authorization" is set to a valid access token for that same device
-        When the request "retrieveIdentifier" is sent
+        When the request "retrieveType" is sent
         Then the response status code is 422
         And the response header "x-correlator" has same value as the request header "x-correlator"
         And the response header "Content-Type" is "application/json"
