@@ -1,5 +1,5 @@
 @device-identifier-retrievePPID
-Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrievePPID
+Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePPID
 
 # Input to be provided by the implementation to the tests
 # References to OAS spec schemas refer to schemas specified in /code/API_definitions/device-identifier.yaml
@@ -32,7 +32,7 @@ Feature: Camara Mobile Device Identifer API, v0.3.0-rc.1 - Operation: retrievePP
 
   Background: Common Device Identifier retrievePPID setup
     Given an environment at "apiRoot"
-    And the resource "/device-identifier/v0.3rc1/retrieve-ppid"
+    And the resource "/device-identifier/vwip/retrieve-ppid"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
