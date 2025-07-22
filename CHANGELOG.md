@@ -3,7 +3,8 @@
 For the best results, use the latest published release.**
 
 ## Table of Contents
-- **[r1.3](#r13)**
+- **[r2.1](#r21)**
+- [r1.3](#r13)
 - [r1.2](#r12)
 - [r1.1](#r11)
 - [v0.1.0](#v010)
@@ -14,6 +15,41 @@ The below sections record the changes for each API version in each release as fo
 * for the first release-candidate, all changes since the last public release
 * for subsequent release-candidate(s), only the delta to the previous release-candidate
 * for a public release, the consolidated changes since the previous public release
+
+# r2.1
+## Release Notes
+
+This public release contains the definition and documentation of
+* device-identifier v0.3.0-rc.1
+
+The API definition(s) are based on
+* Commonalities 0.6.0-rc.1
+* Identity and Consent Management v0.4.0-rc.1
+
+## device-identifier v0.3.0-rc.1
+
+- API definition **with inline documentation**:
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml&nocors)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.1/code/API_definitions/device-identifier.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r2.1/code/API_definitions/device-identifier.yaml)
+
+There are no breaking changes compared to v0.2.0
+
+### Added
+* Add additional endpoint to provide PPID as physical device identifier by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/110
+* Add additional text on undocumented erros to OAS definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/120
+
+### Changed
+* Update x-correlator pattern by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/121
+
+### Fixed
+* Fix typos in feature files by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/125
+
+### Removed
+* Remove AUTHENTICATION_REQUIRED error code by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/111
+* Remove IDENTIFIER_MISMATCH error and include optional device property in 200 response by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/122
+
+**Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/r1.3...r2.1
 
 # r1.3
 ## Release Notes
