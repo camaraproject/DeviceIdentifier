@@ -24,8 +24,8 @@ This public release contains the definition and documentation of
 * device-identifier v0.3.0
 
 The API definition(s) are based on
-* Commonalities 0.6.0
-* Identity and Consent Management v0.4.0
+* Commonalities [r3.3](https://github.com/camaraproject/Commonalities/releases/tag/r3.3)
+* Identity and Consent Management [r3.3](https://github.com/camaraproject/IdentityAndConsentManagement/releases/tag/r3.3)
 
 ## device-identifier v0.3.0
 
