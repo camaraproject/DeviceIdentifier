@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Device Identifier
-  version: wip
+  version: 0.3.0
   description: |
     # Summary
 
@@ -173,7 +173,7 @@ externalDocs:
   url: https://github.com/camaraproject/DeviceIdentifier
 
 servers:
-  - url: "{apiRoot}/device-identifier/vwip"
+  - url: "{apiRoot}/device-identifier/v0.3"
     variables:
       apiRoot:
         default: http://localhost:9091
@@ -867,3 +867,4 @@ components:
             publicAddress: "84.125.93.10"
             publicPort: 59765
           networkAccessIdentifier: "123456789@domain.com"
+
