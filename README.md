@@ -31,7 +31,7 @@ The latest public release is available [here](https://github.com/camaraproject/D
 
 For changes see [CHANGELOG.md](https://github.com/camaraproject/DeviceIdentifier/blob/main/CHANGELOG.md)
 
-Pre-releases of this sub project are available [here](https://github.com/camaraproject/DeviceIdentifier/releases)
+Pre-releases of this repository are available [here](https://github.com/camaraproject/DeviceIdentifier/releases)
 
 ## Contributing
 * Meetings are held virtually
