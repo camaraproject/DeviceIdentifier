@@ -24,6 +24,8 @@ API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/czLe)
 
 ## Release Information
 
+**NEW**: Public release [r2.2](https://github.com/camaraproject/DeviceIdentifier/releases/tag/r2.2) with device-identifier v0.3.0 is now available
+
 The latest public release is available [here](https://github.com/camaraproject/DeviceIdentifier/releases/latest)
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/code/API_definitions/device-identifier.yaml&nocors)
   - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/code/API_definitions/device-identifier.yaml)
