@@ -42,6 +42,7 @@ There are no breaking changes compared to v0.2.0
 
 ### Changed
 * Update x-correlator pattern by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/121
+* Update description of lastChecked response parameter by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/135
 
 ### Fixed
 * Fix typos in feature files by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/125
@@ -55,7 +56,7 @@ There are no breaking changes compared to v0.2.0
 # r2.1
 ## Release Notes
 
-This public release contains the definition and documentation of
+This pre-release contains the definition and documentation of
 * device-identifier v0.3.0-rc.1
 
 The API definition(s) are based on
