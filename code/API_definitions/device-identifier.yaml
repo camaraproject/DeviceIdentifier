@@ -865,6 +865,3 @@ components:
             publicAddress: "84.125.93.10"
             publicPort: 59765
           networkAccessIdentifier: "123456789@domain.com"
-
-
-
