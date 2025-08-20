@@ -37,6 +37,7 @@
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
     And the request body is compliant with the RequestBody schema defined by "/components/schemas/RequestBody"
+    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
 
   # Success scenarios
 
@@ -45,7 +46,6 @@
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And SIMCARD1 is identified by the access token
     And request property "$.device" does not exist
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
@@ -59,7 +59,6 @@
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And no subject is identified by the access token
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
@@ -74,7 +73,6 @@
     And no subject is identified by the access token
     And request property "$.device.ipv4address.publicAddress" is set to PUBLICIPV4ADDRESS
     And request property "$.device.ipv4address.publicPort" is set to PUBLICPORT
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
@@ -88,7 +86,6 @@
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And SIMCARD2 is identified by the access token
     And request property "$.device" does not exist
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
@@ -102,7 +99,6 @@
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And no subject is identified by the access token
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
@@ -116,7 +112,6 @@
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And SIMCARD1 is identified by the access token
     And request property "$.device" does not exist
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
@@ -130,7 +125,6 @@
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And no subject is identified by the access token
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
-    And one of the scopes associated with the access token is device-identifier:retrieve-ppid
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrievePPID schema at "/components/schemas/200RetrievePPID"
