@@ -1,4 +1,4 @@
-@device-identifier-retrievePPID
+  @device-identifier-retrievePPID
   Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePPID
 
   # Input to be provided by the implementation to the tests
