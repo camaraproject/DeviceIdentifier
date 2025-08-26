@@ -384,7 +384,6 @@ components:
 
     200RetrieveType:
       description: A device identifier has been found for the specified subscriber
-
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -777,22 +776,21 @@ components:
         }
 
     ErrorInfo:
-      description: Common CAMARA error response object
       type: object
+      required:
+        - message
+        - status
+        - code
       properties:
-        code:
-          type: string
-          description: A short, human-readable summary of the problem type
-        status:
-          type: integer
-          description: The HTTP status code
         message:
           type: string
-          description: This parameter appears when there was an error. Human readable explanation specific to this occurrence of the problem
-      required:
-        - code
-        - status
-        - message
+          description: A human-readable description of what the event represents
+        status:
+          type: integer
+          description: HTTP response status code
+        code:
+          type: string
+          description: A human-readable code to describe the error
 
     NetworkAccessIdentifier:
       description: A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.
@@ -865,3 +863,4 @@ components:
             publicAddress: "84.125.93.10"
             publicPort: 59765
           networkAccessIdentifier: "123456789@domain.com"
+
