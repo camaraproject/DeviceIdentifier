@@ -38,7 +38,7 @@ There are no breaking changes compared to v0.2.0
 
 ### Added
 * Add additional endpoint to provide PPID as physical device identifier by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/110
-* Add additional text on undocumented erros to OAS definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/120
+* Add additional text on undocumented errors to OAS definition by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/120
 
 ### Changed
 * Update x-correlator pattern by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/121
