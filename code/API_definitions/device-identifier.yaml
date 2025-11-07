@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Device Identifier
-  version: 0.3.0
+  version: wip
   description: |
     # Summary
 
@@ -30,7 +30,7 @@ info:
 
     The mobile network associates this device identifier with the mobile subscription currently using the device. The mobile subscription is defined by the Subscriber Identity Module (SIM) currently active in the mobile device. This may be a removable SIM or an eSIM. In either case, it is possible for the association between the device identifier and subscription to change - for example, when a physical SIM is transferred to another mobile device.
 
-    ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/documentation/API_documentation/resources/Device_Identifier_Overview.png)
+    ![Device Identifier API Overview](https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/main/documentation/API_documentation/resources/Device_Identifier_Overview.png)
 
     The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one or more of the following subscription identifiers:
     - the subscription phone number (also known as MSISDN)
@@ -173,7 +173,7 @@ externalDocs:
   url: https://github.com/camaraproject/DeviceIdentifier
 
 servers:
-  - url: "{apiRoot}/device-identifier/v0.3"
+  - url: "{apiRoot}/device-identifier/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
