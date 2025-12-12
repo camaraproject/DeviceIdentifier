@@ -22,18 +22,25 @@ API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/czLe)
 * Describe, develop, document, and test the API
 * Started: October 2022
 
+<!-- CAMARA:RELEASE-INFO:START -->
+<!-- The following section is automatically maintained by the CAMARA project-administration tooling: https://github.com/camaraproject/project-administration -->
+
 ## Release Information
 
-**NEW**: Public release [r2.2](https://github.com/camaraproject/DeviceIdentifier/releases/tag/r2.2) with device-identifier v0.3.0 is now available
+> [!NOTE]
+> Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest available release**.
 
-The latest public release is available [here](https://github.com/camaraproject/DeviceIdentifier/releases/latest)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/code/API_definitions/device-identifier.yaml&nocors)
-  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/code/API_definitions/device-identifier.yaml)
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r2.2/code/API_definitions/device-identifier.yaml)
+* **NEW**: The latest public release is [r2.2](https://github.com/camaraproject/DeviceIdentifier/releases/tag/r2.2) (Fall25), with the following API versions:
+  * **device-identifier v0.3.0**
+  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r2.2/code/API_definitions/device-identifier.yaml)
+  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/code/API_definitions/device-identifier.yaml&nocors)
+  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r2.2/code/API_definitions/device-identifier.yaml)
+* The latest public release is always available here: https://github.com/camaraproject/DeviceIdentifier/releases/latest
+* Other releases of this repository are available in https://github.com/camaraproject/DeviceIdentifier/releases
+* For changes see [CHANGELOG.md](https://github.com/camaraproject/DeviceIdentifier/blob/main/CHANGELOG.md)
 
-For changes see [CHANGELOG.md](https://github.com/camaraproject/DeviceIdentifier/blob/main/CHANGELOG.md)
-
-Pre-releases of this repository are available [here](https://github.com/camaraproject/DeviceIdentifier/releases)
+_The above section is automatically synchronized by CAMARA project-administration._
+<!-- CAMARA:RELEASE-INFO:END -->
 
 ## Contributing
 * Meetings are held virtually
