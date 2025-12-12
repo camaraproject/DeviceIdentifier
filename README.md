@@ -23,7 +23,7 @@ API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/czLe)
 * Started: October 2022
 
 <!-- CAMARA:RELEASE-INFO:START -->
-<!-- The following section is automatically maintained by the CAMARA project-administration tooling: https://github.com/camaraproject/project-administration -->
+<!-- This section is automatically maintained by the CAMARA project-administration tooling: https://github.com/camaraproject/project-administration -->
 
 ## Release Information
 
