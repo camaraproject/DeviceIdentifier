@@ -330,7 +330,7 @@ paths:
       description: Check if a provided device identifier matches the one the network currently associates with a given mobile subscription
       operationId: matchIdentifier
       tags:
-        - Get Device Identifiers
+        - Verify Device Identifiers
       security:
         - openId:
             - device-identifier:match-identifier
