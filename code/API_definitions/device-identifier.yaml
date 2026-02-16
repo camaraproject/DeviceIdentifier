@@ -80,8 +80,8 @@ info:
     ```
     {
        "lastChecked": "2024-02-20T10:41:38.657Z",
-       "imeisv": "49015420323751800",
-       "imei": "4901542032375181",
+       "imeisv": "4901542032375180",
+       "imei": "490154203237518",
        "tac": "49015420",
        "model": "3110",
        "manufacturer": "Nokia"
@@ -413,8 +413,8 @@ components:
               description: Device identifier has been successfully retrieved when the device subscription was identified by a 3-legged access token or single device subscription identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
-                imeisv: "49015420323751800"
-                imei: "4901542032375181"
+                imeisv: "4901542032375180"
+                imei: "490154203237518"
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
@@ -424,8 +424,8 @@ components:
                 device:
                   phoneNumber: "+123456789"
                 lastChecked: "2024-02-20T10:41:38.657Z"
-                imeisv: "49015420323751800"
-                imei: "4901542032375181"
+                imeisv: "4901542032375180"
+                imei: "490154203237518"
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
@@ -764,11 +764,11 @@ components:
         imeisv:
           type: string
           description: IMEISV of the device
-          example: "49015420323751800"
+          example: "4901542032375180"
         imei:
           type: string
           description: IMEI of the device
-          example: "4901542032375181"
+          example: "490154203237518"
 
     DeviceType:
       description: |
@@ -929,7 +929,7 @@ components:
             providedIdentifier:
               type: string
               description: The device identifier value to match against
-              example: "4901542032375181"
+              example: "490154203237518"
 
     ProvidedIdentifierType:
       type: string
