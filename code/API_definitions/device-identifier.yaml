@@ -991,7 +991,7 @@ components:
         device:
           phoneNumber: "+123456789"
         providedIdentifierType: "IMEI"
-        providedIdentifier: "4901542032375181"
+        providedIdentifier: "490154203237518"
 
     MatchDeviceByIPAddress:
       description: Matching device identifier by IP address and provided TAC
