@@ -493,7 +493,6 @@ components:
     200MatchIdentifier:
       description: |
           A match result has been determined for the provided device identifier.
-          
           The meaning of match=false depends on the HTTP status code:
           - 200 + match=true → Device identifier matches the network's record
           - 200 + match=false → Device identifier does NOT match (subscription and device known, confirmed mismatch)
@@ -1019,4 +1018,3 @@ components:
             publicPort: 59765
         providedIdentifierType: "IMEISV"
         providedIdentifier: "49015420323751800"
-
