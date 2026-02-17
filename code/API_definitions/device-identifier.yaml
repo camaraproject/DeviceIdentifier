@@ -492,11 +492,14 @@ components:
 
     200MatchIdentifier:
       description: |
-          A match result has been determined for the provided device identifier.
-          The meaning of match=false depends on the HTTP status code:
-          - 200 + match=true → Device identifier matches the network's record
-          - 200 + match=false → Device identifier does NOT match (subscription and device known, confirmed mismatch)
-          - 5xx → Technical issue; match determination inconclusive
+        A match result has been successfully determined for the provided device identifier.
+        HTTP Status Code Mapping:
+        - 200 + match=true → The provided identifier MATCHES the network's record
+        - 200 + match=false → The provided identifier does NOT match (subscription and device are known, confirmed mismatch)
+        - 404 → Subscription cannot be resolved from device/token
+        - 422 → Subscription resolved but no deterministic result available (policy/regulation/no device info)
+        - 5xx → Transient or technical failures (timeouts, upstream errors)
+        Note: match=false is ONLY returned when a definitive comparison has been performed.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -529,7 +532,13 @@ components:
                 match: true
 
     400BadRequest:
-      description: Bad Request
+      description: |
+        Invalid request syntax or malformed JSON.
+        This status is reserved for:
+        - Malformed JSON in the request body
+        - Invalid data types
+        - Invalid format (not matching required patterns)
+        Business validation errors should return 422 instead.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -639,7 +648,9 @@ components:
                 message: Client does not have sufficient permissions to perform this action.
 
     404NotFound:
-      description: Subscription not found in network
+      description: |
+        Subscription cannot be resolved from the provided device identifiers or access token.
+        The network cannot map the request to a known subscription.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -657,7 +668,7 @@ components:
                     enum:
                       - IDENTIFIER_NOT_FOUND
           examples:
-            Device Cannot Be Found:
+            DeviceNotFound:
               description: The provided identifier cannot be matched to a device known to the API provider
               value:
                 status: 404
@@ -665,7 +676,14 @@ components:
                 message: The provided identifier cannot be matched to a device.
 
     422UnprocessableContent:
-      description: Subscription found but service not applicable (policy/segment restrictions)
+      description: |
+        Subscription found but the service cannot provide a deterministic match result.
+        This status is used for business validation errors:
+        - MISSING_IDENTIFIER: 2-legged token provided without any subscription identifier
+        - UNNECESSARY_IDENTIFIER: 3-legged token provided with additional device identifier
+        - Service cannot provide deterministic result due to:
+          * No usable device information available for the subscription
+          * Local policy or regulatory restrictions prevent returning match information
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -933,8 +951,9 @@ components:
               $ref: "#/components/schemas/ProvidedIdentifierType"
             providedIdentifier:
               type: string
-              description: The device identifier value to match against
+              description: The device identifier value to match against. Must match the format constraints for the specified identifier type.
               example: "490154203237518"
+              # Pattern will be validated based on providedIdentifierType
 
     ProvidedIdentifierType:
       type: string
@@ -942,7 +961,11 @@ components:
         - IMEI
         - IMEISV
         - TAC
-      description: Type of the provided device identifier
+      description: |
+        Type of the provided device identifier. Format requirements:
+        - IMEI: 15 digits (pattern: ^[0-9]{15}$)
+        - IMEISV: 16 digits (pattern: ^[0-9]{16}$)
+        - TAC: 8 digits (pattern: ^[0-9]{8}$)
 
     MatchResult:
       description: |
@@ -1018,3 +1041,4 @@ components:
             publicPort: 59765
         providedIdentifierType: "IMEISV"
         providedIdentifier: "49015420323751800"
+
