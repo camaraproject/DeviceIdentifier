@@ -59,11 +59,12 @@ info:
 
     # API functionality
 
-    The API defines three service endpoints:
+    The API defines four service endpoints:
 
     - `POST /retrieve-identifier` to get details about the specific device being used by a given mobile subscriber, including IMEI / IMEISV and the type of device
     - `POST /retrieve-type` to get details only about the type (i.e. manufacturer and model) of device being used by a given mobile subscriber
     - `POST /retrieve-ppid` to get a pseudonymised identifier for the specific device being used by a given mobile subscriber
+    - `POST /match-identifier` to check whether a device identifier provided by the API consumer matches the one the network currently associates with a given mobile subscription
 
     To call any of these endpoints, the API consumer must first obtain a valid access token from the token endpoint, which is then passed as an Authorization header. When a 2-legged access token is used, the API consumer must also pass at least one of the available mobile subscription identifiers in the body of the request.
 
@@ -71,6 +72,7 @@ info:
     - When calling endpoint `retrieve-identifier`, the response will always contain `imei`
     - When calling endpoint `retrieve-type`, the response will always contain `tac`
     - When calling endpoint `retrieve-ppid`, the response will always contain `ppid`
+    - When calling endpoint `match-identifier`, the response will always contain `match`
     - Responses will also always contain a `lastChecked` field, indicating when the information provided was last confirmed to be correct
     - Other response parameters are implementation dependent, and thus optional
 
@@ -78,8 +80,8 @@ info:
     ```
     {
        "lastChecked": "2024-02-20T10:41:38.657Z",
-       "imeisv": "49015420323751800",
-       "imei": "4901542032375181",
+       "imeisv": "4901542032375180",
+       "imei": "490154203237518",
        "tac": "49015420",
        "model": "3110",
        "manufacturer": "Nokia"
@@ -322,6 +324,52 @@ paths:
         "429":
           $ref: '#/components/responses/429TooManyRequests'
 
+  "/match-identifier":
+    post:
+      summary: Check if a provided device identifier matches the one associated with the subscription
+      description: Check if a provided device identifier matches the one the network currently associates with a given mobile subscription
+      operationId: matchIdentifier
+      tags:
+        - Verify Device Identifiers
+      security:
+        - openId:
+            - device-identifier:match-identifier
+      parameters:
+        - $ref: "#/components/parameters/x-correlator"
+
+      requestBody:
+        description: Parameters to identify the mobile subscription and provide the device identifier to match
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchRequestBody"
+            examples:
+              Match Device By 3-Legged Access Token:
+                $ref: '#/components/examples/MatchDeviceBy3LeggedToken'
+              Match Device By Phone Number:
+                $ref: '#/components/examples/MatchDeviceByPhoneNumber'
+              Match Device By IP Address:
+                $ref: '#/components/examples/MatchDeviceByIPAddress'
+              Match Device By Multiple Identifiers:
+                $ref: '#/components/examples/MatchDeviceByMultipleIdentifiers'
+
+      responses:
+        "200":
+          $ref: '#/components/responses/200MatchIdentifier'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+        "401":
+          $ref: '#/components/responses/401Unauthorized'
+        "403":
+          $ref: '#/components/responses/403Forbidden'
+        "404":
+          $ref: '#/components/responses/404NotFound'
+        "422":
+          $ref: '#/components/responses/422UnprocessableContent'
+        "429":
+          $ref: '#/components/responses/429TooManyRequests'
+
 components:
   securitySchemes:
     openId:
@@ -365,8 +413,8 @@ components:
               description: Device identifier has been successfully retrieved when the device subscription was identified by a 3-legged access token or single device subscription identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
-                imeisv: "49015420323751800"
-                imei: "4901542032375181"
+                imeisv: "4901542032375180"
+                imei: "490154203237518"
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
@@ -376,8 +424,8 @@ components:
                 device:
                   phoneNumber: "+123456789"
                 lastChecked: "2024-02-20T10:41:38.657Z"
-                imeisv: "49015420323751800"
-                imei: "4901542032375181"
+                imeisv: "4901542032375180"
+                imei: "490154203237518"
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
@@ -442,8 +490,55 @@ components:
                 lastChecked: "2024-02-20T10:41:38.657Z"
                 ppid: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
 
+    200MatchIdentifier:
+      description: |
+        A match result has been successfully determined for the provided device identifier.
+        HTTP Status Code Mapping:
+        - 200 + match=true → The provided identifier MATCHES the network's record
+        - 200 + match=false → The provided identifier does NOT match (subscription and device are known, confirmed mismatch)
+        - 404 → Subscription cannot be resolved from device/token
+        - 422 → Subscription resolved but no deterministic result available (policy/regulation/no device info)
+        - 5xx → Transient or technical failures (timeouts, upstream errors)
+        Note: match=false is ONLY returned when a definitive comparison has been performed.
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/X-Correlator"
+      content:
+        application/json:
+          schema:
+            required:
+              - lastChecked
+              - match
+            allOf:
+              - $ref: "#/components/schemas/CommonResponseBody"
+              - $ref: "#/components/schemas/MatchResult"
+          examples:
+            Successful Match:
+              description: Device identifier match has been successfully determined when the device subscription was identified by a 3-legged access token or single device subscription identifier
+              value:
+                lastChecked: "2024-02-20T10:41:38.657Z"
+                match: true
+            Successful Non-Match:
+              description: Device identifier does not match when the device subscription was identified by a 3-legged access token or single device subscription identifier
+              value:
+                lastChecked: "2024-02-20T10:41:38.657Z"
+                match: false
+            Successful Match With Device Disambiguation:
+              description: Device identifier match has been successfully determined when a 2-legged access token and multiple device subscription identifiers were provided
+              value:
+                device:
+                  phoneNumber: "+123456789"
+                lastChecked: "2024-02-20T10:41:38.657Z"
+                match: true
+
     400BadRequest:
-      description: Bad Request
+      description: |
+        Invalid request syntax or malformed JSON.
+        This status is reserved for:
+        - Malformed JSON in the request body
+        - Invalid data types
+        - Invalid format (not matching required patterns)
+        Business validation errors should return 422 instead.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -553,7 +648,9 @@ components:
                 message: Client does not have sufficient permissions to perform this action.
 
     404NotFound:
-      description: Not found
+      description: |
+        Subscription cannot be resolved from the provided device identifiers or access token.
+        The network cannot map the request to a known subscription.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -571,7 +668,7 @@ components:
                     enum:
                       - IDENTIFIER_NOT_FOUND
           examples:
-            Device Cannot Be Found:
+            DeviceNotFound:
               description: The provided identifier cannot be matched to a device known to the API provider
               value:
                 status: 404
@@ -579,7 +676,14 @@ components:
                 message: The provided identifier cannot be matched to a device.
 
     422UnprocessableContent:
-      description: Unprocessable Content
+      description: |
+        Subscription found but the service cannot provide a deterministic match result.
+        This status is used for business validation errors:
+        - MISSING_IDENTIFIER: 2-legged token provided without any subscription identifier
+        - UNNECESSARY_IDENTIFIER: 3-legged token provided with additional device identifier
+        - Service cannot provide deterministic result due to:
+          * No usable device information available for the subscription
+          * Local policy or regulatory restrictions prevent returning match information
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
@@ -683,11 +787,11 @@ components:
         imeisv:
           type: string
           description: IMEISV of the device
-          example: "49015420323751800"
+          example: "4901542032375180"
         imei:
           type: string
           description: IMEI of the device
-          example: "4901542032375181"
+          example: "490154203237518"
 
     DeviceType:
       description: |
@@ -834,6 +938,45 @@ components:
       pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
       example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
+    MatchRequestBody:
+      description: Request body for match-identifier operation, containing an optional device subscription identifier and the device identifier to match against
+      allOf:
+        - $ref: "#/components/schemas/RequestBody"
+        - type: object
+          required:
+            - providedIdentifierType
+            - providedIdentifier
+          properties:
+            providedIdentifierType:
+              $ref: "#/components/schemas/ProvidedIdentifierType"
+            providedIdentifier:
+              type: string
+              description: The device identifier value to match against. Must match the format constraints for the specified identifier type.
+              example: "490154203237518"
+              # Pattern will be validated based on providedIdentifierType
+
+    ProvidedIdentifierType:
+      type: string
+      enum:
+        - IMEI
+        - IMEISV
+        - TAC
+      description: |
+        Type of the provided device identifier. Format requirements:
+        - IMEI: 15 digits (pattern: ^[0-9]{15}$)
+        - IMEISV: 16 digits (pattern: ^[0-9]{16}$)
+        - TAC: 8 digits (pattern: ^[0-9]{8}$)
+
+    MatchResult:
+      description: |
+        The result of matching the provided device identifier against the network's identifier for the subscription
+      type: object
+      properties:
+        match:
+          type: boolean
+          description: True if the provided device identifier matches the one the network currently associates with the subscription
+          example: true
+
   examples:
     IdentifyDeviceBy3LeggedToken:
       description: Empty JSON when device is identified by access token
@@ -863,3 +1006,38 @@ components:
             publicAddress: "84.125.93.10"
             publicPort: 59765
           networkAccessIdentifier: "123456789@example.com"
+
+    MatchDeviceBy3LeggedToken:
+      description: Match identifier when device is identified by access token
+      value:
+        providedIdentifierType: "IMEI"
+        providedIdentifier: "4901542032375181"
+
+    MatchDeviceByPhoneNumber:
+      description: Matching device identifier by phone number and provided IMEI
+      value:
+        device:
+          phoneNumber: "+123456789"
+        providedIdentifierType: "IMEI"
+        providedIdentifier: "490154203237518"
+
+    MatchDeviceByIPAddress:
+      description: Matching device identifier by IP address and provided TAC
+      value:
+        device:
+          ipv4Address:
+            publicAddress: "84.125.93.10"
+            publicPort: 59765
+        providedIdentifierType: "TAC"
+        providedIdentifier: "49015420"
+
+    MatchDeviceByMultipleIdentifiers:
+      description: Matching device identifier by multiple subscription identifiers and provided IMEISV
+      value:
+        device:
+          phoneNumber: "+123456789"
+          ipv4Address:
+            publicAddress: "84.125.93.10"
+            publicPort: 59765
+        providedIdentifierType: "IMEISV"
+        providedIdentifier: "49015420323751800"
