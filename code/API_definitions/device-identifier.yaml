@@ -939,7 +939,7 @@ components:
       example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
 
     MatchRequestBody:
-      description: Request body for match-identifier operation, containing an optional device subscription identifier and the device identifier to match against
+      description: Request body for match-identifier operation, containing an optional mobile device subscription identifier, and the physical device identifier to match against
       allOf:
         - $ref: "#/components/schemas/RequestBody"
         - type: object
