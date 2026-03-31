@@ -44,7 +44,7 @@ _The above section is automatically synchronized by CAMARA project-administratio
 
 ## Contributing
 * Meetings are held virtually
-    * Schedule: First Friday of each month at 09:00 UTC via Linux Foundation Zoom service
+    * Schedule: First Friday of each month at 15:00 UTC via Linux Foundation Zoom service
     * [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06-450f-b80a-229bb6a88c39) 
     * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
 * Mailing List
