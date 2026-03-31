@@ -951,6 +951,8 @@ components:
               $ref: "#/components/schemas/ProvidedIdentifierType"
             providedIdentifier:
               type: string
+              minLength: 8
+              maxLength: 16
               description: The device identifier value to match against. Must match the format constraints for the specified identifier type.
               example: "490154203237518"
               # Pattern will be validated based on providedIdentifierType
