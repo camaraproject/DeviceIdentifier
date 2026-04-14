@@ -672,13 +672,8 @@ components:
 
     422UnprocessableContent:
       description: |
-        Subscription found but the service cannot provide a deterministic match result.
-        This status is used for business validation errors:
-        - MISSING_IDENTIFIER: 2-legged token provided without any subscription identifier
-        - UNNECESSARY_IDENTIFIER: 3-legged token provided with additional device identifier
-        - Service cannot provide deterministic result due to:
-          * No usable device information available for the subscription
-          * Local policy or regulatory restrictions prevent returning match information
+        The request is valid, but it cannot be processed due to 
+        business, identification, or applicability conditions.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
