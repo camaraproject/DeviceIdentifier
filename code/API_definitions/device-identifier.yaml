@@ -493,13 +493,8 @@ components:
     200MatchIdentifier:
       description: |
         A match result has been successfully determined for the provided device identifier.
-        HTTP Status Code Mapping:
-        - 200 + match=true → The provided identifier MATCHES the network's record
-        - 200 + match=false → The provided identifier does NOT match (subscription and device are known, confirmed mismatch)
-        - 404 → Subscription cannot be resolved from device/token
-        - 422 → Subscription resolved but no deterministic result available (policy/regulation/no device info)
-        - 5xx → Transient or technical failures (timeouts, upstream errors)
-        Note: match=false is ONLY returned when a definitive comparison has been performed.
+        - `match=true` means the provided identifier matches the network's current record.
+        - `match=false` means the provided identifier does not match the network's current record.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
