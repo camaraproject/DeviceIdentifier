@@ -672,8 +672,7 @@ components:
 
     422UnprocessableContent:
       description: |
-        The request is valid, but it cannot be processed due to 
-        business, identification, or applicability conditions.
+        The request is valid, but it cannot be processed due to business, identification, or applicability conditions.
       headers:
         x-correlator:
           $ref: "#/components/headers/X-Correlator"
