@@ -1005,7 +1005,7 @@ components:
         providedIdentifier: "4901542032375181"
 
     MatchDeviceByPhoneNumber:
-      description: Matching device identifier by phone number and provided IMEI
+      description: Matching device identifier by phone number and provided IMEI using a 2-legged access token
       value:
         device:
           phoneNumber: "+123456789"
