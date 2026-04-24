@@ -1,5 +1,5 @@
 # device-identifier-matchIdentifier
-Feature: Camara Mobile Device Identifer API, vwip - Operation: matchIdentifier
+Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
   # Input to be provided by the implementation to the tests
   # References to OAS spec schemas refer to schemas specified in /code/API_definitions/device-identifier.yaml
@@ -15,7 +15,6 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: matchIdentifier
   #         | TAC                 | TAC1               |
   #         | Public IPv4 Address | PUBLICIPV4ADDRESS1 |
   #         | Public Port         | PUBLICPORT1        |
-  #         | NAI                 | NAI1               |
   # * A mobile device "DEVICE2" with the following parameter values:
   #         | Parameter           | Value              |
   #         |---------------------|--------------------|
@@ -24,7 +23,6 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: matchIdentifier
   #         | TAC                 | TAC2               |
   #         | Public IPv4 Address | PUBLICIPV4ADDRESS2 |
   #         | Public Port         | PUBLICPORT2        |
-  #         | NAI                 | NAI2               |
   # * A SIM card "SIMCARD1" from "TELCO1" and phone number "PHONENUMBER1"
   # * A SIM card "SIMCARD2" from "TELCO2" and phone number "PHONENUMBER2"
   # * A fixed line or unsupported line identifier "UNSUPPORTED_LINE"
@@ -210,6 +208,31 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: matchIdentifier
       | IMEISV                 | IMEISV1            |
       | TAC                    | TAC1               |
 
+  @DeviceIdentifier_matchIdentifier_200.05b_success_scenario_3-legged_token_after_device_swap_match
+  Scenario Outline: Match for new device identifier after device swap using 3-legged access token
+    Given SIMCARD1 is installed within DEVICE2, which is connected to the network
+    And SIMCARD1 is identified by the access token
+    And request property "$.device" does not exist
+    And request property "$.providedIdentifierType" is set to "<providedIdentifierType>"
+    And request property "$.providedIdentifier" is set to <providedIdentifier>
+    When the HTTPS "POST" request is sent
+    Then the response status code is 200
+    And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.match" exists and is true
+    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.imei" does not exist
+    And the response property "$.imeisv" does not exist
+    And the response property "$.tac" does not exist
+    And the response property "$.ppid" does not exist
+
+    Examples:
+      | providedIdentifierType | providedIdentifier |
+      | IMEI                   | IMEI2              |
+      | IMEISV                 | IMEISV2            |
+      | TAC                    | TAC2               |
+
   @DeviceIdentifier_matchIdentifier_200.06_success_scenario_2-legged_token_after_SIM_card_swap
   Scenario: Match current device identifier for DEVICE1 with SIMCARD2 using 2-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
@@ -315,10 +338,12 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: matchIdentifier
     And the response property "$.message" contains a user friendly text
 
     Examples:
-      | providedIdentifierType | providedIdentifier |
-      | IMEI                   | 12345678901234     |
-      | IMEISV                 | 123456789012345    |
-      | TAC                    | 1234567            |
+      | providedIdentifierType | providedIdentifier  |
+      | IMEI                   | 12345678901234      |
+      | IMEISV                 | 123456789012345     |
+      | TAC                    | 1234567             |
+      | IMEI                   | 1234567890ABCD      |
+      | TAC                    | 12!45678            |
 
   # Generic 401 errors
 
@@ -403,7 +428,8 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: matchIdentifier
   @DeviceIdentifier_matchIdentifier_422.2_service_not_applicable
   Scenario: Service not applicable for the identified mobile device subscription
     Given that service is not applicable for the identified mobile device subscription due to line type, policy, regulation, or no deterministic device information being available
-    And the identified subject is otherwise valid
+    And SIMCARD1 is identified by the access token
+    And request property "$.device" does not exist
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
     When the request "matchIdentifier" is sent
