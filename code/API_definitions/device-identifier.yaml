@@ -755,6 +755,7 @@ components:
     CommonResponseBody:
       description: |
         Common parameters to be included in all responses
+      type: object
       properties:
         device:
           description: The device subscription identifier that was used to identify the device whose identifier is being returned. If this property is not present, then the device subscription identifier specified in the request was used.
