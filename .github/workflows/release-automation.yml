@@ -1,9 +1,8 @@
-# Release Automation Caller Workflow
+# CAMARA Release Automation — Caller Workflow
 #
-# This workflow template should be copied to .github/workflows/ in API repositories
-# that want to use the CAMARA release automation.
-#
-# Copy this file as: .github/workflows/release-automation.yml
+# Installed in API repositories by the CAMARA onboarding campaign
+# (camaraproject/project-administration). No modification needed;
+# all configuration is centralized in camaraproject/tooling.
 #
 # Triggers:
 # - Slash commands: /create-snapshot, /discard-snapshot, /delete-draft, /publish-release
