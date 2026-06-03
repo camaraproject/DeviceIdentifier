@@ -199,7 +199,7 @@ paths:
         - openId:
             - device-identifier:retrieve-identifier
       parameters:
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to create a new session
@@ -245,7 +245,7 @@ paths:
         - openId:
             - device-identifier:retrieve-type
       parameters:
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to create a new session
@@ -291,7 +291,7 @@ paths:
         - openId:
             - device-identifier:retrieve-ppid
       parameters:
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to identify the mobile subscription when a 2-legged access token is being used
@@ -337,7 +337,7 @@ paths:
         - openId:
             - device-identifier:match-identifier
       parameters:
-        - $ref: "#/components/parameters/x-correlator"
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
         description: Parameters to identify the mobile subscription and provide the device identifier to match
@@ -399,7 +399,7 @@ components:
       description: An device identifier has been found for the specified subscriber
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -436,7 +436,7 @@ components:
       description: A device identifier has been found for the specified subscriber
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -468,7 +468,7 @@ components:
       description: A pseudonymous device identifier has been found for the specified mobile subscriber
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -499,7 +499,7 @@ components:
         - `match=false` means the provided identifier does not match the network's current record.
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -538,7 +538,7 @@ components:
         Business validation errors should return 422 instead.
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -596,7 +596,7 @@ components:
       description: Unauthorized
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -622,7 +622,7 @@ components:
       description: Forbidden
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -650,7 +650,7 @@ components:
         The network cannot map the request to a known subscription.
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -677,7 +677,7 @@ components:
         The request is valid, but it cannot be processed due to business, identification, or applicability conditions.
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -724,7 +724,7 @@ components:
       description: Too Many Requests
       headers:
         x-correlator:
-          $ref: "#/components/headers/X-Correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
