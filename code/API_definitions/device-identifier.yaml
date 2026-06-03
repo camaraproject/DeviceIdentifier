@@ -379,21 +379,6 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
-  parameters:
-    x-correlator:
-      name: x-correlator
-      in: header
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-
-  headers:
-    X-Correlator:
-      description: Correlation id for the different services
-      required: false
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-
   responses:
     200RetrieveIdentifier:
       description: An device identifier has been found for the specified subscriber
