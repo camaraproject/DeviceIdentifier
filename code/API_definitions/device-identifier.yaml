@@ -752,9 +752,8 @@ components:
         lastChecked:
           description: |
             Date and time that the information was last confirmed by the mobile operator to be correct. It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone.
-          type: string
-          format: date-time
-          example: "2024-02-20T10:41:38.657Z"
+          allOf:
+            - $ref: "../common/CAMARA_common.yaml#/components/schemas/DateTime"
 
     DeviceIdentifier:
       description: |
