@@ -762,7 +762,7 @@ components:
         device:
           description: The device subscription identifier that was used to identify the device whose identifier is being returned. If this property is not present, then the device subscription identifier specified in the request was used.
           allOf:
-            - $ref: "#/components/schemas/DeviceResponse"
+            - $ref: "../common/CAMARA_common.yaml#/components/schemas/DeviceResponse"
             - example: {"phoneNumber": "+123456789"}
         lastChecked:
           description: |
@@ -916,7 +916,7 @@ components:
       type: object
       properties:
         device:
-          $ref: "#/components/schemas/Device"
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
 
     SingleIpv4Addr:
       description: A single IPv4 address with no subnet mask
