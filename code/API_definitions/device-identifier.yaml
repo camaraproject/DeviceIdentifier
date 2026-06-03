@@ -183,7 +183,9 @@ servers:
 
 tags:
   - name: Get Device Identifiers
-    description: Retrieve details about the device being used by a mobile subscriber
+    description: Retrieve details about the identity of the device being used by a mobile subscriber
+  - name: Verify Device Identifiers
+    description: Verify the identity of the device being used by a mobile subscriber against a known identifier
 
 paths:
   "/retrieve-identifier":
@@ -776,10 +778,12 @@ components:
       properties:
         imeisv:
           type: string
+          maxLength: 16
           description: IMEISV of the device
           example: "4901542032375180"
         imei:
           type: string
+          maxLength: 15
           description: IMEI of the device
           example: "490154203237518"
 
@@ -790,14 +794,17 @@ components:
       properties:
         tac:
           type: string
+          maxLength: 8
           description: IMEI TAC of the device
           example: "49015420"
         model:
           type: string
+          maxLength: 32
           description: Model of the device
           example: "3110"
         manufacturer:
           type: string
+          maxLength: 32
           description: Manufacturer of the device
           example: "Nokia"
 
@@ -808,6 +815,7 @@ components:
       properties:
         ppid:
           type: string
+          maxLength: 128
           description: A PPID for the identified physical device
           example: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
 
