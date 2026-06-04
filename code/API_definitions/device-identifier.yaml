@@ -802,7 +802,9 @@ components:
       properties:
         ppid:
           type: string
+          minLength: 64
           maxLength: 128
+          patterm: ^[a-fA-F0-9]{64,128}$
           description: A PPID for the identified physical device
           example: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
 
