@@ -232,7 +232,7 @@ paths:
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
   "/retrieve-type":
     post:
@@ -278,7 +278,7 @@ paths:
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
   "/retrieve-ppid":
     post:
@@ -324,7 +324,7 @@ paths:
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
   "/match-identifier":
     post:
@@ -370,7 +370,7 @@ paths:
         "422":
           $ref: '#/components/responses/422UnprocessableContent'
         "429":
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
 components:
   securitySchemes:
