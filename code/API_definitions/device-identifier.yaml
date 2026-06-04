@@ -230,7 +230,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
         "422":
-          $ref: '#/components/responses/422UnprocessableContent'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic422'
         "429":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
@@ -276,7 +276,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
         "422":
-          $ref: '#/components/responses/422UnprocessableContent'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic422'
         "429":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
@@ -322,7 +322,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
         "422":
-          $ref: '#/components/responses/422UnprocessableContent'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic422'
         "429":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
@@ -368,7 +368,7 @@ paths:
         "404":
           $ref: '#/components/responses/404NotFound'
         "422":
-          $ref: '#/components/responses/422UnprocessableContent'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/Generic422'
         "429":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Generic429'
 
