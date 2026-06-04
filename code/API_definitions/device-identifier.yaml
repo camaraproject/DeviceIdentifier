@@ -375,9 +375,7 @@ paths:
 components:
   securitySchemes:
     openId:
-      description: Common security scheme for all CAMARA APIs
-      type: openIdConnect
-      openIdConnectUrl: https://example.com/.well-known/openid-configuration
+      $ref: "../common/CAMARA_common.yaml#/components/securitySchemes/openId"
 
   responses:
     200RetrieveIdentifier:
