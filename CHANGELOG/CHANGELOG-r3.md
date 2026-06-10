@@ -69,15 +69,16 @@ The API definition(s) are based on
 
 ### Added
 
-* N/A
+* Add match-identifier endpoint by @ALIIQBAL786 in https://github.com/camaraproject/DeviceIdentifier/pull/151
+* Add common template code to info.description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/170
 
 ### Changed
 
-* N/A
+* fix: changed networkaccessidentifier example to use example.com by @Kevsy in https://github.com/camaraproject/DeviceIdentifier/pull/147
 
 ### Fixed
 
-* N/A
+* Fix typo in test scenario 200.05 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/155
 
 ### Removed
 
