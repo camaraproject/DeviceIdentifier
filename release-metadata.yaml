@@ -2,7 +2,7 @@ repository:
   repository_name: DeviceIdentifier
   release_tag: r3.1
   release_type: pre-release-alpha
-  release_date: null
+  release_date: '2026-06-11T09:59:38Z'
   src_commit_sha: 8b2e2951995408acfa10afbe6eb3edcd69851650
 apis:
 - api_name: device-identifier
