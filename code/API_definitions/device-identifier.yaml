@@ -465,7 +465,7 @@ components:
               - ppid
             allOf:
               - $ref: "#/components/schemas/CommonResponseBody"
-              - $ref: "#/components/schemas/DevicePPID"
+              - $ref: "#/components/schemas/DevicePeePeeIyeDee"
           examples:
             Successful PPID Retrieval:
               description: Device PPID has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
@@ -691,7 +691,7 @@ components:
           description: Manufacturer of the device
           example: "Nokia"
 
-    DevicePPID:
+    DevicePeePeeIyeDee:
       description: |
         The individual physical mobile device identifier, expressed as a PPID (Pairwise Pseudonymous Identifier)
       type: object
