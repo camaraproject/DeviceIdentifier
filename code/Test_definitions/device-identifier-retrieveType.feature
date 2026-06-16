@@ -73,8 +73,8 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And no subject is identified by the access token
-    And request property "$.device.ipv4address.publicAddress" is set to PUBLICIPV4ADDRESS
-    And request property "$.device.ipv4address.publicPort" is set to PUBLICPORT
+    And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS
+    And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT
     When the HTTPS "POST" request is sent
     Then the response status code is 200
     And the response body complies with the 200RetrieveType schema at "/components/schemas/200RetrieveType"
