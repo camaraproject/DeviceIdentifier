@@ -408,6 +408,15 @@ components:
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
+            Successful Identifier Retrieval With Null lastChecked Field:
+              description: Device identifier has been successfully retrieved but the API provider has no information on when that information was last confirmed to be correct
+              value:
+                lastChecked: null
+                imeisv: "4901542032375180"
+                imei: "490154203237518"
+                tac: "49015420"
+                model: "3110"
+                manufacturer: "Nokia"
             Successful Identifier Retrieval With Device Disambiguation:
               description: Device identifier has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
               value:
@@ -442,6 +451,13 @@ components:
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
+            Successful Type Retrieval With Null lastChecked Field:
+              description: Device identifier has been successfully retrieved but the API provider has no information on when that information was last confirmed to be correct
+              value:
+                lastChecked: null
+                tac: "49015420"
+                model: "3110"
+                manufacturer: "Nokia"
             Successful Type Retrieval With Device Disambiguation:
               description: Device type has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
               value:
@@ -471,6 +487,11 @@ components:
               description: Device PPID has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
+                ppid: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
+            Successful PPID Retrieval With Null lastChecked Field:
+              description: Device identifier has been successfully retrieved but the API provider has no information on when that information was last confirmed to be correct
+              value:
+                lastChecked: null
                 ppid: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
             Successful PPID Retrieval With Device Disambiguation:
               description: Device PPID has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
@@ -502,6 +523,11 @@ components:
               description: Device identifier match has been successfully determined when the device subscription was identified by a 3-legged access token or single device subscription identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
+                match: true
+            Successful Match With Null lastChecked Field:
+              description: Device identifier match has been successfully determined but the API provider has no information on when this information was last confirmed to be correct
+              value:
+                lastChecked: null
                 match: true
             Successful Non-Match:
               description: Device identifier does not match when the device subscription was identified by a 3-legged access token or single device subscription identifier
@@ -648,8 +674,11 @@ components:
         lastChecked:
           description: |
             Date and time that the information was last confirmed by the mobile operator to be correct. It must follow [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) and must have time zone.
-          allOf:
-            - $ref: "../common/CAMARA_common.yaml#/components/schemas/DateTime"
+          type: string
+          format: date-time
+          maxLength: 64
+          nullable: true
+          example: "2018-04-05T17:31:00Z"
 
     DeviceIdentifier:
       description: |
