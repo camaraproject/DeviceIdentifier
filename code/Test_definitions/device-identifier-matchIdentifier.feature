@@ -342,7 +342,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
       | IMEI                   | 12345678901234      |
       | IMEISV                 | 123456789012345     |
       | TAC                    | 1234567             |
-      | IMEI                   | 1234567890ABCD      |
+      | IMEI                   | 1234567890ABCDE     |
+      | IMEISV                 | 1234567890ABCDEF    |
       | TAC                    | 12!45678            |
 
   # Generic 401 errors
