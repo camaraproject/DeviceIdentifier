@@ -289,7 +289,7 @@ paths:
     post:
       summary: Get a pseudonymous identifier for device being used by a given mobile subscriber
       description: Get a pseudonymous identifier for device being used by a given mobile subscriber
-      operationId: retrievePPID
+      operationId: retrievePpid
       tags:
         - Get Device Identifiers
       security:
