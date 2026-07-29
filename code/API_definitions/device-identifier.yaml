@@ -691,7 +691,7 @@ components:
           description: Manufacturer of the device
           example: "Nokia"
 
-    DevicePeePeeIyeDee:
+    DevicePpid:
       description: |
         The individual physical mobile device identifier, expressed as a PPID (Pairwise Pseudonymous Identifier)
       type: object
