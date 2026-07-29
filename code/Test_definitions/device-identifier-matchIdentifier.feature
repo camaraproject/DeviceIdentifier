@@ -454,26 +454,12 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "MISSING_IDENTIFIER"
     And the response property "$.message" contains a user friendly text
 
-  @DeviceIdentifier_matchIdentifier_422.4_device_token_mismatch
-  Scenario: Inconsistent access token context for the device
-    Given the request body property "$.device" is set to a valid testing device
-    And the request body property "$.providedIdentifierType" is set to "IMEI"
-    And the request body property "$.providedIdentifier" is set to IMEI1
-    And the header "Authorization" is set to a valid access token obtained for a different device
-    When the request "matchIdentifier" is sent
-    Then the response status code is 422
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response header "Content-Type" is "application/json"
-    And the response property "$.status" is 422
-    And the response property "$.code" is "UNNECESSARY_IDENTIFIER"
-    And the response property "$.message" contains a user friendly text
-
-  @DeviceIdentifier_matchIdentifier_422.5_unnecessary_device_identifier_in_request
-  Scenario: Explicit device identifier provided when device is identified by the access token
-    Given the request body property "$.device" is set to a valid testing device
-    And the request body property "$.providedIdentifierType" is set to "IMEI"
-    And the request body property "$.providedIdentifier" is set to IMEI1
-    And the header "Authorization" is set to a valid access token for that same device
+  @DeviceIdentifier_matchIdentifier_422.4_unnecessary_device_identifier_in_request
+  Scenario: Explicit device identifier provided when device is already identified by the access token
+    Given the header "Authorization" is set to a valid access token that identifies a device
+    And the request body property "$.providedIdentifierType" exists and is set to a valid value
+    And the request body property "$.providedIdentifier" exists and is set to a valid value
+    And the request body property "$.device" exists and is set to a valid value
     When the request "matchIdentifier" is sent
     Then the response status code is 422
     And the response header "x-correlator" has same value as the request header "x-correlator"
