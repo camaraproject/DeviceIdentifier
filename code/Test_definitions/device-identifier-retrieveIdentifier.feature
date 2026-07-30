@@ -351,7 +351,6 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
 
   # This scenario is valid only for 3-legged access tokens
   @DeviceIdentifier_retrieveIdentifier_422.4_device_token_mismatch
-  Scenario: Inconsistent access token context for the device
   Scenario: Explicit device identifier provided when a 3-legged access token identifies a different device
     Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And the request body property "$.device" exists and identifies DEVICE2 containing SIMCARD2
