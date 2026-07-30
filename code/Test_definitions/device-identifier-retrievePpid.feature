@@ -241,7 +241,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   @DeviceIdentifier_retrievePpid_403.1_missing_access_token_scope
   Scenario: Missing access token scope
-    Given the header "Authorization" is set to an access token that does not include scope device-identifier:retrieve-ppid
+    Given the header "Authorization" is set to a valid access token that does not include scope device-identifier:retrieve-ppid
     When the request "retrievePpid" is sent
     Then the response status code is 403
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -255,7 +255,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   # This scenario usually occurs for a 2-legged access token when the identified device is managed by a different API provider
   @DeviceIdentifier_retrievePpid_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
-    Given that the device cannot be identified from the access token
+    Given the header "Authorization" is set to a valid access token that does not identify a device
     And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
     When the request "retrievePpid" is sent
     Then the response status code is 404
@@ -271,7 +271,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   @DeviceIdentifier_retrievePpid_422.1_unsupported_device_identifier
   Scenario: A 2-legged access token is used, but none of the provided device identifiers is supported by the implementation
     Given that some types of device identifiers are not supported by the implementation
-    And the header "Authorization" is set to an access token that does not identify a device
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And the request body property "$.device" exists but only includes device identifiers that are not supported by the implementation
     When the request "retrievePpid" is sent
     Then the response status code is 422
@@ -310,7 +310,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   # This scenario is only applicable to 3-legged access tokens
   @DeviceIdentifier_retrievePpid_422.4_device_token_mismatch
   Scenario: Explicit device identifier provided when a 3-legged access token is being used
-    Given the header "Authorization" is set to a valid access token that identifies the DEVICE1 containing SIMCARD1
+    Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And the request body property "$.device" exists and identifies DEVICE2 containing SIMCARD2
     When the request "retrievePpid" is sent
     Then the response status code is 422
@@ -323,7 +323,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   # This scenario is only applicable to 3-legged access tokens
   @DeviceIdentifier_retrievePpid_422.5_unnecessary_device_identifier_in_request
   Scenario: Explicit device identifier provided when device is identified by the access token
-    Given the header "Authorization" is set to a valid access token that identifies the DEVICE1 containing SIMCARD1
+    Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And the request body property "$.device" exists and identifies DEVICE1 containing SIMCARD1
     When the request "retrievePpid" is sent
     Then the response status code is 422
