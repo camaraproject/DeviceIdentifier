@@ -41,10 +41,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   # Success scenarios
 
+  # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrievePpid_200.01_success_scenario_3-legged_token
   Scenario: Retrieve device PPID for DEVICE1 with SIM card SIMCARD1 using 3-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And SIMCARD1 is identified by the access token
+    And the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And request property "$.device" does not exist
     When the request "retrievePpid" is sent
     Then the response status code is 200
@@ -54,10 +55,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.ppid" exists and is equal to PPID1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by phone number
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrievePpid" is sent
     Then the response status code is 200
@@ -67,10 +69,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.ppid" exists and is equal to PPID1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT
     When the request "retrievePpid" is sent
@@ -81,10 +84,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.ppid" exists and is equal to PPID1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
 
+  # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrievePpid_200.04_success_scenario_3-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 using 3-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
-    And SIMCARD2 is identified by the access token
+    And the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD2
     And request property "$.device" does not exist
     When the request "retrievePpid" is sent
     Then the response status code is 200
@@ -94,10 +98,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.ppid" exists and is equal to PPID1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.05_success_scenario_2-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 using 2-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     When the request "retrievePpid" is sent
     Then the response status code is 200
@@ -107,10 +112,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.ppid" exists and is equal to PPID1
     And the response property "$.lastChecked" exists and is a valid date-time in the past
 
+  # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrievePpid_200.06_success_scenario_3-legged_token_after_device_swap
   Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 using 3-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
-    And SIMCARD1 is identified by the access token
+    And the header "Authorization" is set to a valid access token that identifies DEVICE2 containing SIMCARD1
     And request property "$.device" does not exist
     When the request "retrievePpid" is sent
     Then the response status code is 200
@@ -120,10 +126,11 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.ppid" exists and is equal to PPID2
     And the response property "$.lastChecked" exists and is a valid date-time in the past
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.07_success_scenario_2-legged_token_after_device_swap
   Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 using 2-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrievePpid" is sent
     Then the response status code is 200
@@ -135,6 +142,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   # Generic 400 errors
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
     Given the request body is set to any value which is not compliant with the schema at "/components/schemas/RequestBody"
@@ -146,6 +154,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_400.2_no_request_body
   Scenario: Missing request body
     Given the request body is not included
@@ -157,6 +166,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_400.3_device_empty
   Scenario: The device value is an empty object
     Given the request body property "$.device" is set to: {}
@@ -168,12 +178,13 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_400.4_device_identifiers_not_schema_compliant
   # Test every type of identifier even if not supported by the implementation
   # Note that device schema validation errors (if any) should be thrown even if a 3-legged access token is being used
   Scenario Outline: Some device identifier value does not comply with the schema
-    Given the request body property "<device_identifier>" does not comply with the OAS schema at "<oas_spec_schema>"
-    And a 2-legged or 3-legged access token is being used
+    Given a 2-legged or 3-legged access token is being used
+    And the request body property "<device_identifier>" does not comply with the OAS schema at "<oas_spec_schema>"
     When the request "retrievePpid" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -189,10 +200,12 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
       | $.device.ipv6Address             | /components/schemas/DeviceIpv6Address       |
       | $.device.networkAccessIdentifier | /components/schemas/NetworkAccessIdentifier |
 
+  # This scenario is only valid for 2-legged access tokens
   # The maximum is considered in the schema so a generic schema validator may fail and generate a 400 INVALID_ARGUMENT without further distinction, and both could be accepted
   @DeviceIdentifier_retrievePpid_400.5_out_of_range_port
   Scenario: Out of range port
-    Given the request body property  "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
+    Given the header "Authorization" is set to a valid access token that does not identify a device
+    And the request body property "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
     When the request "retrievePpid" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -239,6 +252,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   # Generic 403 errors
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_403.1_missing_access_token_scope
   Scenario: Missing access token scope
     Given the header "Authorization" is set to a valid access token that does not include scope device-identifier:retrieve-ppid
@@ -252,7 +266,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   # Generic 404 errors
 
-  # This scenario usually occurs for a 2-legged access token when the identified device is managed by a different API provider
+  # This scenario is valid only for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
     Given the header "Authorization" is set to a valid access token that does not identify a device
