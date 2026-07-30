@@ -415,7 +415,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
   # This scenario is valid only for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
-    Given that the device cannot be identified from the access token
+    Given the header "Authorization" is set to a valid access token that does not identify a device
     And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
