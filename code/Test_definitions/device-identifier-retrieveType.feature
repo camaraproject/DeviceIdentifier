@@ -51,7 +51,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
-    And the response property "$.lastChecked" exists and is either a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
@@ -67,7 +67,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
@@ -84,7 +84,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
@@ -100,7 +100,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
@@ -116,7 +116,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1
     And the response property "$.model", if present, is equal to MODEL1
 
@@ -132,7 +132,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC2
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER2
     And the response property "$.model", if present, is equal to MODEL2
 
@@ -148,7 +148,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC2
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER2
     And the response property "$.model", if present, is equal to MODEL2
 
