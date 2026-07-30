@@ -32,20 +32,21 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the resource "/device-identifier/vwip/match-identifier"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
+    And the header "x-correlator" complies with the schema at "/components/schemas/XCorrelator"
     And the request body is compliant with the MatchRequestBody schema defined by "/components/schemas/MatchRequestBody"
     And one of the scopes associated with the access token is device-identifier:match-identifier
 
   # Success scenarios
 
+  # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.01_success_scenario_3-legged_token
   Scenario Outline: Match current device identifier for DEVICE1 with SIMCARD1 using 3-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And SIMCARD1 is identified by the access token
+    And the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And request property "$.device" does not exist
     And request property "$.providedIdentifierType" is set to "<providedIdentifierType>"
     And request property "$.providedIdentifier" is set to <providedIdentifier>
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -63,14 +64,15 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
       | IMEISV                 | IMEISV1            |
       | TAC                    | TAC1               |
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
   Scenario: Match current device identifier for DEVICE1 with SIMCARD1 identifying device by phone number
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     And request property "$.providedIdentifierType" is set to "IMEI"
     And request property "$.providedIdentifier" is set to IMEI1
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -82,14 +84,15 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.tac" does not exist
     And the response property "$.ppid" does not exist
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.02b_success_scenario_2-legged_token_identifying_device_by_phone_number_non_match
   Scenario: Non-match current device identifier for DEVICE1 with SIMCARD1 identifying device by phone number
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     And request property "$.providedIdentifierType" is set to "IMEI"
     And request property "$.providedIdentifier" is set to IMEI2
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -101,15 +104,16 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.tac" does not exist
     And the response property "$.ppid" does not exist
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
   Scenario: Match current device identifier for DEVICE1 with SIMCARD1 identifying device by IPv4 address
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS1
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT1
     And request property "$.providedIdentifierType" is set to "TAC"
     And request property "$.providedIdentifier" is set to TAC1
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -121,15 +125,16 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.tac" does not exist
     And the response property "$.ppid" does not exist
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.03b_success_scenario_2-legged_token_identifying_device_by_IPv4_address_non_match
   Scenario: Non-match current device identifier for DEVICE1 with SIMCARD1 identifying device by IPv4 address
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS1
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT1
     And request property "$.providedIdentifierType" is set to "TAC"
     And request property "$.providedIdentifier" is set to TAC2
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -141,16 +146,17 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.tac" does not exist
     And the response property "$.ppid" does not exist
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.04_success_scenario_2-legged_token_identifying_device_by_multiple_identifiers
   Scenario: Match current device identifier for DEVICE1 with SIMCARD1 identifying device by multiple identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS1
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT1
     And request property "$.providedIdentifierType" is set to "IMEISV"
     And request property "$.providedIdentifier" is set to IMEISV1
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -162,16 +168,17 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.tac" does not exist
     And the response property "$.ppid" does not exist
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.04b_success_scenario_2-legged_token_identifying_device_by_multiple_identifiers_non_match
   Scenario: Non-match current device identifier for DEVICE1 with SIMCARD1 identifying device by multiple identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS1
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT1
     And request property "$.providedIdentifierType" is set to "IMEISV"
     And request property "$.providedIdentifier" is set to IMEISV2
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -183,14 +190,15 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.tac" does not exist
     And the response property "$.ppid" does not exist
 
+  # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.05_success_scenario_3-legged_token_after_device_swap_mismatch
   Scenario Outline: Non-match for old device identifier after device swap using 3-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
-    And SIMCARD1 is identified by the access token
+    And the header "Authorization" is set to a valid access token that identifies DEVICE2 containing SIMCARD1
     And request property "$.device" does not exist
     And request property "$.providedIdentifierType" is set to "<providedIdentifierType>"
     And request property "$.providedIdentifier" is set to <providedIdentifier>
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -208,14 +216,15 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
       | IMEISV                 | IMEISV1            |
       | TAC                    | TAC1               |
 
+  # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.05b_success_scenario_3-legged_token_after_device_swap_match
   Scenario Outline: Match for new device identifier after device swap using 3-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
-    And SIMCARD1 is identified by the access token
+    And the header "Authorization" is set to a valid access token that identifies DEVICE2 containing SIMCARD1
     And request property "$.device" does not exist
     And request property "$.providedIdentifierType" is set to "<providedIdentifierType>"
     And request property "$.providedIdentifier" is set to <providedIdentifier>
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -233,14 +242,15 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
       | IMEISV                 | IMEISV2            |
       | TAC                    | TAC2               |
 
+  # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.06_success_scenario_2-legged_token_after_SIM_card_swap
   Scenario: Match current device identifier for DEVICE1 with SIMCARD2 using 2-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
-    And no subject is identified by the access token
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     And request property "$.providedIdentifierType" is set to "IMEI"
     And request property "$.providedIdentifier" is set to IMEI1
-    When the HTTPS "POST" request is sent
+    When the request "matchIdentifier" is sent
     Then the response status code is 200
     And the response body complies with the 200MatchIdentifier schema at "/components/schemas/200MatchIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -254,6 +264,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
   # Generic 400 errors
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
     Given the request body is set to any value which is not compliant with the schema at "/components/schemas/MatchRequestBody"
@@ -265,6 +276,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.2_no_request_body
   Scenario: Missing request body
     Given the request body is not included
@@ -276,9 +288,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.2b_device_empty
   Scenario: The device value is an empty object
-    Given the request body property "$.device" is set to: {}
+    Given the request body property "$.device" exists and is set to: {}
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
     When the request "matchIdentifier" is sent
@@ -289,13 +302,14 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.3_device_identifiers_not_schema_compliant
   # Note that device schema validation errors (if any) should be thrown even if a 3-legged access token is being used
   Scenario Outline: Some device identifier value does not comply with the schema
-    Given the request body property "$.providedIdentifierType" is set to "IMEI"
+    Given a valid 2-legged or 3-legged access token is being used
+    And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
     And the request body property "<device_identifier>" does not comply with the OAS schema at "<oas_spec_schema>"
-    And a 2-legged or 3-legged access token is being used
     When the request "matchIdentifier" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -311,9 +325,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
       | $.device.ipv6Address             | /components/schemas/DeviceIpv6Address |
       | $.device.networkAccessIdentifier | /components/schemas/NetworkAccessIdentifier |
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.4_invalid_identifier_type
   Scenario: Unsupported providedIdentifierType enum value
-    Given the request body property "$.device.phoneNumber" is set to PHONENUMBER1
+    Given a valid 2-legged or 3-legged access token is being used
     And the request body property "$.providedIdentifierType" is set to "INVALID_TYPE"
     And the request body property "$.providedIdentifier" is set to IMEI1
     When the request "matchIdentifier" is sent
@@ -324,9 +339,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.5_invalid_identifier_format
   Scenario Outline: Provided identifier does not comply with the format required by the identifier type
-    Given the request body property "$.device.phoneNumber" is set to PHONENUMBER1
+    Given a valid 2-legged or 3-legged access token is being used
     And the request body property "$.providedIdentifierType" is set to "<providedIdentifierType>"
     And the request body property "$.providedIdentifier" is set to "<providedIdentifier>"
     When the request "matchIdentifier" is sent
@@ -342,7 +358,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
       | IMEI                   | 12345678901234      |
       | IMEISV                 | 123456789012345     |
       | TAC                    | 1234567             |
-      | IMEI                   | 1234567890ABCD      |
+      | IMEI                   | 1234567890ABCDE     |
+      | IMEISV                 | 1234567890ABCDEF    |
       | TAC                    | 12!45678            |
 
   # Generic 401 errors
@@ -382,9 +399,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
   # Generic 403 errors
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_403.1_missing_access_token_scope
   Scenario: Missing access token scope
-    Given the header "Authorization" is set to an access token that does not include scope device-identifier:match-identifier
+    Given the header "Authorization" is set to a valid access token that does not include scope device-identifier:match-identifier
     When the request "matchIdentifier" is sent
     Then the response status code is 403
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -395,9 +413,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
   # Generic 404 errors
 
+  # This scenario is valid only for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
-    Given that the device cannot be identified from the access token
+    Given the header "Authorization" is set to a valid access token that does not identify a device
     And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
@@ -411,9 +430,11 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
   # Generic 422 errors
 
+  # This scenario is valid only for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_422.1_device_identifiers_unsupported
   Scenario: None of the provided device identifiers is supported by the implementation
-    Given that some type of device identifiers are not supported by the implementation
+    Given that some types of device identifiers are not supported by the implementation
+    And the header "Authorization" is set to a valid access token that does not identify a device
     And the request body property "$.device" only includes device identifiers not supported by the implementation
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
@@ -425,11 +446,13 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "UNSUPPORTED_IDENTIFIER"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_422.2_service_not_applicable
   Scenario: Service not applicable for the identified mobile device subscription
-    Given that service is not applicable for the identified mobile device subscription due to line type, policy, regulation, or no deterministic device information being available
-    And SIMCARD1 is identified by the access token
-    And request property "$.device" does not exist
+    #  The service may not be application due to, for example, line type, policy, regulation, or no deterministic device information being available
+    Given that the matchIdentifier service is not applicable for the identified mobile device subscription
+    And a valid 2-legged or 3-legged access token is being used
+    And a valid device is identified by the access token or the request body property "$.device"
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
     When the request "matchIdentifier" is sent
@@ -440,6 +463,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "SERVICE_NOT_APPLICABLE"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid only for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_422.3_unidentifiable_device
   Scenario: Device not included and cannot be deduced from the access token
     Given the header "Authorization" is set to a valid access token which does not identify a device
@@ -454,12 +478,13 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "MISSING_IDENTIFIER"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid only for 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_422.4_device_token_mismatch
-  Scenario: Inconsistent access token context for the device
-    Given the request body property "$.device" is set to a valid testing device
+  Scenario: Explicit device identifier provided when a 3-legged access token identifies a different device
+    Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
+    And the request body property "$.device" exists and identifies DEVICE2 containing SIMCARD2
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
-    And the header "Authorization" is set to a valid access token obtained for a different device
     When the request "matchIdentifier" is sent
     Then the response status code is 422
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -468,12 +493,13 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "UNNECESSARY_IDENTIFIER"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is valid only for 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_422.5_unnecessary_device_identifier_in_request
-  Scenario: Explicit device identifier provided when device is identified by the access token
-    Given the request body property "$.device" is set to a valid testing device
+  Scenario: Explicit device identifier provided when a 3-legged access token identifies the same device
+    Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
+    And the request body property "$.device" exists and also identifies DEVICE1 containing SIMCARD1
     And the request body property "$.providedIdentifierType" is set to "IMEI"
     And the request body property "$.providedIdentifier" is set to IMEI1
-    And the header "Authorization" is set to a valid access token for that same device
     When the request "matchIdentifier" is sent
     Then the response status code is 422
     And the response header "x-correlator" has same value as the request header "x-correlator"
