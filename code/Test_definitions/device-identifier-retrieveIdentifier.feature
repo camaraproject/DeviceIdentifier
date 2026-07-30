@@ -230,7 +230,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
   # The maximum is considered in the schema so a generic schema validator may fail and generate a 400 INVALID_ARGUMENT without further distinction, and both could be accepted
   @DeviceIdentifier_retrieveIdentifier_400.5_out_of_range_port
   Scenario: Out of range port
-    And the header "Authorization" is set to a valid access token that does not identify a device
+    Given the header "Authorization" is set to a valid access token that does not identify a device
     And the request body property "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
     When the request "retrieveIdentifier" is sent
     Then the response status code is 400
