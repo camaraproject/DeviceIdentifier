@@ -309,7 +309,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   # This scenario is only applicable to 3-legged access tokens
   @DeviceIdentifier_retrievePpid_422.4_device_token_mismatch
-  Scenario: Explicit device identifier provided when a 3-legged access token is being used
+  Scenario: Explicit device identifier provided when a 3-legged access token identifies a different device
     Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And the request body property "$.device" exists and identifies DEVICE2 containing SIMCARD2
     When the request "retrievePpid" is sent
@@ -322,7 +322,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
 
   # This scenario is only applicable to 3-legged access tokens
   @DeviceIdentifier_retrievePpid_422.5_unnecessary_device_identifier_in_request
-  Scenario: Explicit device identifier provided when device is identified by the access token
+  Scenario: Explicit device identifier provided when a 3-legged access token identifies the same device
     Given the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And the request body property "$.device" exists and identifies DEVICE1 containing SIMCARD1
     When the request "retrievePpid" is sent
