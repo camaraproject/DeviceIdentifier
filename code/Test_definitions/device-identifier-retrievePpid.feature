@@ -310,9 +310,8 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   # This scenario is only applicable to 3-legged access tokens
   @DeviceIdentifier_retrievePpid_422.4_device_token_mismatch
   Scenario: Explicit device identifier provided when a 3-legged access token is being used
-    # To test this, an access token has to be obtained for a different device
-    Given the header "Authorization" is set to a valid access token that identifies a device
-    And the request body property "$.device" exists and identifies a different device
+    Given the header "Authorization" is set to a valid access token that identifies the DEVICE1 containing SIMCARD1
+    And the request body property "$.device" exists and identifies DEVICE2 containing SIMCARD2
     When the request "retrievePpid" is sent
     Then the response status code is 422
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -324,8 +323,8 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   # This scenario is only applicable to 3-legged access tokens
   @DeviceIdentifier_retrievePpid_422.5_unnecessary_device_identifier_in_request
   Scenario: Explicit device identifier provided when device is identified by the access token
-    Given the header "Authorization" is set to a valid access token that identifies a device
-    And the request body property "$.device" exists and identifies that same device
+    Given the header "Authorization" is set to a valid access token that identifies the DEVICE1 containing SIMCARD1
+    And the request body property "$.device" exists and identifies DEVICE1 containing SIMCARD1
     When the request "retrievePpid" is sent
     Then the response status code is 422
     And the response header "x-correlator" has same value as the request header "x-correlator"
