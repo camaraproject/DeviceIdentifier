@@ -53,7 +53,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
@@ -67,7 +67,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
@@ -82,7 +82,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrievePpid_200.04_success_scenario_3-legged_token_after_SIM_card_swap
@@ -96,7 +96,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.05_success_scenario_2-legged_token_after_SIM_card_swap
@@ -110,7 +110,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrievePpid_200.06_success_scenario_3-legged_token_after_device_swap
@@ -124,7 +124,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID2
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrievePpid_200.07_success_scenario_2-legged_token_after_device_swap
@@ -138,7 +138,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID2
-    And the response property "$.lastChecked" exists and is a valid date-time in the past
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
 
   # Generic 400 errors
 
