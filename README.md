@@ -19,6 +19,7 @@ API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/czLe)
 * The API provides the API consumer with the ability to:  
   * Retrieve the current identity (IMEI) of the mobile device being used by a given mobile subscriber
   * Retrieve the type (manufacturer and model) of the mobile device being used by a given mobile subscriber
+  * Confirm whether or not the identity of the mobile device being used by a given mobile subscriber matches a known identifier
 * Describe, develop, document, and test the API
 * Started: October 2022
 
