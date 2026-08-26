@@ -1,5 +1,5 @@
 # device-identifier-retrievePpid
-Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
+Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
 
   # Input to be provided by the implementation to the tests
   # References to OAS spec schemas refer to schemas specified in /code/API_definitions/device-identifier.yaml
@@ -7,7 +7,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   # * api_root: API root of the server URL
   #
   # Testing assets:
-  # * A mobile device "DEVICE1" with the folowing parameter values:
+  # * A mobile device "DEVICE1" with the following parameter values:
   #         | Parameter           | Value             | Comment                          |
   #         |---------------------|-------------------|----------------------------------|
   #         | IMEISV              | IMEISV1           |                                  |
@@ -18,7 +18,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrievePpid
   #         | Public IPv4 Address | PUBLICIPV4ADDRESS |                                  |
   #         | Public Port         | PUBLICPORT        |                                  |
   #         | PPID                | PPID1             | API Provider dependent parameter |
-  # * A mobile device "DEVICE2" with the folowing parameter values:
+  # * A mobile device "DEVICE2" with the following parameter values:
   #         | Parameter           | Value             | Comment                          |
   #         |---------------------|-------------------|----------------------------------|
   #         | IMEISV              | IMEISV2           |                                  |
