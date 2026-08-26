@@ -85,19 +85,33 @@ Changes documented below are compared to version 0.3.0.
 
 ### Breaking changes
 
-* N/A
+* Mandatory response property `lastChecked` can now be set to `null` if the API provider does not have this information
 
 ### Added
 
-* N/A
+* Add match-identifier endpoint by @ALIIQBAL786 in https://github.com/camaraproject/DeviceIdentifier/pull/151
+* Add common template code to info.description by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/170
+* Add conformance test definitions for the new /match-identifier endpoint  by @usmanTheCoder in https://github.com/camaraproject/DeviceIdentifier/pull/160
+* [Added] Update test cases for device identifier matching by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/188
 
 ### Changed
 
-* N/A
+* fix: changed networkaccessidentifier example to use example.com by @Kevsy in https://github.com/camaraproject/DeviceIdentifier/pull/147
+* Update API definition following Commonalities r4.3 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/167
+  * Use header, parameter and schema definition from Commonalities where possible rather than maintain local copies
+  * Add `maxLength` directive for all strings
+  * Tightening of `ppid` format by adding `minLength: 64`, `maxLength: 128`, and `pattern: ^[a-fA-F0-9]{64,128}$` constraints
+* [Changed] Update and clarify tests for applicability to 2-legged and/or 3-legged access tokens by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/189
+* [Changed] Make lastChecked property nullable and add examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/184
+* [Changed] Various documentation additions, updates and fixes for consistency, accuracy and clarity by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/198
 
 ### Fixed
 
-* N/A
+* Fix typo in test scenario 200.05 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/155
+* [Fixed] Fix ipv4Address typo in feature files by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/182
+* [Fixed] Rename schema DevicePPID to use PascalCase by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/179
+* [Fixed] Fix test definition component references by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/197
+* [Fixed] Fix examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/196
 
 ### Removed
 
