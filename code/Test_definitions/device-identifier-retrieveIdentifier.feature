@@ -33,8 +33,8 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And the resource "/device-identifier/vwip/retrieve-identifier"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "/components/schemas/XCorrelator"
-    And the request body is compliant with the RequestBody schema defined by "/components/schemas/RequestBody"
+    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
+    And the request body is compliant with the RequestBody schema defined by "#/components/schemas/RequestBody"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
 
   # Success scenarios
@@ -47,7 +47,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device" does not exist
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
@@ -65,7 +65,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
@@ -84,7 +84,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
@@ -102,7 +102,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device" does not exist
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
@@ -120,7 +120,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI1
@@ -138,7 +138,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device" does not exist
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI2
@@ -156,7 +156,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrieveIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveIdentifier schema at "/components/schemas/200RetrieveIdentifier"
+    And the response body complies with the 200RetrieveIdentifier schema at "#/components/responses/200RetrieveIdentifier"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.imei" exists and is equal to IMEI2
@@ -171,7 +171,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveIdentifie
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrieveIdentifier_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
-    Given the request body is set to any value which is not compliant with the schema at "/components/schemas/RequestBody"
+    Given the request body is set to any value which is not compliant with the schema at "#/components/schemas/RequestBody"
     When the request "retrieveIdentifier" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
