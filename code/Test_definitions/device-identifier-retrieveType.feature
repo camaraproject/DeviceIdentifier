@@ -1,5 +1,5 @@
 # device-identifier-retrieveType
-Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
+Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # Input to be provided by the implementation to the tests
   # References to OAS spec schemas refer to schemas specified in /code/API_definitions/device-identifier.yaml
@@ -7,7 +7,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
   # * api_root: API root of the server URL
   #
   # Testing assets:
-  # * A mobile device "DEVICE1" with the folowing parameter values:
+  # * A mobile device "DEVICE1" with the following parameter values:
   #         | Parameter           | Value             |
   #         |---------------------|-------------------|
   #         | IMEISV              | IMEISV1           |
@@ -17,7 +17,7 @@ Feature: Camara Mobile Device Identifer API, vwip - Operation: retrieveType
   #         | Model               | MODEL1            |
   #         | Public IPv4 Address | PUBLICIPV4ADDRESS |
   #         | Public Port         | PUBLICPORT        |
-  # * A mobile device "DEVICE2" with the folowing parameter values:
+  # * A mobile device "DEVICE2" with the following parameter values:
   #         | Parameter           | Value             |
   #         |---------------------|-------------------|
   #         | IMEISV              | IMEISV2           |
