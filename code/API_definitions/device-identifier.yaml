@@ -574,12 +574,6 @@ components:
                 status: 400
                 code: INVALID_ARGUMENT
                 message: "At least one of phoneNumber, networkAccessIdentifier, ipv4Address and ipv6Address must be specified"
-            Inconsistent Device Properties:
-              description: Device parameters provided identify different devices
-              value:
-                status: 400
-                code: INVALID_ARGUMENT
-                message: "Multiple inconsistent device parameters specified"
             Invalid Network Access Identifier:
               value:
                 status: 400
@@ -814,7 +808,7 @@ components:
     MatchDeviceBy3LeggedToken:
       description: Match identifier when device is identified by access token
       value:
-        providedIdentifierType: "IMEI"
+        providedIdentifierType: "IMEISV"
         providedIdentifier: "4901542032375181"
 
     MatchDeviceByPhoneNumber:
