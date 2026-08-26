@@ -35,7 +35,7 @@ info:
     The Device Identifier API allows the API consumer to obtain the IMEI and associated parameters for a specified mobile subscription identifier or equivalent. The mobile subscription can be identified using one or more of the following subscription identifiers:
     - the subscription phone number (also known as MSISDN)
     - the subscription network access identifier, which is a domain specific identifier typically allocated to devices that do not require voice / SMS connectivity
-    - the current IP address and port alloacted to the device, which must be an IPv6 or public IPv4 address
+    - the current IP address and port allocated to the device, which must be an IPv6 or public IPv4 address
 
     The API can be called by an API consumer to establish an identifier for the physical device currently being used by the mobile subscription. The information returned will depend upon the consent that the end user (i.e. mobile subscription owner) has given for that information to be provided to the API consumer. For example, if the end user has not consented to any information about their device being given, then the API consumer will receive an error in response to their request. Otherwise, the information that the end user has consented to being given will be returned.
 
@@ -145,19 +145,21 @@ info:
     In cases where personal data is processed by the API and users can exercise their rights through mechanisms such as opt-in and/or opt-out, the use of three-legged access tokens is mandatory. This ensures that the API remains in compliance with privacy regulations, upholding the principles of transparency and user-centric privacy-by-design.
     <!-- CAMARA:MANDATORY:authorization-and-authentication:END -->
 
+    <!-- CAMARA:MANDATORY:identifying-device-from-access-token:BEGIN -->
     # Identifying the device from the access token
 
     This API requires the API consumer to identify a device as the subject of the API as follows:
     - When the API is invoked using a two-legged access token, the subject will be identified from the optional `device` object, which therefore MUST be provided.
-
     - When a three-legged access token is used however, this optional identifier MUST NOT be provided, as the subject will be uniquely identified from the access token.
 
     This approach simplifies API usage for API consumers using a three-legged access token to invoke the API by relying on the information that is associated with the access token and was identified during the authentication process.
 
     ## Error handling:
+
     - If the subject cannot be identified from the access token and the optional `device` object is not included in the request, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
 
     - If the subject can be identified from the access token and the optional `device` object is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same device is identified by these two methods, as the server is unable to make this comparison.
+    <!-- CAMARA:MANDATORY:identifying-device-from-access-token:END -->
 
     # Multi-SIM scenario handling
 
@@ -207,7 +209,7 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
-        description: Parameters to create a new session
+        description: Request body definition for the retrieveIdentifier operation
         required: true
         content:
           application/json:
@@ -253,7 +255,7 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
-        description: Parameters to create a new session
+        description: Request body definition for the retrieveType operation
         required: true
         content:
           application/json:
@@ -299,7 +301,7 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
-        description: Parameters to identify the mobile subscription when a 2-legged access token is being used
+        description: Request body definition for the retrievePpid operation
         required: true
         content:
           application/json:
@@ -345,7 +347,7 @@ paths:
         - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
 
       requestBody:
-        description: Parameters to identify the mobile subscription and provide the device identifier to match
+        description: Request body definition for the matchIdentifier operation
         required: true
         content:
           application/json:
@@ -384,7 +386,7 @@ components:
 
   responses:
     200RetrieveIdentifier:
-      description: An device identifier has been found for the specified subscriber
+      description: A physical device identifier has been found for the specified mobile device subscription
       headers:
         x-correlator:
           $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
@@ -400,7 +402,7 @@ components:
               - $ref: "#/components/schemas/DeviceType"
           examples:
             Successful Identifier Retrieval:
-              description: Device identifier has been successfully retrieved when the device subscription was identified by a 3-legged access token or single device subscription identifier
+              description: The physical device identifier has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
                 imeisv: "4901542032375180"
@@ -409,7 +411,7 @@ components:
                 model: "3110"
                 manufacturer: "Nokia"
             Successful Identifier Retrieval With Null lastChecked Field:
-              description: Device identifier has been successfully retrieved but the API provider has no information on when that information was last confirmed to be correct
+              description: The physical device identifier has been successfully retrieved but the API provider has no information as to when that information was last confirmed to be correct
               value:
                 lastChecked: null
                 imeisv: "4901542032375180"
@@ -418,7 +420,7 @@ components:
                 model: "3110"
                 manufacturer: "Nokia"
             Successful Identifier Retrieval With Device Disambiguation:
-              description: Device identifier has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
+              description: A physical device identifier has been successfully retrieved when a 2-legged access token and multiple device identifiers were provided
               value:
                 device:
                   phoneNumber: "+123456789"
@@ -430,7 +432,7 @@ components:
                 manufacturer: "Nokia"
 
     200RetrieveType:
-      description: A device identifier has been found for the specified subscriber
+      description: A physical device type has been found for the specified mobile device subscription
       headers:
         x-correlator:
           $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
@@ -445,21 +447,21 @@ components:
               - $ref: "#/components/schemas/DeviceType"
           examples:
             Successful Type Retrieval:
-              description: Device type has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
+              description: The physical device type has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
             Successful Type Retrieval With Null lastChecked Field:
-              description: Device identifier has been successfully retrieved but the API provider has no information on when that information was last confirmed to be correct
+              description: The physical device type has been successfully retrieved but the API provider has no information as to when that information was last confirmed to be correct
               value:
                 lastChecked: null
                 tac: "49015420"
                 model: "3110"
                 manufacturer: "Nokia"
             Successful Type Retrieval With Device Disambiguation:
-              description: Device type has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
+              description: The physical device type has been successfully retrieved when a 2-legged access token and multiple device identifiers were provided
               value:
                 device:
                   phoneNumber: "+123456789"
@@ -469,7 +471,7 @@ components:
                 manufacturer: "Nokia"
 
     200RetrievePPID:
-      description: A pseudonymous device identifier has been found for the specified mobile subscriber
+      description: A pseudonymous device identifier has been found for the specified mobile device subscription
       headers:
         x-correlator:
           $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
@@ -484,17 +486,17 @@ components:
               - $ref: "#/components/schemas/DevicePpid"
           examples:
             Successful PPID Retrieval:
-              description: Device PPID has been successfully retrieved when the device subcsription was identified by a 3-legged access token or single device subscription identifier
+              description: The physical device PPID has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
                 ppid: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
             Successful PPID Retrieval With Null lastChecked Field:
-              description: Device identifier has been successfully retrieved but the API provider has no information on when that information was last confirmed to be correct
+              description: The physical device PPID has been successfully retrieved but the API provider has no information as to when that information was last confirmed to be correct
               value:
                 lastChecked: null
                 ppid: "b083f65ccdad365d7489fff24b6d5074b30c12b6d81db3404d25964ffd908813"
             Successful PPID Retrieval With Device Disambiguation:
-              description: Device PPID has been successfully retrieved when a 2-legged access token and multiple device subscription identifiers were provided
+              description: The physical device PPID has been successfully retrieved when a 2-legged access token and multiple device identifiers were provided
               value:
                 device:
                   phoneNumber: "+123456789"
@@ -520,22 +522,22 @@ components:
               - $ref: "#/components/schemas/MatchResult"
           examples:
             Successful Match:
-              description: Device identifier match has been successfully determined when the device subscription was identified by a 3-legged access token or single device subscription identifier
+              description: The physical device identifier match has been successfully determined for the mobile device subscription identified by a 3-legged access token or single device identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
                 match: true
             Successful Match With Null lastChecked Field:
-              description: Device identifier match has been successfully determined but the API provider has no information on when this information was last confirmed to be correct
+              description: The physical device identifier match has been successfully determined but the API provider has no information as to when this information was last confirmed to be correct
               value:
                 lastChecked: null
                 match: true
             Successful Non-Match:
-              description: Device identifier does not match when the device subscription was identified by a 3-legged access token or single device subscription identifier
+              description: The physical device identifier does not match the mobile device subscription identified by a 3-legged access token or single device identifier
               value:
                 lastChecked: "2024-02-20T10:41:38.657Z"
                 match: false
             Successful Match With Device Disambiguation:
-              description: Device identifier match has been successfully determined when a 2-legged access token and multiple device subscription identifiers were provided
+              description: The physical device identifier match has been successfully determined when a 2-legged access token and multiple device identifiers were provided
               value:
                 device:
                   phoneNumber: "+123456789"
@@ -653,7 +655,7 @@ components:
                     enum:
                       - IDENTIFIER_NOT_FOUND
           examples:
-            DeviceNotFound:
+            Mobile Device Identifier Not Found:
               description: The provided identifier cannot be matched to a device known to the API provider
               value:
                 status: 404
@@ -700,14 +702,14 @@ components:
 
     DeviceType:
       description: |
-        The physical device type, as expressed by Type Approval Code, manufacturer name and model name
+        The physical device type, as expressed by Type Allocation Code (TAC), manufacturer name and model name
       type: object
       properties:
         tac:
           type: string
           maxLength: 8
           pattern: ^[0-9]{8}$
-          description: IMEI TAC of the device
+          description: IMEI Type Allocation Code of the device
           example: "49015420"
         model:
           type: string
