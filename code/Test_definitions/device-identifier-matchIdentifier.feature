@@ -1,5 +1,5 @@
 # device-identifier-matchIdentifier
-Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
+Feature: Camara Mobile Device Identifier API, v0.4.0-rc.1 - Operation: matchIdentifier
 
   # Input to be provided by the implementation to the tests
   # References to OAS spec schemas refer to schemas specified in /code/API_definitions/device-identifier.yaml
@@ -29,7 +29,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
   Background: Common Device Identifier matchIdentifier setup
     Given an environment at "apiRoot"
-    And the resource "/device-identifier/vwip/match-identifier"
+    And the resource "/device-identifier/v0.4rc1/match-identifier"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
