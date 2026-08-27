@@ -682,7 +682,7 @@ components:
         - $ref: "#/components/schemas/CommonResponseBody"
         - $ref: "#/components/schemas/DeviceIdentifier"
         - $ref: "#/components/schemas/DeviceType"
-    
+
     DeviceType:
       description: |
         The physical device type, as expressed by Type Allocation Code (TAC), manufacturer name and model name
