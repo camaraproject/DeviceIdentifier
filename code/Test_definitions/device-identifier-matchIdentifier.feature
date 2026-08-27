@@ -239,7 +239,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
-    Given the request body is set to any value which is not compliant with the schema at "#/components/schemas/MatchRequestBody"
+    Given the request body is set to any value which is not compliant with the OAS schema at "#/components/schemas/MatchRequestBody"
     When the request "matchIdentifier" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -391,7 +391,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
   @DeviceIdentifier_matchIdentifier_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
     Given the header "Authorization" is set to a valid access token that does not identify a device
-    And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
+    And the request body property "$.device" is compliant with the OAS schema at "#/components/schemas/Device" but does not identify a valid device
     And the request body property "$.imei" is set to IMEI1
     And no other request properties are present
     When the request "matchIdentifier" is sent
