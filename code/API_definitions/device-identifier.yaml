@@ -621,7 +621,7 @@ components:
                     enum:
                       - PERMISSION_DENIED
           examples:
-            Permision Denied:
+            Permission Denied:
               description: Permission denied. OAuth2 token access does not have the required scope or when the user fails operational security
               value:
                 status: 403
