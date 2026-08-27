@@ -34,7 +34,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
-    And the request body is compliant with the RequestBody schema defined by "#/components/schemas/RequestBody"
+    And the request body complies with the OAS schema at "#/components/schemas/RequestBody"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
 
   # Success scenarios
@@ -171,7 +171,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrieveIdentifier_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
-    Given the request body is set to any value which is not compliant with the schema at "#/components/schemas/RequestBody"
+    Given the request body is set to any value which is not compliant with the OAS schema at "#/components/schemas/RequestBody"
     When the request "retrieveIdentifier" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
