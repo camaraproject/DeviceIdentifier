@@ -411,6 +411,22 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
 
+  # This scenario is only valid for 2-legged access tokens
+  @DeviceIdentifier_matchIdentifier_403.2_consent_not_granted
+  Scenario: The end user of SIMCARD1 has not granted consent
+    Given the end user of SIMCARD1 has not consented to the API consumer using scope device-identifier:match-identifier for any purpose for that device
+    And SIMCARD1 is installed within DEVICE1, which is connected to the network
+    And the header "Authorization" is set to a valid access token that does not identify a device
+    And request property "$.device.phoneNumber" is set to PHONENUMBER1
+    And request property "$.imei" is set to IMEI1
+    When the request "matchIdentifier" is sent
+    Then the response status code is 403
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
+    And the response property "$.status" is 403
+    And the response property "$.code" is "PERMISSION_DENIED"
+    And the response property "$.message" contains a user friendly text
+
   # Generic 404 errors
 
   # This scenario is valid only for 2-legged access tokens
