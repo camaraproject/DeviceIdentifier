@@ -412,7 +412,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response property "$.message" contains a user friendly text
 
   # This scenario is only valid for 2-legged access tokens
-  @DeviceIdentifier_matchIdentifier_403.1_consent_not_given
+  @DeviceIdentifier_matchIdentifier_403.2_consent_not_granted
   Scenario: The end user of SIMCARD1 has not granted consent
     Given the end user of SIMCARD1 has not consented to the API consumer using scope device-identifier:match-identifier for any purpose for that device
     And SIMCARD1 is installed within DEVICE1, which is connected to the network
