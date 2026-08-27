@@ -683,6 +683,13 @@ components:
         - $ref: "#/components/schemas/DeviceIdentifier"
         - $ref: "#/components/schemas/DeviceType"
 
+    DeviceName:
+      description: Generic schema for device name
+      type: string
+      minLength: 1
+      maxLength: 32
+      pattern: ^.{1,32}$
+
     DeviceType:
       description: |
         The physical device type, as expressed by Type Allocation Code (TAC), manufacturer name and model name
@@ -695,15 +702,15 @@ components:
           description: IMEI Type Allocation Code of the device
           example: "49015420"
         model:
-          type: string
-          maxLength: 32
           description: Model of the device
-          example: "3110"
+          allOf:
+            - $ref: "#/components/schemas/DeviceName
+            - example: "3110"
         manufacturer:
-          type: string
-          maxLength: 32
           description: Manufacturer of the device
-          example: "Nokia"
+          allOf:
+            - $ref: "#/components/schemas/DeviceName
+            - example: "Nokia"
 
     RetrieveTypeResponse:
       description: Response body definition for retrieveType operation
