@@ -282,7 +282,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
   @DeviceIdentifier_retrieveType_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
     Given the header "Authorization" is set to a valid access token that does not identify a device
-    And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
+    And the request body property "$.device" is compliant with the OAS schema at "#/components/schemas/Device" but does not identify a valid device
     When the request "retrieveType" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
