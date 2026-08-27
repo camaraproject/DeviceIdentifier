@@ -393,7 +393,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/scheams/RetrieveIdentifierResponse"
+            $ref: "#/components/schemas/RetrieveIdentifierResponse"
           examples:
             Successful Identifier Retrieval:
               description: The physical device identifier has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
@@ -433,7 +433,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/scheams/RetrieveTypeResponse"
+            $ref: "#/components/schemas/RetrieveTypeResponse"
           examples:
             Successful Type Retrieval:
               description: The physical device type has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
@@ -467,7 +467,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/scheams/RetrievePpidResponse"
+            $ref: "#/components/schemas/RetrievePpidResponse"
           examples:
             Successful PPID Retrieval:
               description: The physical device PPID has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
@@ -498,7 +498,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/scheams/MatchIdentifierResponse"
+            $ref: "#/components/schemas/MatchIdentifierResponse"
           examples:
             Successful Match:
               description: The physical device identifier match has been successfully determined for the mobile device subscription identified by a 3-legged access token or single device identifier
