@@ -17,9 +17,9 @@ API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/czLe)
 
 * Service API “DeviceIdentifier” (see [APIBacklog](https://github.com/camaraproject/APIBacklog/blob/main/documentation/APIbacklog.md)) 
 * The API provides the API consumer with the ability to:  
-  * Retrieve the current identity (IMEI) of the mobile device being used by a given mobile subscriber
-  * Retrieve the type (manufacturer and model) of the mobile device being used by a given mobile subscriber
-  * Confirm whether or not the identity of the mobile device being used by a given mobile subscriber matches a known identifier
+  * Retrieve an identifier (IMEI) or a pseudonymised identifier (PPID) for the physical mobile device being used by a given mobile subscriber
+  * Retrieve the type (manufacturer and model) of the physical mobile device being used by a given mobile subscriber
+  * Confirm whether or not the identity of the physical mobile device being used by a given mobile subscriber matches a known identifier
 * Describe, develop, document, and test the API
 * Started: October 2022
 
