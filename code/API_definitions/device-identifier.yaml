@@ -352,9 +352,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: "#/components/schemas/MatchRequestBody"
-                - additionalProperties: false
+              $ref: "#/components/schemas/MatchRequestBody"
             examples:
               Match Device IMEISV By 3-Legged Access Token:
                 $ref: '#/components/examples/MatchDeviceBy3LeggedToken'
