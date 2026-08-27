@@ -393,13 +393,7 @@ components:
       content:
         application/json:
           schema:
-            required:
-              - lastChecked
-              - imei
-            allOf:
-              - $ref: "#/components/schemas/CommonResponseBody"
-              - $ref: "#/components/schemas/DeviceIdentifier"
-              - $ref: "#/components/schemas/DeviceType"
+            $ref: "#/components/schemas/RetrieveIdentifierResponse"
           examples:
             Successful Identifier Retrieval:
               description: The physical device identifier has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
@@ -439,12 +433,7 @@ components:
       content:
         application/json:
           schema:
-            required:
-              - lastChecked
-              - tac
-            allOf:
-              - $ref: "#/components/schemas/CommonResponseBody"
-              - $ref: "#/components/schemas/DeviceType"
+            $ref: "#/components/schemas/RetrieveTypeResponse"
           examples:
             Successful Type Retrieval:
               description: The physical device type has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
@@ -478,12 +467,7 @@ components:
       content:
         application/json:
           schema:
-            required:
-              - lastChecked
-              - ppid
-            allOf:
-              - $ref: "#/components/schemas/CommonResponseBody"
-              - $ref: "#/components/schemas/DevicePpid"
+            $ref: "#/components/schemas/RetrievePpidResponse"
           examples:
             Successful PPID Retrieval:
               description: The physical device PPID has been successfully retrieved when the mobile device subscription was identified by a 3-legged access token or single device identifier
@@ -514,12 +498,7 @@ components:
       content:
         application/json:
           schema:
-            required:
-              - lastChecked
-              - match
-            allOf:
-              - $ref: "#/components/schemas/CommonResponseBody"
-              - $ref: "#/components/schemas/MatchResult"
+            $ref: "#/components/schemas/MatchIdentifierResponse"
           examples:
             Successful Match:
               description: The physical device identifier match has been successfully determined for the mobile device subscription identified by a 3-legged access token or single device identifier
@@ -742,6 +721,23 @@ components:
         imei:
           $ref: "#/components/schemas/Imei"
 
+    RetrieveIdentifierResponse:
+      description: Response body definition for retrieveIdentifier operation
+      required:
+        - lastChecked
+        - imei
+      allOf:
+        - $ref: "#/components/schemas/CommonResponseBody"
+        - $ref: "#/components/schemas/DeviceIdentifier"
+        - $ref: "#/components/schemas/DeviceType"
+
+    DeviceName:
+      description: Generic schema for device name
+      type: string
+      minLength: 1
+      maxLength: 32
+      pattern: ^.{1,32}$
+
     DeviceType:
       description: |
         The physical device type, as expressed by Type Allocation Code (TAC), manufacturer name and model name
@@ -750,15 +746,24 @@ components:
         tac:
           $ref: "#/components/schemas/Tac"
         model:
-          type: string
-          maxLength: 32
           description: Model of the device
-          example: "3110"
+          allOf:
+            - $ref: "#/components/schemas/DeviceName"
+            - example: "3110"
         manufacturer:
-          type: string
-          maxLength: 32
           description: Manufacturer of the device
-          example: "Nokia"
+          allOf:
+            - $ref: "#/components/schemas/DeviceName"
+            - example: "Nokia"
+
+    RetrieveTypeResponse:
+      description: Response body definition for retrieveType operation
+      required:
+        - lastChecked
+        - tac
+      allOf:
+        - $ref: "#/components/schemas/CommonResponseBody"
+        - $ref: "#/components/schemas/DeviceType"
 
     DevicePpid:
       description: |
@@ -767,6 +772,15 @@ components:
       properties:
         ppid:
           $ref: "#/components/schemas/Ppid"
+
+    RetrievePpidResponse:
+      description: Response body definition for retrievePpid operation
+      required:
+        - lastChecked
+        - ppid
+      allOf:
+        - $ref: "#/components/schemas/CommonResponseBody"
+        - $ref: "#/components/schemas/DevicePpid"
 
     MatchResult:
       description: |
@@ -777,6 +791,15 @@ components:
           type: boolean
           description: True if the provided device identifier matches the one the network currently associates with the subscription
           example: true
+
+    MatchIdentifierResponse:
+      description: Response body definition for matchIdentifier operation
+      required:
+        - lastChecked
+        - match
+      allOf:
+        - $ref: "#/components/schemas/CommonResponseBody"
+        - $ref: "#/components/schemas/MatchResult"
 
   examples:
     IdentifyDeviceBy3LeggedToken:

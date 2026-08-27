@@ -47,7 +47,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device" does not exist
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
@@ -63,7 +63,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
@@ -80,7 +80,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
@@ -96,7 +96,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device" does not exist
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
@@ -112,7 +112,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC1
@@ -128,7 +128,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device" does not exist
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC2
@@ -144,7 +144,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrieveType" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrieveType schema at "#/components/responses/200RetrieveType"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.tac" exists and is equal to TAC2

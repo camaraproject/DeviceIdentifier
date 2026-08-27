@@ -49,7 +49,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device" does not exist
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
@@ -63,7 +63,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
@@ -78,7 +78,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device.ipv4Address.publicPort" is set to PUBLICPORT
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
@@ -92,7 +92,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device" does not exist
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
@@ -106,7 +106,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID1
@@ -120,7 +120,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device" does not exist
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID2
@@ -134,7 +134,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
     When the request "retrievePpid" is sent
     Then the response status code is 200
-    And the response body complies with the 200RetrievePPID schema at "#/components/responses/200RetrievePPID"
+    And the response body complies with the OAS schema at "#/components/schemas/RetrievePpidResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.ppid" exists and is equal to PPID2
