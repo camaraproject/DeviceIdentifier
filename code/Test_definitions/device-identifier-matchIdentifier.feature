@@ -33,7 +33,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
-    And the request body is compliant with the MatchRequestBody schema defined by "#/components/schemas/MatchRequestBody"
+    And the request body complies with the OAS schema at "#/components/schemas/MatchRequestBody"
     And one of the scopes associated with the access token is device-identifier:match-identifier
 
   # Success scenarios
@@ -148,7 +148,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
     And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
-    And the response property "$.device" exists and complies with the DeviceResponse schema at "#/components/schemas/DeviceResponse"
+    And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
     And no other response properties are present
 
   # This scenario is only valid for 2-legged access tokens
@@ -168,7 +168,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is false
     And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
-    And the response property "$.device" exists and complies with the DeviceResponse schema at "#/components/schemas/DeviceResponse"
+    And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
     And no other response properties are present
 
   # This scenario is only valid for 3-legged access tokens
