@@ -354,13 +354,13 @@ paths:
             schema:
               $ref: "#/components/schemas/MatchRequestBody"
             examples:
-              Match Device By 3-Legged Access Token:
+              Match Device IMEISV By 3-Legged Access Token:
                 $ref: '#/components/examples/MatchDeviceBy3LeggedToken'
-              Match Device By Phone Number:
+              Match Device IMEI By Phone Number:
                 $ref: '#/components/examples/MatchDeviceByPhoneNumber'
-              Match Device By IP Address:
+              Match Device TAC By IP Address:
                 $ref: '#/components/examples/MatchDeviceByIPAddress'
-              Match Device By Multiple Identifiers:
+              Match Device IMEISV By Multiple Identifiers:
                 $ref: '#/components/examples/MatchDeviceByMultipleIdentifiers'
 
       responses:
@@ -810,19 +810,19 @@ components:
           networkAccessIdentifier: "123456789@example.com"
 
     MatchDeviceBy3LeggedToken:
-      description: Match identifier when device is identified by access token
+      description: Match IMEISV when device is identified using a 3-legged access token
       value:
         imeisv: "4901542032375181"
 
     MatchDeviceByPhoneNumber:
-      description: Matching device identifier by phone number and provided IMEI using a 2-legged access token
+      description: Matching IMEI when identifying device by phone number and using a 2-legged access token
       value:
         device:
           phoneNumber: "+123456789"
         imei: "490154203237518"
 
     MatchDeviceByIPAddress:
-      description: Matching device identifier by IP address and provided TAC
+      description: Matching TAC when identifying device by IP address and using a 2-legged access token
       value:
         device:
           ipv4Address:
@@ -831,7 +831,7 @@ components:
         tac: "49015420"
 
     MatchDeviceByMultipleIdentifiers:
-      description: Matching device identifier by multiple subscription identifiers and provided IMEISV
+      description: Matching IMEISV when identifying device by multiple identifiers and using a 2-legged access token
       value:
         device:
           phoneNumber: "+123456789"
