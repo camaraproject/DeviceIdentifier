@@ -660,9 +660,9 @@ components:
     Imei:
       description: Schema for the International Mobile Equipment Identity (IMEI) of a physical mobile device
       type: string
-      maxLength: 16
-      pattern: ^[0-9]{16}$
-      example: "4901542032375180"
+      maxLength: 15
+      pattern: ^[0-9]{15}$
+      example: "490154203237518"
 
     ImeiSv:
       description: Schema for the International Mobile Equipment Identity - Software Version (IMEISV) of a physical mobile device
