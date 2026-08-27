@@ -35,8 +35,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the resource "/device-identifier/vwip/retrieve-ppid"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
-    And the request body is compliant with the RequestBody schema defined by "#/components/schemas/RequestBody"
+    And the header "x-correlator" complies with the OAS schema at "#/components/schemas/XCorrelator"
+    And the request body complies with the OAS schema at "#/components/schemas/RequestBody"
     And one of the scopes associated with the access token is device-identifier:retrieve-ppid
 
   # Success scenarios
@@ -319,7 +319,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
   @DeviceIdentifier_retrievePpid_404.1_device_not_found
   Scenario: An identifier cannot be matched to a valid device
     Given the header "Authorization" is set to a valid access token that does not identify a device
-    And the request body property "$.device" is compliant with the request body schema but does not identify a valid device
+    And the request body property "$.device" is compliant with the OAS schema at "#/components/schemas/Device" but does not identify a valid device
     When the request "retrievePpid" is sent
     Then the response status code is 404
     And the response header "x-correlator" has same value as the request header "x-correlator"
