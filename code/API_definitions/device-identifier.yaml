@@ -692,7 +692,6 @@ components:
     RequestBody:
       description: Common request body to allow optional Device object to be passed
       type: object
-      additionalProperties: false
       properties:
         device:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
