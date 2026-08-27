@@ -704,12 +704,12 @@ components:
         model:
           description: Model of the device
           allOf:
-            - $ref: "#/components/schemas/DeviceName
+            - $ref: "#/components/schemas/DeviceName"
             - example: "3110"
         manufacturer:
           description: Manufacturer of the device
           allOf:
-            - $ref: "#/components/schemas/DeviceName
+            - $ref: "#/components/schemas/DeviceName"
             - example: "Nokia"
 
     RetrieveTypeResponse:
