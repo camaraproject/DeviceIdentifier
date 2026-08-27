@@ -712,7 +712,7 @@ components:
               $ref: "#/components/schemas/Imei"
             tac:
               $ref: "#/components/schemas/Tac"
-          additionalProperties: false
+        - additionalProperties: false
 
     CommonResponseBody:
       description: |
