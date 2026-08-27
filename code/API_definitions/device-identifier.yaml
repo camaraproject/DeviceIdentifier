@@ -660,6 +660,7 @@ components:
     Imei:
       description: Schema for the International Mobile Equipment Identity (IMEI) of a physical mobile device
       type: string
+      minLength: 15
       maxLength: 15
       pattern: ^[0-9]{15}$
       example: "490154203237518"
@@ -667,6 +668,7 @@ components:
     ImeiSv:
       description: Schema for the International Mobile Equipment Identity - Software Version (IMEISV) of a physical mobile device
       type: string
+      minLength: 16
       maxLength: 16
       pattern: ^[0-9]{16}$
       example: "4901542032375180"
@@ -674,6 +676,7 @@ components:
     Tac:
       description: Schema for the IMEI Type Allocation Code (TAC) of a physical mobile device
       type: string
+      minLength: 8
       maxLength: 8
       pattern: ^[0-9]{8}$
       example: "49015420"
@@ -689,13 +692,13 @@ components:
     RequestBody:
       description: Common request body to allow optional Device object to be passed
       type: object
+      additionalProperties: false
       properties:
         device:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
 
     MatchRequestBody:
       description: Request body for match-identifier operation, containing an optional mobile device subscription identifier, and the physical device identifier to match against
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/RequestBody"
         - type: object
@@ -809,16 +812,14 @@ components:
     MatchDeviceBy3LeggedToken:
       description: Match identifier when device is identified by access token
       value:
-        providedIdentifierType: "IMEISV"
-        providedIdentifier: "4901542032375181"
+        imeisv: "4901542032375181"
 
     MatchDeviceByPhoneNumber:
       description: Matching device identifier by phone number and provided IMEI using a 2-legged access token
       value:
         device:
           phoneNumber: "+123456789"
-        providedIdentifierType: "IMEI"
-        providedIdentifier: "490154203237518"
+        imei: "490154203237518"
 
     MatchDeviceByIPAddress:
       description: Matching device identifier by IP address and provided TAC
@@ -827,8 +828,7 @@ components:
           ipv4Address:
             publicAddress: "84.125.93.10"
             publicPort: 59765
-        providedIdentifierType: "TAC"
-        providedIdentifier: "49015420"
+        tac: "49015420"
 
     MatchDeviceByMultipleIdentifiers:
       description: Matching device identifier by multiple subscription identifiers and provided IMEISV
@@ -838,5 +838,4 @@ components:
           ipv4Address:
             publicAddress: "84.125.93.10"
             publicPort: 59765
-        providedIdentifierType: "IMEISV"
-        providedIdentifier: "4901542032375180"
+        imeisv: "4901542032375180"
