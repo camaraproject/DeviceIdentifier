@@ -48,7 +48,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to <providedIdentifier>
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
@@ -74,7 +74,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to IMEI1
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
@@ -94,7 +94,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to IMEI2
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is false
@@ -115,7 +115,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to TAC1
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
@@ -136,7 +136,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to TAC2
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is false
@@ -158,7 +158,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to IMEISV1
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
@@ -180,7 +180,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to IMEISV2
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is false
@@ -200,7 +200,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to <providedIdentifier>
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is false
@@ -226,7 +226,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to <providedIdentifier>
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
@@ -252,7 +252,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And request property "$.providedIdentifier" is set to IMEI1
     When the request "matchIdentifier" is sent
     Then the response status code is 200
-    And the response body complies with the 200MatchIdentifier schema at "#/components/responses/200MatchIdentifier"
+    And the response body complies with the OAS schema at "#/components/schemas/MatchIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response property "$.match" exists and is true
