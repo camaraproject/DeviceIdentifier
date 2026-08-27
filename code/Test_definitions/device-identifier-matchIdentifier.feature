@@ -32,7 +32,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the resource "/device-identifier/vwip/match-identifier"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
+    And the header "x-correlator" complies with the OAS schema at "#/components/schemas/XCorrelator"
     And the request body complies with the OAS schema at "#/components/schemas/MatchRequestBody"
     And one of the scopes associated with the access token is device-identifier:match-identifier
 
