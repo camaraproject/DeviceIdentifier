@@ -33,7 +33,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
     And the resource "/device-identifier/vwip/retrieve-identifier"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
+    And the header "x-correlator" complies with the OAS schema at "#/components/schemas/XCorrelator"
     And the request body complies with the OAS schema at "#/components/schemas/RequestBody"
     And one of the scopes associated with the access token is device-identifier:retrieve-identifier
 
