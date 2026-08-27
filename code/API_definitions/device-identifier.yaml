@@ -703,9 +703,9 @@ components:
         - $ref: "#/components/schemas/RequestBody"
         - type: object
           oneOf:
-           - required: [ imeisv ]
-           - required: [ imei ]
-           - required: [ tac ]
+            - required: [imeisv]
+            - required: [imei]
+            - required: [tac]
           properties:
             imeisv:
               $ref: "#/components/schemas/ImeiSv"
