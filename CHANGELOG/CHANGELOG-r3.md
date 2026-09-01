@@ -90,7 +90,6 @@ Changes documented below are compared to version 0.3.0.
 ### Breaking changes
 
 * Mandatory response property `lastChecked` can now be set to `null` if the API provider does not have this information
-* Request body for /match-identifier changed to require only one of properties `imei`, `imeisv` or `tac` to be specified instead of `providedIdentifierType` and `providedIdentifierType`
 
 ### Added
 
