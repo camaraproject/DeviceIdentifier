@@ -67,7 +67,7 @@ Changes documented below are compared to version 0.4.0-rc.1.
 
 ### Changed
 
-* N/A
+* [Changed] Update error response schema using new Commonalities r4.4 schemas by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/213
 
 ### Fixed
 
