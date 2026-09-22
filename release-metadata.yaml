@@ -1,0 +1,13 @@
+repository:
+  repository_name: DeviceIdentifier
+  release_tag: r3.3
+  release_type: pre-release-rc
+  release_date: null
+  src_commit_sha: f591baf08b6f6e027dc9f71048dfad0a4cc8c85c
+apis:
+- api_name: device-identifier
+  api_version: 0.4.0-rc.2
+  api_title: Device Identifier
+dependencies:
+  commonalities_release: r4.4 (0.9.0)
+  identity_consent_management_release: r4.2 (0.5.0)
