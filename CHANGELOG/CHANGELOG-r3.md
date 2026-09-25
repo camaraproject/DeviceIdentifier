@@ -2,6 +2,7 @@
 
 <!-- TOC:START -->
 ## Table of Contents
+- [r3.3](#r33)
 - [r3.2](#r32)
 - [r3.1](#r31)
 <!-- TOC:END -->
@@ -14,6 +15,50 @@ The below sections record the changes for each API version in each release as fo
 * for the first release-candidate, all changes since the last public release
 * for subsequent release-candidate(s), only the delta to the previous release-candidate
 * for a public release, the consolidated changes since the previous public release
+
+# r3.3
+
+## Release Notes
+
+This release candidate contains the definition and documentation of
+* device-identifier 0.4.0-rc.2
+
+The API definition(s) are based on
+* Commonalities r4.4 (0.9.0)
+* Identity and Consent Management r4.2 (0.5.0)
+
+## device-identifier 0.4.0-rc.2
+
+**device-identifier 0.4.0-rc.2 is a release-candidate version of this API.**
+
+Changes documented below are compared to version 0.4.0-rc.1.
+
+- API definition **with inline documentation**:
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r3.3/code/API_definitions/device-identifier.yaml&nocors)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r3.3/code/API_definitions/device-identifier.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/DeviceIdentifier/blob/r3.3/code/API_definitions/device-identifier.yaml)
+
+### Breaking changes
+
+* N/A
+
+### Added
+
+* N/A
+
+### Changed
+
+* [Changed] Update error response schema using new Commonalities r4.4 schemas by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/213
+
+### Fixed
+
+* N/A
+
+### Removed
+
+* N/A
+
+**Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/r3.2...r3.3
 
 # r3.2
 
