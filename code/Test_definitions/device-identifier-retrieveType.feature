@@ -37,7 +37,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the request body complies with the OAS schema at "#/components/schemas/RequestBody"
     And one of the scopes associated with the access token is device-identifier:retrieve-type
 
-  # Success scenarios
+###################
+# Success scenarios
+###################
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrieveType_200.01_success_scenario_3-legged_token
@@ -190,7 +192,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the response property "$.manufacturer", if present, is equal to MANUFACTURER1 or MANUFACTURER2
     And the response property "$.model", if present, is equal to MODEL1 or MODEL2
 
-  # Generic 400 errors
+#################
+# Error code 400
+#################
 
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrieveType_400.1_schema_not_compliant
@@ -264,7 +268,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the response property "$.code" is "OUT_OF_RANGE" or "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
-  # Generic 401 errors
+#################
+# Error code 401
+#################
 
   @DeviceIdentifier_retrieveType_401.1_no_authorization_header
   Scenario: No Authorization header
@@ -300,7 +306,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the response property "$.code" is "UNAUTHENTICATED"
     And the response property "$.message" contains a user friendly text
 
-  # Generic 403 errors
+#################
+# Error code 403
+#################
 
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrieveType_403.1_missing_access_token_scope
@@ -344,7 +352,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
     And the response property "$.message" contains a user friendly text
 
-  # Generic 422 errors
+#################
+# Error code 422
+#################
 
   # This scenario is valid only for 2-legged access tokens
   @DeviceIdentifier_retrieveType_422.1_device_identifiers_unsupported
@@ -412,4 +422,32 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 422
     And the response property "$.code" is "UNNECESSARY_IDENTIFIER"
+    And the response property "$.message" contains a user friendly text
+
+#################
+# Error code 429
+#################
+
+  @DeviceIdentifier_retrieveType_429.01_Too_Many_Requests
+  #To test this scenario environment has to be configured to reject requests reaching the threshold limit set.
+  Scenario: Request is rejected due to threshold policy
+    Given a valid request for "retrieveType"
+    And the header "Authorization" is set to a valid access token
+    And the threshold of requests has been reached
+    When the request "retrieveType" is sent
+    Then the response status code is 429
+    And the response property "$.status" is 429
+    And the response property "$.code" is "TOO_MANY_REQUESTS"
+    And the response property "$.message" contains a user friendly text
+
+  @DeviceIdentifier_retrieveType_429.02_Quota_Exceeded
+  #To test this scenario environment has to be configured to reject requests reaching the allocated quota.
+  Scenario: Request is rejected due to API consumer quota being reached
+    Given a valid request for "retrieveType"
+    And the header "Authorization" is set to a valid access token
+    And the API consumer allocated quota of requests has been reached
+    When the request "retrieveType" is sent
+    Then the response status code is 429
+    And the response property "$.status" is 429
+    And the response property "$.code" is "QUOTA_EXCEEDED"
     And the response property "$.message" contains a user friendly text
