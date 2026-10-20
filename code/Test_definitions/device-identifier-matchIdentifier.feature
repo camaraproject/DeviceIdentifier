@@ -36,7 +36,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the request body complies with the OAS schema at "#/components/schemas/MatchRequestBody"
     And one of the scopes associated with the access token is device-identifier:match-identifier
 
-  # Success scenarios
+###################
+# Success scenarios
+###################
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.01_success_scenario_3-legged_token
