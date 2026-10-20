@@ -63,7 +63,17 @@ Changes documented below are compared to version 0.4.0-rc.2.
 
 ### Added
 
-* N/A
+* [Added / Removed] Add QUOTA_EXCEEDED and remove OUT_OF_RANGE error response codes by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225
+  * Add QUOTA_EXCEEDED as a valid error code for 429 error responses (was inadvertently removed by a previous PR)
+  * Add test cases for 429 error reponses:
+    * @DeviceIdentifier_matchIdentifier_429.01_Too_Many_Requests
+    * @DeviceIdentifier_matchIdentifier_429.02_Quota_Exceeded
+    * @DeviceIdentifier_retrieveIdentifier_429.01_Too_Many_Requests
+    * @DeviceIdentifier_retrieveIdentifier_429.02_Quota_Exceeded
+    * @DeviceIdentifier_retrievePpid_429.01_Too_Many_Requests
+    * @DeviceIdentifier_retrievePpid_429.02_Quota_Exceeded
+    * @DeviceIdentifier_retrieveType_429.01_Too_Many_Requests
+    * @DeviceIdentifier_retrieveType_429.02_Quota_Exceeded
 
 ### Changed
 
@@ -75,7 +85,8 @@ Changes documented below are compared to version 0.4.0-rc.2.
 
 ### Removed
 
-* N/A
+* [Added / Removed] Add QUOTA_EXCEEDED and remove OUT_OF_RANGE error response codes by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225
+  * Remove 400 OUT_OF_RANGE as a valid error response code
 
 **Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/r3.3...r3.4
 
