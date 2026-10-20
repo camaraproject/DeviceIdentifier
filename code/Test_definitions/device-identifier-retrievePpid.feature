@@ -39,7 +39,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the request body complies with the OAS schema at "#/components/schemas/RequestBody"
     And one of the scopes associated with the access token is device-identifier:retrieve-ppid
 
-  # Success scenarios
+###################
+# Success scenarios
+###################
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrievePpid_200.01_success_scenario_3-legged_token
@@ -174,7 +176,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
 
-  # Generic 400 errors
+#################
+# Error code 401
+#################
 
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_400.1_schema_not_compliant
@@ -248,7 +252,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the response property "$.code" is "OUT_OF_RANGE" or "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
 
-  # Generic 401 errors
+#################
+# Error code 401
+#################
 
   @DeviceIdentifier_retrievePpid_401.1_no_authorization_header
   Scenario: No Authorization header
@@ -284,7 +290,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the response property "$.code" is "UNAUTHENTICATED"
     And the response property "$.message" contains a user friendly text
 
-  # Generic 403 errors
+#################
+# Error code 403
+#################
 
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_403.1_missing_access_token_scope
@@ -328,7 +336,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
     And the response property "$.message" contains a user friendly text
 
-  # Generic 422 errors
+#################
+# Error code 422
+#################
 
   # This scenario is only applicable to 2-legged access tokens
   @DeviceIdentifier_retrievePpid_422.1_unsupported_device_identifier
@@ -394,4 +404,32 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 422
     And the response property "$.code" is "UNNECESSARY_IDENTIFIER"
+    And the response property "$.message" contains a user friendly text
+
+#################
+# Error code 429
+#################
+
+  @DeviceIdentifier_retrievePpid_429.01_Too_Many_Requests
+  #To test this scenario environment has to be configured to reject requests reaching the threshold limit set.
+  Scenario: Request is rejected due to threshold policy
+    Given a valid request for "retrievePpid"
+    And the header "Authorization" is set to a valid access token
+    And the threshold of requests has been reached
+    When the request "retrievePpid" is sent
+    Then the response status code is 429
+    And the response property "$.status" is 429
+    And the response property "$.code" is "TOO_MANY_REQUESTS"
+    And the response property "$.message" contains a user friendly text
+
+  @DeviceIdentifier_retrievePpid_429.02_Quota_Exceeded
+  #To test this scenario environment has to be configured to reject requests reaching the allocated quota.
+  Scenario: Request is rejected due to API consumer quota being reached
+    Given a valid request for "retrievePpid"
+    And the header "Authorization" is set to a valid access token
+    And the API consumer allocated quota of requests has been reached
+    When the request "retrievePpid" is sent
+    Then the response status code is 429
+    And the response property "$.status" is 429
+    And the response property "$.code" is "QUOTA_EXCEEDED"
     And the response property "$.message" contains a user friendly text
