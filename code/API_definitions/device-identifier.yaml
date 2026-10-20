@@ -99,9 +99,6 @@ info:
     `400 INVALID_ARGUMENT`:
     - The API request is not compliant with this OAS definition
 
-    `400 OUT_OF_RANGE`:
-    - A parameter value in the API request is outwith the range documented in this OAS definition for that parameter
-
     `404 IDENTIFIER_NOT_FOUND`:
     - The device identified by the `device` object in the request is not managed by the API provider
 
@@ -233,7 +230,7 @@ paths:
         "200":
           $ref: '#/components/responses/200RetrieveIdentifier'
         "400":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequestWithRange400'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequest400'
         "401":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Unauthenticated401'
         "403":
@@ -243,7 +240,7 @@ paths:
         "422":
           $ref: '../common/CAMARA_common.yaml#/components/responses/DeviceIdentifier422'
         "429":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/TooManyRequests429'
+          $ref: '#/components/responses/TooManyRequestsOrQuotaExceeded429'
 
   "/retrieve-type":
     post:
@@ -279,7 +276,7 @@ paths:
         "200":
           $ref: '#/components/responses/200RetrieveType'
         "400":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequestWithRange400'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequest400'
         "401":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Unauthenticated401'
         "403":
@@ -289,7 +286,7 @@ paths:
         "422":
           $ref: '../common/CAMARA_common.yaml#/components/responses/DeviceIdentifier422'
         "429":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/TooManyRequests429'
+          $ref: '#/components/responses/TooManyRequestsOrQuotaExceeded429'
 
   "/retrieve-ppid":
     post:
@@ -325,7 +322,7 @@ paths:
         "200":
           $ref: '#/components/responses/200RetrievePPID'
         "400":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequestWithRange400'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequest400'
         "401":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Unauthenticated401'
         "403":
@@ -335,7 +332,7 @@ paths:
         "422":
           $ref: '../common/CAMARA_common.yaml#/components/responses/DeviceIdentifier422'
         "429":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/TooManyRequests429'
+          $ref: '#/components/responses/TooManyRequestsOrQuotaExceeded429'
 
   "/match-identifier":
     post:
@@ -371,7 +368,7 @@ paths:
         "200":
           $ref: '#/components/responses/200MatchIdentifier'
         "400":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequestWithRange400'
+          $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequest400'
         "401":
           $ref: '../common/CAMARA_common.yaml#/components/responses/Unauthenticated401'
         "403":
@@ -381,7 +378,7 @@ paths:
         "422":
           $ref: '../common/CAMARA_common.yaml#/components/responses/DeviceIdentifier422'
         "429":
-          $ref: '../common/CAMARA_common.yaml#/components/responses/TooManyRequests429'
+          $ref: '#/components/responses/TooManyRequestsOrQuotaExceeded429'
 
 components:
   securitySchemes:
@@ -389,6 +386,31 @@ components:
       $ref: "../common/CAMARA_common.yaml#/components/securitySchemes/openId"
 
   responses:
+    TooManyRequestsOrQuotaExceeded429:
+      description: Too Many Requests or Quota Exceeded
+      headers:
+        x-correlator:
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 429
+                  code:
+                    enum:
+                      - TOO_MANY_REQUESTS
+                      - QUOTA_EXCEEDED
+          examples:
+            GENERIC_429_TOO_MANY_REQUESTS:
+              $ref: "../common/CAMARA_common.yaml#/components/examples/GENERIC_429_TOO_MANY_REQUESTS"
+            GENERIC_429_QUOTA_EXCEEDED:
+              $ref: "../common/CAMARA_common.yaml#/components/examples/GENERIC_429_QUOTA_EXCEEDED"
+
     200RetrieveIdentifier:
       description: A physical device identifier has been found for the specified mobile device subscription
       headers:
