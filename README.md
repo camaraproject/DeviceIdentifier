@@ -41,9 +41,9 @@ API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/czLe)
 
 ### Upcoming Release Preview
 
-* Pre-release: [r3.3](https://github.com/camaraproject/DeviceIdentifier/releases/tag/r3.3) (release candidate)
-  * **device-identifier 0.4.0-rc.2**
-  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r3.3/code/API_definitions/device-identifier.yaml)  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r3.3/code/API_definitions/device-identifier.yaml&nocors)  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r3.3/code/API_definitions/device-identifier.yaml)
+* Pre-release: [r3.4](https://github.com/camaraproject/DeviceIdentifier/releases/tag/r3.4) (release candidate)
+  * **device-identifier 0.4.0-rc.3**
+  [[YAML]](https://github.com/camaraproject/DeviceIdentifier/blob/r3.4/code/API_definitions/device-identifier.yaml)  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r3.4/code/API_definitions/device-identifier.yaml&nocors)  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/DeviceIdentifier/r3.4/code/API_definitions/device-identifier.yaml)
 
 
 _The above section is automatically synchronized by CAMARA project-administration._
