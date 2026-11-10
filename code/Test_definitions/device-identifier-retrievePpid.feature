@@ -418,6 +418,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the threshold of requests has been reached
     When the request "retrievePpid" is sent
     Then the response status code is 429
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 429
     And the response property "$.code" is "TOO_MANY_REQUESTS"
     And the response property "$.message" contains a user friendly text
@@ -430,6 +432,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the API consumer allocated quota of requests has been reached
     When the request "retrievePpid" is sent
     Then the response status code is 429
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 429
     And the response property "$.code" is "QUOTA_EXCEEDED"
     And the response property "$.message" contains a user friendly text
