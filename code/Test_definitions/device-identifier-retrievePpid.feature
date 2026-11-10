@@ -183,7 +183,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_retrievePpid_400.1_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
-    Given the request body is set to any value which is not compliant with the schema at "#/components/schemas/RequestBody"
+    Given the request body is set to any value which does not comply with the OAS schema at "#/components/schemas/RequestBody"
     When the request "retrievePpid" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
