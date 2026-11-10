@@ -215,9 +215,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
     Examples:
       | propertyName | providedIdentifier |
-      | imei         | IMEI1              |
-      | imeisv       | IMEISV1            |
-      | tac          | TAC1               |
+      | imei         | IMEI2              |
+      | imeisv       | IMEISV2            |
+      | tac          | TAC2               |
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.06_success_scenario_2-legged_token_after_SIM_card_swap
@@ -284,7 +284,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
   Scenario Outline: Some device identifier value does not comply with the schema
     Given a valid 2-legged or 3-legged access token is being used
     And the request body property "$.imei" is set to IMEI1
-    And the request body property "<device_identifier>" exits but does not comply with the OAS schema at "<oas_spec_schema>"
+    And the request body property "<device_identifier>" exists but does not comply with the OAS schema at "<oas_spec_schema>"
     And no other request properties are present
     When the request "matchIdentifier" is sent
     Then the response status code is 400
@@ -296,10 +296,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
     Examples:
       | device_identifier                | oas_spec_schema                             |
-      | $.device.phoneNumber             | /components/schemas/PhoneNumber             |
-      | $.device.ipv4Address             | /components/schemas/DeviceIpv4Address       |
-      | $.device.ipv6Address             | /components/schemas/DeviceIpv6Address       |
-      | $.device.networkAccessIdentifier | /components/schemas/NetworkAccessIdentifier |
+      | $.device.phoneNumber             | #/components/schemas/PhoneNumber             |
+      | $.device.ipv4Address             | #/components/schemas/DeviceIpv4Address       |
+      | $.device.ipv6Address             | #/components/schemas/DeviceIpv6Address       |
+      | $.device.networkAccessIdentifier | #/components/schemas/NetworkAccessIdentifier |
 
   # This scenario is valid for both 2-legged and 3-legged access tokens
   @DeviceIdentifier_matchIdentifier_400.4_invalid_identifier_type
@@ -522,6 +522,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the threshold of requests has been reached
     When the request "matchIdentifier" is sent
     Then the response status code is 429
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 429
     And the response property "$.code" is "TOO_MANY_REQUESTS"
     And the response property "$.message" contains a user friendly text
@@ -534,6 +536,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
     And the API consumer allocated quota of requests has been reached
     When the request "matchIdentifier" is sent
     Then the response status code is 429
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 429
     And the response property "$.code" is "QUOTA_EXCEEDED"
     And the response property "$.message" contains a user friendly text

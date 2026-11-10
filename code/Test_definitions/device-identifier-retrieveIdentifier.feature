@@ -193,6 +193,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
   @DeviceIdentifier_retrieveIdentifier_200.09_success_scenario_2-legged_token_identifying_device_by_multiple_conflicting_identifiers
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by multiple conflicting identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
+    And SIMCARD2 is installed within DEVICE2, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS
@@ -202,13 +203,18 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
     And the response body complies with the OAS schema at "#/components/schemas/RetrieveIdentifierResponse"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
-    And the response property "$.imei" exists and is equal to either IMEI1 or IMEI2
-    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
-    And the response property "$.imeisv", if present, is equal to IMEISV1 or IMEI2
-    And the response property "$.tac", if present, is equal to TAC1 or TAC2
-    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1 or MANUFACTURER2
-    And the response property "$.model", if present, is equal to MODEL1 or MODEL2
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
+    And if "$.device" identifies DEVICE1, the response property "$.imei" exists and is equal to IMEI1
+    And if "$.device" identifies DEVICE1, the response property "$.imeisv", if present, is equal to IMEISV1
+    And if "$.device" identifies DEVICE1, the response property "$.tac", if present, is equal to TAC1
+    And if "$.device" identifies DEVICE1, the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And if "$.device" identifies DEVICE1, the response property "$.model", if present, is equal to MODEL1
+    And if "$.device" identifies DEVICE2, the response property "$.imei" exists and is equal to IMEI2
+    And if "$.device" identifies DEVICE2, the response property "$.imeisv", if present, is equal to IMEISV2
+    And if "$.device" identifies DEVICE2, the response property "$.tac", if present, is equal to TAC2
+    And if "$.device" identifies DEVICE2, the response property "$.manufacturer", if present, is equal to MANUFACTURER2
+    And if "$.device" identifies DEVICE2, the response property "$.model", if present, is equal to MODEL2
 
 #################
 # Error code 400
@@ -267,17 +273,17 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
 
     Examples:
       | device_identifier                | oas_spec_schema                             |
-      | $.device.phoneNumber             | /components/schemas/PhoneNumber             |
-      | $.device.ipv4Address             | /components/schemas/DeviceIpv4Address       |
-      | $.device.ipv6Address             | /components/schemas/DeviceIpv6Address       |
-      | $.device.networkAccessIdentifier | /components/schemas/NetworkAccessIdentifier |
+      | $.device.phoneNumber             | #/components/schemas/PhoneNumber             |
+      | $.device.ipv4Address             | #/components/schemas/DeviceIpv4Address       |
+      | $.device.ipv6Address             | #/components/schemas/DeviceIpv6Address       |
+      | $.device.networkAccessIdentifier | #/components/schemas/NetworkAccessIdentifier |
 
   # This scenario is only valid for 2-legged access tokens
   # The maximum is considered in the schema, and so is treated as an invalid argument by a generic schema validator without further distinction
   @DeviceIdentifier_retrieveIdentifier_400.5_out_of_range_port
   Scenario: Out of range port
     Given the header "Authorization" is set to a valid access token that does not identify a device
-    And the request body property "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
+    And the request body property "$.device.ipv4Address.publicPort" is set to a value less than 1 or greater than 65535
     When the request "retrieveIdentifier" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
@@ -454,6 +460,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
     And the threshold of requests has been reached
     When the request "retrieveIdentifier" is sent
     Then the response status code is 429
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 429
     And the response property "$.code" is "TOO_MANY_REQUESTS"
     And the response property "$.message" contains a user friendly text
@@ -466,6 +474,8 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
     And the API consumer allocated quota of requests has been reached
     When the request "retrieveIdentifier" is sent
     Then the response status code is 429
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response header "Content-Type" is "application/json"
     And the response property "$.status" is 429
     And the response property "$.code" is "QUOTA_EXCEEDED"
     And the response property "$.message" contains a user friendly text
