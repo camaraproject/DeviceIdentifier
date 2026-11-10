@@ -215,9 +215,9 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
 
     Examples:
       | propertyName | providedIdentifier |
-      | imei         | IMEI1              |
-      | imeisv       | IMEISV1            |
-      | tac          | TAC1               |
+      | imei         | IMEI2              |
+      | imeisv       | IMEISV2            |
+      | tac          | TAC2               |
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_matchIdentifier_200.06_success_scenario_2-legged_token_after_SIM_card_swap
