@@ -109,7 +109,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.05_success_scenario_2-legged_token_after_SIM_card_swap
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 using 2-legged access token
-    Given SIMCARD1 is installed within DEVICE1, which is connected to the network
+    Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     When the request "retrieveType" is sent
