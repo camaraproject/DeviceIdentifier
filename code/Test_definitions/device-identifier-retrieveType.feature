@@ -195,8 +195,6 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And if "$.device" identifies DEVICE2, the response property "$.tac" exists and is equal to TAC2
     And if "$.device" identifies DEVICE2, the response property "$.manufacturer", if present, is equal to MANUFACTURER2
     And if "$.device" identifies DEVICE2, the response property "$.model", if present, is equal to MODEL2
-
-
 #################
 # Error code 400
 #################
