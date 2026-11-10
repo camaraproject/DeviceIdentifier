@@ -283,7 +283,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
   @DeviceIdentifier_retrieveIdentifier_400.5_out_of_range_port
   Scenario: Out of range port
     Given the header "Authorization" is set to a valid access token that does not identify a device
-    And the request body property "$.device.ipv4Address.publicPort" is set to a value not between 0 and 65535
+    And the request body property "$.device.ipv4Address.publicPort" is set to a value not between 1 and 65535
     When the request "retrieveIdentifier" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
