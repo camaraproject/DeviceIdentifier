@@ -284,7 +284,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: matchIdentifier
   Scenario Outline: Some device identifier value does not comply with the schema
     Given a valid 2-legged or 3-legged access token is being used
     And the request body property "$.imei" is set to IMEI1
-    And the request body property "<device_identifier>" exits but does not comply with the OAS schema at "<oas_spec_schema>"
+    And the request body property "<device_identifier>" exists but does not comply with the OAS schema at "<oas_spec_schema>"
     And no other request properties are present
     When the request "matchIdentifier" is sent
     Then the response status code is 400
