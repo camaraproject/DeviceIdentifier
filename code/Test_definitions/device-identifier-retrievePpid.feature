@@ -160,7 +160,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrievePpid
     And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
 
   # This scenario is only valid for 2-legged access tokens
-  @DeviceIdentifier_retrievePpid_200.08_success_scenario_2-legged_token_identifying_device_by_multiple_conflicting_identifiers
+  @DeviceIdentifier_retrievePpid_200.09_success_scenario_2-legged_token_identifying_device_by_multiple_conflicting_identifiers
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by multiple conflicting identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
