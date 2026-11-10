@@ -205,10 +205,10 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveIdentifi
     And the response property "$.imei" exists and is equal to either IMEI1 or IMEI2
     And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
-    And the response property "$.imeisv", if present, is equal to IMEISV1 or IMEI2
-    And the response property "$.tac", if present, is equal to TAC1 or TAC2
-    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1 or MANUFACTURER2
-    And the response property "$.model", if present, is equal to MODEL1 or MODEL2
+    And the response property "$.imeisv", if present, is equal to either IMEISV1 or IMEISV2
+    And the response property "$.tac", if present, is equal to either TAC1 or TAC2
+    And the response property "$.manufacturer", if present, is equal to either MANUFACTURER1 or MANUFACTURER2
+    And the response property "$.model", if present, is equal to either MODEL1 or MODEL2
 
 #################
 # Error code 400
