@@ -177,6 +177,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
   @DeviceIdentifier_retrieveType_200.09_success_scenario_2-legged_token_identifying_device_by_multiple_conflicting_identifiers
   Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by multiple conflicting identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
+    And SIMCARD2 is installed within DEVICE2, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS
@@ -186,11 +187,15 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response header "Content-Type" is "application/json"
     And the response body complies with the OAS schema at "#/components/schemas/RetrieveTypeResponse"
-    And the response property "$.tac" exists and is equal to TAC1 or TAC2
-    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
     And the response property "$.device" exists and complies with the OAS schema at "#/components/schemas/DeviceResponse"
-    And the response property "$.manufacturer", if present, is equal to MANUFACTURER1 or MANUFACTURER2
-    And the response property "$.model", if present, is equal to MODEL1 or MODEL2
+    And the response property "$.lastChecked" exists and is either a valid date-time in the past, or is null
+    And if "$.device" identifies DEVICE1, the response property "$.tac" exists and is equal to TAC1
+    And if "$.device" identifies DEVICE1, the response property "$.manufacturer", if present, is equal to MANUFACTURER1
+    And if "$.device" identifies DEVICE1, the response property "$.model", if present, is equal to MODEL1
+    And if "$.device" identifies DEVICE2, the response property "$.tac" exists and is equal to TAC2
+    And if "$.device" identifies DEVICE2, the response property "$.manufacturer", if present, is equal to MANUFACTURER2
+    And if "$.device" identifies DEVICE2, the response property "$.model", if present, is equal to MODEL2
+
 
 #################
 # Error code 400
