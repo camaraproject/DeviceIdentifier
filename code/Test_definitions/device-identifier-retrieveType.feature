@@ -43,7 +43,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrieveType_200.01_success_scenario_3-legged_token
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 using 3-legged access token
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD1 using 3-legged access token
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD1
     And request property "$.device" does not exist
@@ -59,7 +59,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.02_success_scenario_2-legged_token_identifying_device_by_phone_number
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by phone number
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD1 identifying device by phone number
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
@@ -75,7 +75,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.03_success_scenario_2-legged_token_identifying_device_by_IPv4_address
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD1 identifying device by IPv4 address
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.ipv4Address.publicAddress" is set to PUBLICIPV4ADDRESS
@@ -92,7 +92,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrieveType_200.04_success_scenario_3-legged_token_after_SIM_card_swap
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 using 3-legged access token
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD2 using 3-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that identifies DEVICE1 containing SIMCARD2
     And request property "$.device" does not exist
@@ -108,7 +108,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.05_success_scenario_2-legged_token_after_SIM_card_swap
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD2 using 2-legged access token
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD2 using 2-legged access token
     Given SIMCARD2 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER2
@@ -124,7 +124,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 3-legged access tokens
   @DeviceIdentifier_retrieveType_200.06_success_scenario_3-legged_token_after_device_swap
-  Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 using 3-legged access token
+  Scenario: Retrieve device type for DEVICE2 with SIM card SIMCARD1 using 3-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And the header "Authorization" is set to a valid access token that identifies DEVICE2 containing SIMCARD1
     And request property "$.device" does not exist
@@ -140,7 +140,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.07_success_scenario_2-legged_token_after_device_swap
-  Scenario: Retrieve device identifier for DEVICE2 with SIM card SIMCARD1 using 2-legged access token
+  Scenario: Retrieve device type for DEVICE2 with SIM card SIMCARD1 using 2-legged access token
     Given SIMCARD1 is installed within DEVICE2, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
@@ -156,7 +156,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.08_success_scenario_2-legged_token_identifying_device_by_multiple_matching_identifiers
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by multiple matching identifiers
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD1 identifying device by multiple matching identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
     And request property "$.device.phoneNumber" is set to PHONENUMBER1
@@ -175,7 +175,7 @@ Feature: Camara Mobile Device Identifier API, vwip - Operation: retrieveType
 
   # This scenario is only valid for 2-legged access tokens
   @DeviceIdentifier_retrieveType_200.09_success_scenario_2-legged_token_identifying_device_by_multiple_conflicting_identifiers
-  Scenario: Retrieve device identifier for DEVICE1 with SIM card SIMCARD1 identifying device by multiple conflicting identifiers
+  Scenario: Retrieve device type for DEVICE1 with SIM card SIMCARD1 identifying device by multiple conflicting identifiers
     Given SIMCARD1 is installed within DEVICE1, which is connected to the network
     And SIMCARD2 is installed within DEVICE2, which is connected to the network
     And the header "Authorization" is set to a valid access token that does not identify a device
