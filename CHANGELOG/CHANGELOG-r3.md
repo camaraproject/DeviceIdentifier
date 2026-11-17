@@ -128,11 +128,14 @@ Changes documented below are compared to version 0.3.0.
 
 ### Changed
 
-* Update API definition following Commonalities r4.3 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/167
-  * Use header, parameter and schema definition from Commonalities where possible rather than maintain local copies
+* Aligned with CAMARA Commonalities r4.4 (0.9.0) by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/167, https://github.com/camaraproject/DeviceIdentifier/pull/170, https://github.com/camaraproject/DeviceIdentifier/pull/213 and https://github.com/camaraproject/DeviceIdentifier/pull/215
+  * Use header, parameter, schema and error response definitions from Commonalities where possible rather than maintain local copies
   * Add `maxLength` directive for all strings
     * Free-form `model` and `manufacturer` strings now limited to 32 characters
+  * `imei`, `imeisv` and `tac` in responses are now constrained to 15, 16 and 8 digits
   * Tightening of `ppid` format by adding `minLength: 64`, `maxLength: 128`, and `pattern: ^[a-fA-F0-9]{64,128}$` constraints
+  * `device.ipv4Address.publicPort` must be at least 1 (`0` was allowed before but is not a usable port)
+  * Updated the info.description template sections and added the section on request body strictness: requests with undeclared properties are rejected with `400 INVALID_ARGUMENT`
 * [Changed] Update and clarify tests for applicability to 2-legged and/or 3-legged access tokens by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/189
 * [Changed] Make lastChecked property nullable and add examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/184
 * [Changed] Various documentation additions, updates and fixes for consistency, accuracy and clarity by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/198
