@@ -155,9 +155,9 @@ Changes documented below are compared to version 0.3.0.
 
 ### Removed
 
-* [Added / Removed] Add QUOTA_EXCEEDED and remove OUT_OF_RANGE error response codes by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225
-  * Remove 400 OUT_OF_RANGE as a valid error response code, as all schema non-compliance will be caught by 400 INVALID_REQUEST
-  * Associated test cases removed by https://github.com/camaraproject/DeviceIdentifier/pull/232
+* Remove 400 OUT_OF_RANGE as a valid error response code by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225, as all schema non-compliance will be caught by 400 INVALID_ARGUMENT
+  * Not breaking: the 0.3.0 test definitions already accepted 400 INVALID_ARGUMENT for an out-of-range port
+  * Test scenarios `400.5_out_of_range_port` now expect only INVALID_ARGUMENT, by https://github.com/camaraproject/DeviceIdentifier/pull/232
 
 **Full Changelog**: https://github.com/camaraproject/DeviceIdentifier/compare/r2.2...r3.5
 
