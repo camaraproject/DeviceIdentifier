@@ -137,6 +137,8 @@ Changes documented below are compared to version 0.3.0.
   * `device.ipv4Address.publicPort` must be at least 1 (`0` was allowed before but is not a usable port)
   * Updated the info.description template sections and added the section on request body strictness: requests with undeclared properties are rejected with `400 INVALID_ARGUMENT`
 * [Changed] Update and clarify tests for applicability to 2-legged and/or 3-legged access tokens by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/189
+* Renamed operationId `retrievePPID` to `retrievePpid` and schema `DevicePPID` to `DevicePpid` by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/179
+  * Test definition file and scenario tags were renamed accordingly (`device-identifier-retrievePpid.feature`, `@DeviceIdentifier_retrievePpid_...`) in https://github.com/camaraproject/DeviceIdentifier/pull/189
 * [Changed] Make lastChecked property nullable and add examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/184
 * [Changed] Various documentation additions, updates and fixes for consistency, accuracy and clarity by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/198
 * [Changed] Add dedicated response body schema and update tests by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/203
