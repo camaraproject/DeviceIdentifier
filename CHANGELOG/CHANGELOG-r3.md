@@ -148,7 +148,7 @@ Changes documented below are compared to version 0.3.0.
 
 * Fix typo in test scenario 200.05 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/155
 * [Fixed] Fix ipv4Address typo in feature files by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/182
-* [Fixed] Fix test definition component references by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/197
+* [Fixed] Fix test definition component references by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/197 and https://github.com/camaraproject/DeviceIdentifier/pull/203
 * [Fixed] Fix examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/196
 * [Fixed] Documentation fixes by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/204
 * [Fixed] Fix typos, add missing elements, and remove ambiguities in test definitions by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/237
