@@ -124,8 +124,6 @@ Changes documented below are compared to version 0.3.0.
     * @DeviceIdentifier_retrievePpid_429.02_Quota_Exceeded
     * @DeviceIdentifier_retrieveType_429.01_Too_Many_Requests
     * @DeviceIdentifier_retrieveType_429.02_Quota_Exceeded
-* Add conformance test definitions for the new /match-identifier endpoint  by @usmanTheCoder in https://github.com/camaraproject/DeviceIdentifier/pull/160
-* [Added] Update test cases for device identifier matching by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/188
 * [Added] Add tests for multiple device identifiers and missing end user consent by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/205
 
 ### Changed
