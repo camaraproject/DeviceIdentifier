@@ -151,7 +151,6 @@ Changes documented below are compared to version 0.3.0.
 * [Fixed] Fix test definition component references by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/197 and https://github.com/camaraproject/DeviceIdentifier/pull/203
 * Removed the `Inconsistent Device Properties` example for 400 INVALID_ARGUMENT by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/196
   * No error is returned when the supplied device identifiers do not identify the same device, as 0.3.0 already stated for the `device` response property
-* [Fixed] Documentation fixes by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/204
 * [Fixed] Fix typos, add missing elements, and remove ambiguities in test definitions by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/237
 
 ### Removed
