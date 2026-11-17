@@ -112,6 +112,8 @@ Changes documented below are compared to version 0.3.0.
 * New match-identifier endpoint added
   * Originally by @ALIIQBAL786 in https://github.com/camaraproject/DeviceIdentifier/pull/151
   * Updated by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/202
+  * `POST /match-identifier` (scope `device-identifier:match-identifier`) takes exactly one of `imei`, `imeisv` or `tac` and returns `match` and `lastChecked`
+  * Conformance test definitions added by @usmanTheCoder in https://github.com/camaraproject/DeviceIdentifier/pull/160 and updated by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/188
 
 * [Added / Removed] Add QUOTA_EXCEEDED and remove OUT_OF_RANGE error response codes by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225
   * Add test cases for 429 error responses:
