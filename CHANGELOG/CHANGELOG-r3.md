@@ -115,7 +115,7 @@ Changes documented below are compared to version 0.3.0.
   * `POST /match-identifier` (scope `device-identifier:match-identifier`) takes exactly one of `imei`, `imeisv` or `tac` and returns `match` and `lastChecked`
   * Conformance test definitions added by @usmanTheCoder in https://github.com/camaraproject/DeviceIdentifier/pull/160 and updated by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/188
 
-* Add test cases for 429 error responses by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225
+* Added test cases for 429 error responses by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225
     * @DeviceIdentifier_matchIdentifier_429.01_Too_Many_Requests
     * @DeviceIdentifier_matchIdentifier_429.02_Quota_Exceeded
     * @DeviceIdentifier_retrieveIdentifier_429.01_Too_Many_Requests
@@ -124,7 +124,7 @@ Changes documented below are compared to version 0.3.0.
     * @DeviceIdentifier_retrievePpid_429.02_Quota_Exceeded
     * @DeviceIdentifier_retrieveType_429.01_Too_Many_Requests
     * @DeviceIdentifier_retrieveType_429.02_Quota_Exceeded
-* [Added] Add tests for multiple device identifiers and missing end user consent by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/205
+* Added tests for multiple device identifiers and missing end user consent by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/205
 
 ### Changed
 
@@ -136,26 +136,26 @@ Changes documented below are compared to version 0.3.0.
   * Tightening of `ppid` format by adding `minLength: 64`, `maxLength: 128`, and `pattern: ^[a-fA-F0-9]{64,128}$` constraints
   * `device.ipv4Address.publicPort` must be at least 1 (`0` was allowed before but is not a usable port)
   * Updated the info.description template sections and added the section on request body strictness: requests with undeclared properties are rejected with `400 INVALID_ARGUMENT`
-* [Changed] Update and clarify tests for applicability to 2-legged and/or 3-legged access tokens by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/189
+* Updated and clarified tests for applicability to 2-legged and/or 3-legged access tokens by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/189
 * Renamed operationId `retrievePPID` to `retrievePpid` and schema `DevicePPID` to `DevicePpid` by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/179
   * Test definition file and scenario tags were renamed accordingly (`device-identifier-retrievePpid.feature`, `@DeviceIdentifier_retrievePpid_...`) in https://github.com/camaraproject/DeviceIdentifier/pull/189
-* [Changed] Make lastChecked property nullable and add examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/184
-* [Changed] Various documentation additions, updates and fixes for consistency, accuracy and clarity by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/198
-* [Changed] Add dedicated response body schema and update tests by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/203
-* fix: changed networkaccessidentifier example to use example.com by @Kevsy in https://github.com/camaraproject/DeviceIdentifier/pull/147
+* Made lastChecked property nullable and added examples by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/184
+* Various documentation additions, updates and fixes for consistency, accuracy and clarity by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/198
+* Added dedicated response body schema and updated tests by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/203
+* Changed networkaccessidentifier example to use example.com by @Kevsy in https://github.com/camaraproject/DeviceIdentifier/pull/147
 
 ### Fixed
 
-* Fix typo in test scenario 200.05 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/155
-* [Fixed] Fix ipv4Address typo in feature files by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/182
-* [Fixed] Fix test definition component references by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/197 and https://github.com/camaraproject/DeviceIdentifier/pull/203
+* Fixed typo in test scenario 200.05 by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/155
+* Fixed ipv4Address typo in feature files by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/182
+* Fixed test definition component references by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/197 and https://github.com/camaraproject/DeviceIdentifier/pull/203
 * Removed the `Inconsistent Device Properties` example for 400 INVALID_ARGUMENT by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/196
   * No error is returned when the supplied device identifiers do not identify the same device, as 0.3.0 already stated for the `device` response property
-* [Fixed] Fix typos, add missing elements, and remove ambiguities in test definitions by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/237
+* Fixed typos, add missing elements, and remove ambiguities in test definitions by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/237
 
 ### Removed
 
-* Remove 400 OUT_OF_RANGE as a valid error response code by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225, as all schema non-compliance will be caught by 400 INVALID_ARGUMENT
+* Removed 400 OUT_OF_RANGE as a valid error response code by @eric-murray in https://github.com/camaraproject/DeviceIdentifier/pull/225, as all schema non-compliance will be caught by 400 INVALID_ARGUMENT
   * Not breaking: the 0.3.0 test definitions already accepted 400 INVALID_ARGUMENT for an out-of-range port
   * Test scenarios `400.5_out_of_range_port` now expect only INVALID_ARGUMENT, by https://github.com/camaraproject/DeviceIdentifier/pull/232
 
