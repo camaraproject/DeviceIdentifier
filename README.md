@@ -52,7 +52,7 @@ _The above section is automatically synchronized by CAMARA project-administratio
 ## Contributing
 * Meetings are held virtually
     * Schedule: First Friday of each month at 15:00 UTC via Linux Foundation Zoom service
-    * [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/96981252767?password=fc957607-cc06-450f-b80a-229bb6a88c39) 
+    * [Registration / Join](https://app.lfx.dev/meetings/93287288649?password=2e0040bc-4aaf-44a8-9b53-80d441012cdc) 
     * Minutes: Access [meeting minutes](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14564298/DeviceIdentifier+Meeting+Minutes)
 * Mailing List
     * Subscribe / Unsubscribe to the mailing list [https://lists.camaraproject.org/g/sp-dvi](https://lists.camaraproject.org/g/sp-dvi) .
