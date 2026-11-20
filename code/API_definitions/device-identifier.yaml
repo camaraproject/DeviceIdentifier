@@ -660,12 +660,12 @@ components:
         tac:
           $ref: "#/components/schemas/Tac"
         model:
-          description: Model of the device
+          description: A friendly name for the model of the device (e.g. the model marketing name)
           allOf:
             - $ref: "#/components/schemas/DeviceName"
             - example: "3110"
         manufacturer:
-          description: Manufacturer of the device
+          description: A friendly name for the manufacturer of the device (e.g. the brand name)
           allOf:
             - $ref: "#/components/schemas/DeviceName"
             - example: "Nokia"
