@@ -588,23 +588,25 @@ components:
       properties:
         device:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
+      additionalProperties: false
 
     MatchRequestBody:
       description: Request body for match-identifier operation, containing an optional mobile device subscription identifier, and the physical device identifier to match against
-      allOf:
-        - $ref: "#/components/schemas/RequestBody"
-        - type: object
-          oneOf:
-            - required: [imeisv]
-            - required: [imei]
-            - required: [tac]
-          properties:
-            imeisv:
-              $ref: "#/components/schemas/ImeiSv"
-            imei:
-              $ref: "#/components/schemas/Imei"
-            tac:
-              $ref: "#/components/schemas/Tac"
+      type: object
+      oneOf:
+        - required: [imeisv]
+        - required: [imei]
+        - required: [tac]
+      properties:
+        imeisv:
+          $ref: "#/components/schemas/ImeiSv"
+        imei:
+          $ref: "#/components/schemas/Imei"
+        tac:
+          $ref: "#/components/schemas/Tac"
+        device:
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
+      additionalProperties: false
 
     CommonResponseBody:
       description: |
