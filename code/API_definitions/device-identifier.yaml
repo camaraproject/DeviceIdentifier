@@ -588,6 +588,7 @@ components:
       properties:
         device:
           $ref: "../common/CAMARA_common.yaml#/components/schemas/Device"
+      additionalProperties: false
 
     MatchRequestBody:
       description: Request body for match-identifier operation, containing an optional mobile device subscription identifier, and the physical device identifier to match against
@@ -605,6 +606,7 @@ components:
               $ref: "#/components/schemas/Imei"
             tac:
               $ref: "#/components/schemas/Tac"
+          additionalProperties: false
 
     CommonResponseBody:
       description: |
